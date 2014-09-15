@@ -394,6 +394,14 @@ class Elegant extends Model{
 
         return $dirty;
     }
+
+    /**
+     * zwraca obiekt walidatora
+     * @return mixed
+     */
+    public function getValidator(){
+        return $this->Validator;
+    }
 }
 
 class ElegantDeletionException extends \Exception{
