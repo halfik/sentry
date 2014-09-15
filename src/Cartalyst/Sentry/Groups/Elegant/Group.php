@@ -81,78 +81,23 @@ class Group extends Elegant implements GroupInterface {
                 )
 
             ),
-            'email'=>array(
-                'title'=>'E-mail',
+            'name'=>array(
+                'title'=>'Nazwa roli',
                 'type'=>'string',
-                'sortable' => true,
-                'searchable' =>  Searchable::orTextRight('title'),
-                'rules'=>array(
-                    'update'=>'required|email',
-                    'insert'=>'required|email|unique:users'
-                )
-            ),
-            'password'=>array(
-                'title'=>'Hasło',
-                'type'=>'password',
                 'rules'=>array(
                     'any'=>'required'
                 )
             ),
-            'activated'=>array(
-                'title'=>'Aktywny',
-                'type'=>'bool',
-                'sortable' => true,
-                'rules'=>array(
-                    'any'=>'in:0,1'
-                )
-            ),
-            'first_name' => array(
-                'title'=>'Imię',
+            'code'=>array(
+                'title'=>'Kod roli',
                 'type'=>'string',
-                'sortable' => true,
-                'searchable' =>  Searchable::orTextRight('first_name'),
                 'rules'=>array(
-                    'update'=>'',
-                    'insert'=>''
-                )
-            ),
-            'last_name' => array(
-                'title'=>'Nazwisko',
-                'type'=>'string',
-                'sortable' => true,
-                'searchable' =>  Searchable::orTextRight('last_name'),
-                'rules'=>array(
-                    'update'=>'',
-                    'insert'=>''
+                    'any'=>'required'
                 )
             ),
             'permissions' => array(
                 'title'=>'Uprawnienia',
                 'type'=>'string'
-            ),
-            'activation_code' => array(
-                'title'=>'Kod aktywacyjny',
-                'type'=>'string'
-            ),
-            'persist_code' => array(
-                'title'=>'Kod',
-                'type'=>'string'
-            ),
-            'reset_password_code' => array(
-                'title'=>'Kod do odzyskiwania hasła',
-                'type'=>'string'
-            ),
-            'salt' => array(
-                'title'=>'Salt',
-                'type'=>'string'
-            ),
-            'last_login'=> array(
-                'title'=>'Data ostatniego logowania',
-                'type'=>'dateTime'
-            ),
-            'activated_at'=> array(
-                'title'=>'Data aktywacji',
-                'type'=>'dateTime'
             ),
             'created_at'=> array(
                 'title'=>'Data utworzenia',
