@@ -65,7 +65,13 @@ class Elegant extends Model{
      */
     public function performInsert(DataBaseBuilder $query){
         $this->validate('insert');
+
+        $attributes = $this->attributes;
+        $this->attributes = $this->getDirty();
+
         parent::performInsert($query);
+
+        $this->attributes = array_merge($attributes, $this->attributes );
     }
 
     /**
