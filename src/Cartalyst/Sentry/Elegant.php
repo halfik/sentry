@@ -90,7 +90,7 @@ class Elegant extends Model{
         }
         $MessageBag=new MessageBag();
         $Validator=$this->Validator();
-        $Validator->setData($this->getDirty());
+        $Validator->setData($this->attributes);
 
         $rules = $this->getFieldsRules($rulesGroups);
         foreach ($rules AS $field=>$val){
@@ -326,6 +326,14 @@ class Elegant extends Model{
         return $result;
     }
 
+    /**
+     * zwraca informacje o typie pola
+     * @param string $field
+     * @return mixed
+     */
+    public function getFieldType($field){
+        return $this->fields[$field]['type'];
+    }
 
     /**
      * set up validation rules for selected field
@@ -344,10 +352,10 @@ class Elegant extends Model{
 
     /**
      * enalbe/disable validation
-     * @param bool $enable
+     * @param bool $enalble
      */
-    public function setValidationEnabled($enable=true){
-        $this->validationEnabled = $enable;
+    public function setValidationEnabled($enalble=true){
+        $this->validationEnabled = $enalble;
     }
 
     /**
@@ -382,6 +390,9 @@ class Elegant extends Model{
         foreach ($dirty as $field => $value)
         {
             if (!$this->isOriginal($field)){
+                unset($dirty[$field]);
+            }
+            elseif($this->getFieldType($field) == 'password' && empty($dirty[$field])){
                 unset($dirty[$field]);
             }
         }
