@@ -90,8 +90,17 @@ class Elegant extends Model{
         }
         $MessageBag=new MessageBag();
         $Validator=$this->Validator();
-        $Validator->setData($this->attributes);
-        $Validator->setRules($this->getFieldsRules($rulesGroups));
+        $Validator->setData($this->getDirty());
+
+        $rules = $this->getFieldsRules($rulesGroups);
+        foreach ($rules AS $field=>$val){
+            if (!$this->isDirty($field)){
+                unset($rules[$field]);
+            }
+        }
+
+        $Validator->setRules($rules);
+
         if($Validator->fails()){
             $messages=$Validator->messages()->toArray();
             foreach($messages as $key=>$message){
