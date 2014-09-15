@@ -72,6 +72,7 @@ class Elegant extends Model{
         parent::performInsert($query);
 
         $this->attributes = array_merge($attributes, $this->attributes );
+        $this->fireModelEvent('after_created', false);
     }
 
     /**
@@ -83,6 +84,7 @@ class Elegant extends Model{
     protected function performUpdate(DataBaseBuilder $query){
         $this->validate('update');
         parent::performUpdate($query);
+        $this->fireModelEvent('after_updated', false);
     }
 
     /**
