@@ -127,6 +127,7 @@ class User extends Elegant implements UserInterface {
      * init fields and their rules
      */
     protected function init(){
+        $this->guarded = array_merge($this->guarded, array('password_confirmation', 'rules', 'permission', 'roles'));
 
         $this->fields=array(
             'id'=>array(
@@ -137,6 +138,7 @@ class User extends Elegant implements UserInterface {
                     'any'=>'integer',
                     'update'=>'required'
                 )
+
             ),
             'email'=>array(
                 'title'=>'E-mail',
@@ -144,24 +146,78 @@ class User extends Elegant implements UserInterface {
                 'sortable' => true,
                 'rules'=>array(
                     'update'=>'required|email',
-                    'insert'=>'required|email|unique:user'
+                    'insert'=>'required|email|unique:users'
                 )
             ),
             'password'=>array(
-                'title'=>'Password',
+                'title'=>'Hasło',
                 'type'=>'password',
                 'rules'=>array(
                     'any'=>'required'
                 )
             ),
             'activated'=>array(
-                'title'=>'Is Active',
+                'title'=>'Aktywny',
                 'type'=>'bool',
                 'sortable' => true,
                 'rules'=>array(
                     'any'=>'in:0,1'
                 )
-            )
+            ),
+            'first_name' => array(
+                'title'=>'Imię',
+                'type'=>'string',
+                'sortable' => true,
+                'rules'=>array(
+                    'update'=>'',
+                    'insert'=>''
+                )
+            ),
+            'last_name' => array(
+                'title'=>'Nazwisko',
+                'type'=>'string',
+                'sortable' => true,
+                'rules'=>array(
+                    'update'=>'',
+                    'insert'=>''
+                )
+            ),
+            'permissions' => array(
+                'title'=>'Uprawnienia',
+                'type'=>'string'
+            ),
+            'activation_code' => array(
+                'title'=>'Kod aktywacyjny',
+                'type'=>'string'
+            ),
+            'persist_code' => array(
+                'title'=>'Kod',
+                'type'=>'string'
+            ),
+            'reset_password_code' => array(
+                'title'=>'Kod do odzyskiwania hasła',
+                'type'=>'string'
+            ),
+            'salt' => array(
+                'title'=>'Salt',
+                'type'=>'string'
+            ),
+            'last_login'=> array(
+                'title'=>'Data ostatniego logowania',
+                'type'=>'dateTime'
+            ),
+            'activated_at'=> array(
+                'title'=>'Data aktywacji',
+                'type'=>'dateTime'
+            ),
+            'created_at'=> array(
+                'title'=>'Data utworzenia',
+                'type'=>'dateTime'
+            ),
+            'updated_at'=> array(
+                'title'=>'Data ostatniej modyfikacji',
+                'type'=>'dateTime'
+            ),
         );
     }
 
