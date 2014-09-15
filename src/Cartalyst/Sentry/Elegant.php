@@ -56,21 +56,6 @@ class Elegant extends Model{
     }
 
 
-    public function fill(array $attributes =array())
-    {
-        $this->setInput($attributes);
-
-        $data=array();
-        foreach($attributes as $k=>$v){
-            if($this->isOriginal($k)){
-                $data[$k]=$v;
-            }
-        }
-
-        return parent::fill($data);
-    }
-
-
 
     /**
      * Perform a model insert operation.
