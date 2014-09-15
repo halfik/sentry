@@ -153,7 +153,7 @@ class Elegant extends Model{
             foreach($inFields as $field){
                 if ( isSet($this->fields[$field]['searchable'])){
                     $searchable = $this->fields[$field]['searchable'];
-                    if($searchable instanceof Closure){
+                    if($searchable instanceof \Closure){
                         $this->fields[$field]['searchable']($q,$keyword);
                     }
                 }
