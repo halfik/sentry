@@ -335,10 +335,10 @@ class Elegant extends Model{
 
     /**
      * enalbe/disable validation
-     * @param bool $enalble
+     * @param bool $enable
      */
-    public function setValidationEnabled($enalble=true){
-        $this->validationEnabled = $enalble;
+    public function setValidationEnabled($enable=true){
+        $this->validationEnabled = $enable;
     }
 
     /**
