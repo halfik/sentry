@@ -343,7 +343,7 @@ class Elegant extends Model{
         if (!isSet($this->fields[$field]['type'])){
             return null;
         }
-        
+
         return $this->fields[$field]['type'];
     }
 
@@ -444,6 +444,19 @@ class Elegant extends Model{
         }
 
         parent::setAttribute($key, $value);
+    }
+
+    /**
+     * Get a new query builder instance for the connection.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    protected function newBaseQueryBuilder()
+    {
+        $conn = $this->getConnection();
+        $grammar = $conn->getQueryGrammar();
+
+        return App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()));
     }
 }
 
