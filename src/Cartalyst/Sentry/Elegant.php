@@ -32,6 +32,7 @@ class Elegant extends Model{
     }
 
     public function __construct(array $attributes = array()){
+	    \Searchable::$alias = $this->getTable();
         $this->init();
         parent::__construct($attributes);
     }
