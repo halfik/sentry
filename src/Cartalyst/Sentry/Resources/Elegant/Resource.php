@@ -29,6 +29,40 @@ class Resource extends Elegant implements ResourceInterface {
 
     public $childrens = array();
 
+    /**
+     * init fields and their rules
+     */
+    protected function init(){
+        $this->fields=array(
+            'id'=>array(
+                'title'=>'Id',
+                'type'=>'int',
+                'rules'=>array(
+                    'any'=>'integer',
+                    'update'=>'required'
+                )
+
+            ),
+            'parent_id'=>array(
+                'title'=>'Id nadrzędnego zasobu',
+                'type'=>'int'
+            ),
+            'name'=>array(
+                'title'=>'Nazwa wyświetlana',
+                'type'=>'string',
+                'rules'=>array(
+                    'any'=>'required'
+                )
+            ),
+            'value'=>array(
+                'title'=>'Nazwa właściwa zasobu',
+                'type'=>'string',
+                'rules'=>array(
+                    'any'=>'required'
+                )
+            )
+        );
+    }
 
     /**
      * Returns the group's ID.
