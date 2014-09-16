@@ -147,7 +147,7 @@ class Sentry {
 	 * @return \Cartalyst\Sentry\Users\UserInterface
 	 */
 	public function register(array $credentials, $activate = false)
-	{   
+	{
 		$user = $this->userProvider->create($credentials);
 
 		if ($activate)

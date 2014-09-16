@@ -415,6 +415,33 @@ class Elegant extends Model{
     public function getValidator(){
         return $this->Validator;
     }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    public function setAttribute($key, $value)
+    {
+
+        $type = $this->getFieldType($key);
+        $value = trim($value);
+        
+        switch ($type){
+            case 'integer':
+                if (empty($value)){
+                    $value = null;
+                }
+                break;
+            case 'date':
+            case 'dateTime':
+                if (empty($value)){
+                    $value = null;
+                }
+                break;
+        }
+
+        parent::setAttribute($key, $value);
+    }
 }
 
 class ElegantDeletionException extends \Exception{
