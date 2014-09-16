@@ -62,9 +62,70 @@ class Provider implements ProviderInterface {
         {
             $this->model = $model;
         }
+
+        parent::__construct();
 	}
 
-	/**
+    /**
+     * init fields and their rules
+     */
+    protected function init(){
+        $this->fields=array(
+            'id'=>array(
+                'title'=>'Id',
+                'type'=>'int',
+                'rules'=>array(
+                    'any'=>'integer',
+                    'update'=>'required'
+                )
+
+            ),
+            'user_id'=>array(
+                'title'=>'User id',
+                'type'=>'int'
+            ),
+            'ip_address'=>array(
+                'title'=>'Adres IP',
+                'type'=>'string'
+            ),
+            'attempts'=>array(
+                'title'=>'Ilość prób logowania',
+                'type'=>'int',
+                'rules'=>array(
+                    'any'=>'integer|required'
+                )
+            ),
+            'suspended' => array(
+                'title'=>'Konto zawieszone',
+                'type'=>'bool',
+                'rules'=>array(
+                    'any'=>'in:0,1'
+                )
+            ),
+            'banned' => array(
+                'title'=>'Konto zablokowane',
+                'type'=>'bool',
+                'rules'=>array(
+                    'any'=>'in:0,1'
+                )
+            ),
+            'last_attempt_at' => array(
+                'title'=>'Ostatnia próba logowania',
+                'type'=>'datetime'
+            ),
+            'suspended_at' => array(
+                'title'=>'Data zawieszenia konta',
+                'type'=>'datetime'
+            ),
+            'banned_at' => array(
+                'title'=>'Data zbanowania',
+                'type'=>'datetime'
+            )
+        );
+    }
+
+
+    /**
 	 * Finds a throttler by the given Model.
 	 *
 	 * @param  \Cartalyst\Sentry\Users\UserInterface $user
