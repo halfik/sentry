@@ -456,7 +456,7 @@ class Elegant extends Model{
         $conn = $this->getConnection();
         $grammar = $conn->getQueryGrammar();
 
-        return App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()));
+        return \App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()));
     }
 }
 
