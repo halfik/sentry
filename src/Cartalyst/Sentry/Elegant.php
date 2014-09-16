@@ -340,6 +340,10 @@ class Elegant extends Model{
      * @return mixed
      */
     public function getFieldType($field){
+        if (!isSet($this->fields[$field]['type'])){
+            return null;
+        }
+        
         return $this->fields[$field]['type'];
     }
 
@@ -422,10 +426,9 @@ class Elegant extends Model{
      */
     public function setAttribute($key, $value)
     {
-
         $type = $this->getFieldType($key);
         $value = trim($value);
-        
+
         switch ($type){
             case 'integer':
                 if (empty($value)){
