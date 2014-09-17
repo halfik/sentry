@@ -156,7 +156,6 @@ class Elegant extends Model{
      * @param $inFields
      */
     public function makeLikeWhere(QueryBuilder &$q, $keyword, $inFields){
-
         $q->where(function(QueryBuilder $q)use($keyword, $inFields){
             foreach($inFields as $field){
                 if ( isSet($this->fields[$field]['searchable'])){
@@ -264,6 +263,19 @@ class Elegant extends Model{
 
         }
         return $result;
+    }
+
+    /**
+     * zwraca label dla pola
+     * @param string $field
+     * @return mixed
+     */
+    public function getFieldTitle($field){
+        if (!isSet($this->fields[$field]['title'])){
+            return null;
+        }
+
+        return $this->fields[$field]['title'];
     }
 
     /**
