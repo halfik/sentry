@@ -99,6 +99,10 @@ class Group extends Elegant implements GroupInterface {
                 'title'=>'Uprawnienia',
                 'type'=>'string'
             ),
+            'weight' => array(
+                'title'=>'Waga',
+                'type'=>'integer'
+            ),
             'created_at'=> array(
                 'title'=>'Data utworzenia',
                 'type'=>'dateTime'

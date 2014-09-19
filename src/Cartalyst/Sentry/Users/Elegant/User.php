@@ -556,6 +556,7 @@ class User extends Elegant implements UserInterface {
 	}
 
     /**
+     * Zwraca role o najnizszej wadze (glowna role)
      * @return null|GroupInterface
      */
     public function getMainGroup(){
