@@ -9,11 +9,11 @@ class RoleFilter {
      * @param string $roleName
      * @param string $resourceName
      */
-    public function filter($q, $roleName, $resourceName){
+    public function filter($q, $roleName, $resourceName, $userData){
         $config = \Config::get('acl');
 
         if (is_string($resourceName) && isSet($config[$roleName][$resourceName])){
-            $config[$roleName][$resourceName]($q,\App::make('sentry')->getUser());
+            $config[$roleName][$resourceName]($q,$userData);
         }
     }
 }
