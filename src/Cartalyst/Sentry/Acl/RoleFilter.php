@@ -6,15 +6,14 @@ class RoleFilter {
     /**
      * filter dla query
      * @param QueryBuilder $q
-     * @param User $user
+     * @param string $roleName
      * @param string $resourceName
      */
-    public function filter($q, $user, $resourceName){
-        $mainGroup = $user->getMainGroup();
+    public function filter($q, $roleName, $resourceName){
         $config = \Config::get('acl');
 
-        if (isSet($config[$mainGroup->getCode()][$resourceName])){
-            $config[$mainGroup->getCode()][$resourceName]($q,$user);
+        if (isSet($config[$roleName][$resourceName])){
+            $config[$roleName][$resourceName]($q,\App::make('sentry')->getUser());
         }
     }
 }
