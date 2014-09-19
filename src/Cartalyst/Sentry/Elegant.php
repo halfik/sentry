@@ -183,7 +183,7 @@ class Elegant extends Model{
      * @return \Illuminate\Database\Query\Builder|static
      */
     public function search(array $params=array()){
-        $q=$this->getQuery();
+        $q=$this->newQuery();
         if(array_get($params,'fields')){
             $q->select($this->makeFieldsAliases($params['fields']));
             $q->from($this->getTable().' AS '.get_class($this));
