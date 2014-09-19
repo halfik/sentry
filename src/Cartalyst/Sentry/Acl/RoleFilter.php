@@ -12,7 +12,7 @@ class RoleFilter {
     public function filter($q, $roleName, $resourceName){
         $config = \Config::get('acl');
 
-        if (isSet($config[$roleName][$resourceName])){
+        if (is_string($resourceName) && isSet($config[$roleName][$resourceName])){
             $config[$roleName][$resourceName]($q,\App::make('sentry')->getUser());
         }
     }
