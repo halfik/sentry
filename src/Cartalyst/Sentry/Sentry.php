@@ -179,6 +179,7 @@ class Sentry {
 
         $user = $authProvider->authorize($credentials, $remember);
         \Session::put('mainRoleCode', $user->getMainGroup()->code);
+        \Session::put('userData', $user->toArray());
 
         $this->login($user, $remember);
 
