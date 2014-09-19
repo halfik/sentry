@@ -555,6 +555,25 @@ class User extends Elegant implements UserInterface {
 		return $this->userGroups;
 	}
 
+    /**
+     * @return null|GroupInterface
+     */
+    public function getMainGroup(){
+        $mainGroup = null;
+        $groups = $this->getGroups();
+
+        foreach ($groups AS $group){
+            if ($mainGroup == null){
+                $mainGroup = $group;
+            }
+            elseif ($mainGroup->weight > $group->weight){
+                $mainGroup = $group;
+            }
+        }
+
+        return $mainGroup;
+    }
+
 	/**
 	 * Adds the user to the given group.
 	 *
