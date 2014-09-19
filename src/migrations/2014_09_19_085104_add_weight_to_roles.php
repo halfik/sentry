@@ -14,7 +14,7 @@ class AddWeightToRoles extends Migration {
 	{
 		Schema::table('roles', function(Blueprint $table)
 		{
-			$table->smallInteger('weight', false, true);
+			$table->smallInteger('weight', false, true)->default(0);
 		});
 
 	}
