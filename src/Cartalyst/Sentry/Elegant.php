@@ -152,12 +152,12 @@ class Elegant extends Model{
     }
 
     /**
-     * @param Illuminate\Database\Query\Builder $q
+     * @param \Illuminate\Database\Eloquent\Builder $q
      * @param $keyword
      * @param $inFields
      */
-    public function makeLikeWhere(Illuminate\Database\Query\Builder &$q, $keyword, $inFields){
-        $q->where(function(Illuminate\Database\Query\Builder $q)use($keyword, $inFields){
+    public function makeLikeWhere(\Illuminate\Database\Eloquent\Builder &$q, $keyword, $inFields){
+        $q->where(function(\Illuminate\Database\Eloquent\Builder $q)use($keyword, $inFields){
             foreach($inFields as $field){
                 if ( isSet($this->fields[$field]['searchable'])){
                     $searchable = $this->fields[$field]['searchable'];
