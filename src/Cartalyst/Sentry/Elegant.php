@@ -156,8 +156,8 @@ class Elegant extends Model{
      * @param $keyword
      * @param $inFields
      */
-    public function makeLikeWhere(QueryBuilder &$q, $keyword, $inFields){
-        $q->where(function(QueryBuilder $q)use($keyword, $inFields){
+    public function makeLikeWhere(Illuminate\Database\Query\Builder &$q, $keyword, $inFields){
+        $q->where(function(Illuminate\Database\Query\Builder $q)use($keyword, $inFields){
             foreach($inFields as $field){
                 if ( isSet($this->fields[$field]['searchable'])){
                     $searchable = $this->fields[$field]['searchable'];
