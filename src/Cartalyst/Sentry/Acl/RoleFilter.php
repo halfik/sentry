@@ -7,14 +7,14 @@ class RoleFilter {
      * filter dla query
      * @param QueryBuilder $q
      * @param User $user
-     * @param string $routeName
+     * @param string $resourceName
      */
-    public function filter($q, $user, $routeName){
+    public function filter($q, $user, $resourceName){
         $mainGroup = $user->getMainGroup();
         $config = \Config::get('acl');
 
-        if (isSet($config[$mainGroup->getCode()][$routeName])){
-            $config[$mainGroup->getCode()][$routeName]($q,$user);
+        if (isSet($config[$mainGroup->getCode()][$resourceName])){
+            $config[$mainGroup->getCode()][$resourceName]($q,$user);
         }
     }
 }
