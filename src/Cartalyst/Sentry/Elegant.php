@@ -120,6 +120,22 @@ class Elegant extends Model{
         }
     }
 
+	/**
+	 * add error into validation exception
+	 * @param $key
+	 * @param $message
+	 */
+	public function addValidationError($key, $message){
+		if(is_null($this->Error)){
+			$MessageBag=new MessageBag();
+			$this->Error = new ElegantValidationException($MessageBag);
+		}
+		else{
+			$MessageBag=$this->Error->getMessageBag();
+		}
+		$MessageBag->add($key,$message);
+	}
+
     /**
      * @param string $rulesGroups
      * @return bool
@@ -440,8 +456,10 @@ class Elegant extends Model{
     public function setAttribute($key, $value)
     {
         $type = $this->getFieldType($key);
-        $value = trim($value);
-
+	    if(is_scalar($value)){
+		    $value = trim($value);
+	    }
+        
         switch ($type){
             case 'integer':
                 if (empty($value)){
