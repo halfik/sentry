@@ -12,8 +12,8 @@ class RoleFilter {
     public function filter($q, $roleName, $resourceName, $userData){
         $config = \Config::get('acl');
 
-        if (is_string($resourceName) && isSet($config[$roleName][$resourceName])){
-            $config[$roleName][$resourceName]($q,$userData);
+        if (is_string($resourceName) && isSet($config[$roleName]['data'][$resourceName])){
+            $config[$roleName]['data'][$resourceName]($q,$userData);
         }
     }
 }
