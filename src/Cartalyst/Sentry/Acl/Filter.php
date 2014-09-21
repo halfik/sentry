@@ -30,7 +30,7 @@ class Filter {
         if ( isSet($config[$roleName]['view'][$view]) ){
             $view = $config[$roleName]['view'][$view];
 
-            if ( isSet($config[$roleName]['skin']) ){
+            if ( isSet($config[$roleName]['skin']) && !empty($config[$roleName]['skin'])){
                 $view = $config[$roleName]['skin'].'.'.$view;
             }
         }
