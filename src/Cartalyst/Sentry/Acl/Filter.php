@@ -19,13 +19,14 @@ class Filter {
 
     /**
      * filtr widokow
-     * @param string $view
+     * @param stdObject $view
      * @param string $roleName
      * @return string
      */
-    public function viewFilter($view, $roleName){
+    public function viewFilter($viewObj, $roleName){
         $config = \Config::get('acl');
 
+        $view = $viewObj->view;
         if ( isSet($config[$roleName]['view'][$view]) ){
             $view = $config[$roleName]['view'][$view];
 
@@ -34,6 +35,6 @@ class Filter {
             }
         }
 
-        return $view;
+        $viewObj->view = $view;
     }
 }
