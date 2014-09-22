@@ -29,10 +29,10 @@ class Filter {
         $view = $viewObj->view;
         if ( isSet($config[$roleName]['view'][$view]) ){
             $view = $config[$roleName]['view'][$view];
+        }
 
-            if ( isSet($config[$roleName]['skin']) && !empty($config[$roleName]['skin'])){
-                $view = $config[$roleName]['skin'].'.'.$view;
-            }
+        if ( isSet($config[$roleName]['skin']) && !empty($config[$roleName]['skin'])){
+            $view = $config[$roleName]['skin'].'.'.$view;
         }
 
         $viewObj->view = $view;
