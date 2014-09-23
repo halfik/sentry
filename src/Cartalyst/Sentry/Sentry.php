@@ -461,7 +461,7 @@ class Sentry {
      * @param  \Cartalyst\Sentry\Throttling\ProviderInterface
      * @return void
      */
-    public function setResourceProvider(ResourceProviderInterfaceo $resourceProvider)
+    public function setResourceProvider(ResourceProviderInterface $resourceProvider)
     {
         $this->resourceProvider = $resourceProvider;
     }
