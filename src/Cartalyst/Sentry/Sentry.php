@@ -178,6 +178,8 @@ class Sentry {
         $authProvider = $authManager->getCurrent();
 
         $user = $authProvider->authorize($credentials, $remember);
+        \Session::put('mainRoleCode', $user->getMainGroup()->code);
+        \Session::put('userData', $user->toArray());
 
         $this->login($user, $remember);
 
@@ -459,7 +461,7 @@ class Sentry {
      * @param  \Cartalyst\Sentry\Throttling\ProviderInterface
      * @return void
      */
-    public function setResourceProvider(ResourceProviderInterfaceo $resourceProvider)
+    public function setResourceProvider(ResourceProviderInterface $resourceProvider)
     {
         $this->resourceProvider = $resourceProvider;
     }
