@@ -20,6 +20,12 @@ class Elegant extends Model{
     protected $Validator;
     protected $validationEnabled = true;
 
+    /**
+     * alias dla tabeli
+     * do uzywania przy budowaniu query
+     */
+    const TABLE_ALIAS='';
+
     protected function init(){
 
     }
