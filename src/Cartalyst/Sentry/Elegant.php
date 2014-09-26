@@ -109,7 +109,7 @@ class Elegant extends Model{
 
         $rules = $this->getFieldsRules($rulesGroups);
         foreach ($rules AS $field=>$val){
-            if (!$this->isDirty($field)){
+            if ($this->exists && !$this->isDirty($field)){
                 unset($rules[$field]);
             }
         }
