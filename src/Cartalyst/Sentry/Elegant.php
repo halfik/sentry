@@ -20,6 +20,12 @@ class Elegant extends Model{
     protected $Validator;
     protected $validationEnabled = true;
 
+    /**
+     * alias dla tabeli
+     * do uzywania przy budowaniu query
+     */
+    const TABLE_ALIAS='';
+
     protected function init(){
 
     }
@@ -103,7 +109,7 @@ class Elegant extends Model{
 
         $rules = $this->getFieldsRules($rulesGroups);
         foreach ($rules AS $field=>$val){
-            if (!$this->isDirty($field)){
+            if ($this->exists && !$this->isDirty($field)){
                 unset($rules[$field]);
             }
         }
@@ -119,6 +125,22 @@ class Elegant extends Model{
             throw $this->Error;
         }
     }
+
+	/**
+	 * add error into validation exception
+	 * @param $key
+	 * @param $message
+	 */
+	public function addValidationError($key, $message){
+		if(is_null($this->Error)){
+			$MessageBag=new MessageBag();
+			$this->Error = new ElegantValidationException($MessageBag);
+		}
+		else{
+			$MessageBag=$this->Error->getMessageBag();
+		}
+		$MessageBag->add($key,$message);
+	}
 
     /**
      * @param string $rulesGroups
@@ -157,6 +179,7 @@ class Elegant extends Model{
      * @param $inFields
      */
     public function makeLikeWhere(\Illuminate\Database\Eloquent\Builder &$q, $keyword, $inFields){
+        $keyword = trim($keyword);
         $q->where(function(\Illuminate\Database\Eloquent\Builder $q)use($keyword, $inFields){
             foreach($inFields as $field){
                 if ( isSet($this->fields[$field]['searchable'])){
@@ -440,8 +463,10 @@ class Elegant extends Model{
     public function setAttribute($key, $value)
     {
         $type = $this->getFieldType($key);
-        $value = trim($value);
-
+	    if(is_scalar($value)){
+		    $value = trim($value);
+	    }
+        
         switch ($type){
             case 'integer':
                 if (empty($value)){
