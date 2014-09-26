@@ -20,6 +20,8 @@ class Elegant extends Model{
     protected $Validator;
     protected $validationEnabled = true;
 
+    protected $queryAllowAcl = true;
+
     /**
      * alias dla tabeli
      * do uzywania przy budowaniu query
@@ -63,6 +65,13 @@ class Elegant extends Model{
     }
 
 
+    /**
+     * Metoda pozwala kierowac odpaleniem eventu acl w query builderze
+     * @param bool $allow
+     */
+    public function allowQueryAcl($allow=true){
+        $this->queryAllowAcl = $allow;
+    }
 
     /**
      * Perform a model insert operation.
@@ -494,7 +503,7 @@ class Elegant extends Model{
         $conn = $this->getConnection();
         $grammar = $conn->getQueryGrammar();
 
-        return \App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()));
+        return \App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()))->allowAclFilter($this->queryAllowAcl);
     }
 }
 

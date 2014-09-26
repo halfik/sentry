@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "3.1.18",
+    "version": "3.2.0",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel", "codeigniter", "fuelphp", "kohana"],
 	"license": "BSD-3-Clause",
@@ -72,8 +72,8 @@
             "3": "master"
 		},
 		"branch-alias": {
-			"dev-master": "3.1-dev",
-            "3.1" : "dev-master"
+			"dev-master": "3.2-dev",
+            "3.2" : "dev-master"
 		}
 	},
 	"minimum-stability": "dev"
