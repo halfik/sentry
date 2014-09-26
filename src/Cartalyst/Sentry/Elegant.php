@@ -68,9 +68,11 @@ class Elegant extends Model{
     /**
      * Metoda pozwala kierowac odpaleniem eventu acl w query builderze
      * @param bool $allow
+     * return Cartalyst\Sentry\Elegant
      */
     public function allowQueryAcl($allow=true){
         $this->queryAllowAcl = $allow;
+        return $this;
     }
 
     /**
