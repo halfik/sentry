@@ -68,12 +68,11 @@
 		"frameworks": ["Laravel 3", "Laravel 4", "CodeIgniter 3", "FuelPHP 1", "Kohana"],
 		"versions": {
 			"1": "1.1/master",
-			"2": "master",
             "3": "master"
 		},
 		"branch-alias": {
 			"dev-master": "3.1-dev",
-            "3.1" : "dev-master"
+                        "3.1" : "dev-master"
 		}
 	},
 	"minimum-stability": "dev"
