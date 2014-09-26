@@ -20,7 +20,7 @@ class Elegant extends Model{
     protected $Validator;
     protected $validationEnabled = true;
 
-    protected $queryAllowAcl = true;
+    protected static $queryAllowAcl = true;
 
     /**
      * alias dla tabeli
@@ -68,11 +68,10 @@ class Elegant extends Model{
     /**
      * Metoda pozwala kierowac odpaleniem eventu acl w query builderze
      * @param bool $allow
-     * return Cartalyst\Sentry\Elegant
      */
-    public function allowQueryAcl($allow=true){
-        $this->queryAllowAcl = $allow;
-        return $this;
+    public static function allowQueryAcl($allow=true){
+
+        self::$queryAllowAcl = $allow;
     }
 
     /**
@@ -505,7 +504,7 @@ class Elegant extends Model{
         $conn = $this->getConnection();
         $grammar = $conn->getQueryGrammar();
 
-        return \App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()))->allowAclFilter($this->queryAllowAcl);
+        return \App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()))->allowAclFilter(self::$queryAllowAcl);
     }
 }
 
