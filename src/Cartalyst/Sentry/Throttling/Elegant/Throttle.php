@@ -102,7 +102,7 @@ class Throttle extends Elegant implements ThrottleInterface {
                 'title'=>'Ilość prób logowania',
                 'type'=>'int',
                 'rules'=>array(
-                    'any'=>'integer|required'
+                    'any'=>'integer'
                 )
             ),
             'suspended' => array(

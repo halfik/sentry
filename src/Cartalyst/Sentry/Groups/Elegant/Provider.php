@@ -56,7 +56,7 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
         $model->allowQueryAcl(false);
-        
+
 		if ( ! $group = $model->newQuery()->find($id))
 		{
 			throw new GroupNotFoundException("A group could not be found with ID [$id].");
