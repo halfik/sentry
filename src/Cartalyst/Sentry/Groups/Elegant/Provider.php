@@ -91,7 +91,7 @@ class Provider implements ProviderInterface {
      */
     public function findByCode($code){
         $model = $this->createModel();
-
+        $model->allowQueryAcl(false);
         if ( ! $group = $model->newQuery()->where('code', '=', $code)->first())
         {
             throw new GroupNotFoundException("A group could not be found with the code [$code].");
