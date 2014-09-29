@@ -67,8 +67,7 @@
 		"component": "package",
 		"frameworks": ["Laravel 3", "Laravel 4", "CodeIgniter 3", "FuelPHP 1", "Kohana"],
 		"versions": {
-			"1": "1.1/master",
-            "3": "master"
+                    "3": "master"
 		},
 		"branch-alias": {
 			"dev-master": "3.1-dev",
