@@ -32,6 +32,21 @@ class Elegant extends Model{
 
     }
 
+    /**
+     * Find a model by its primary key.
+     *
+     * @param  mixed  $id
+     * @param  array  $columns
+     * @return \Illuminate\Support\Collection|static
+     */
+    public static function find($id, $columns = array('*'))
+    {
+        $columns = array();
+        $columns[] =  \App::make(get_called_class())->getTable().'.*';
+
+        return parent::find($id, $columns);
+    }
+
     public function Validator(){
         if(is_null($this->Validator)){
             $this->Validator=\Validator::make($this->attributes,$this->getFieldsRules());
