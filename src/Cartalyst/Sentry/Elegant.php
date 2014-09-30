@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder AS DataBaseBuilder;
 use Illuminate\Database\Query\Builder AS QueryBuilder;
 use Illuminate\Support\MessageBag AS MessageBag;
+use Netinteractive\Utils\Utils AS Utils;
 
 class Elegant extends Model{
     /**
@@ -312,13 +313,13 @@ class Elegant extends Model{
      * @return array
      */
     public function getFieldsRules($rulesGroups='any', $fieldsKeys=null){
-        $rulesGroups=\Utils::paramToArray($rulesGroups);
+        $rulesGroups=Utils::paramToArray($rulesGroups);
 
         if(is_null($fieldsKeys)){
             $fieldsKeys=array_keys($this->getFields());
         }
 
-        $fieldsKeys=\Utils::paramToArray($fieldsKeys);
+        $fieldsKeys=Utils::paramToArray($fieldsKeys);
 
         if(!in_array('any',$rulesGroups)){
             array_push($rulesGroups,'any');
