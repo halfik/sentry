@@ -178,6 +178,8 @@ class Sentry {
         $authProvider = $authManager->getCurrent();
 
         $user = $authProvider->authorize($credentials, $remember);
+        //$this->session->put('mainRoleCode', $user->getMainGroup()->code);
+        //$this->session->put('userData', $user->toArray());
         \Session::put('mainRoleCode', $user->getMainGroup()->code);
         \Session::put('userData', $user->toArray());
 
@@ -318,7 +320,7 @@ class Sentry {
 	public function logout()
 	{
 		$this->user = null;
-
+                \Session::flush();
 		$this->session->forget();
 		$this->cookie->forget();
 	}
