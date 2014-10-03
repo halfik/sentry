@@ -2,7 +2,6 @@
 namespace Cartalyst\Sentry;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder AS DataBaseBuilder;
 use Illuminate\Database\Query\Builder AS QueryBuilder;
 use Illuminate\Support\MessageBag AS MessageBag;
 use Netinteractive\Utils\Utils AS Utils;
@@ -96,7 +95,7 @@ class Elegant extends Model{
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool|null
      */
-    public function performInsert(DataBaseBuilder $query){
+    public function performInsert(Builder $query){
         $this->validate('insert');
 
         $attributes = $this->attributes;
@@ -114,7 +113,7 @@ class Elegant extends Model{
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool|null
      */
-    protected function performUpdate(DataBaseBuilder $query){
+    protected function performUpdate(Builder $query){
         $this->validate('update');
         parent::performUpdate($query);
         $this->fireModelEvent('after_updated', false);
