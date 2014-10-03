@@ -95,13 +95,13 @@ class Elegant extends Model{
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool|null
      */
-    public function performInsert(Builder $query){
+    public function performInsert(\Illuminate\Database\Eloquent\Builder $query, array $options=array()){
         $this->validate('insert');
 
         $attributes = $this->attributes;
         $this->attributes = $this->getDirty();
 
-        parent::performInsert($query);
+        parent::performInsert($query, $options);
 
         $this->attributes = array_merge($attributes, $this->attributes );
         $this->fireModelEvent('after_created', false);
@@ -113,9 +113,9 @@ class Elegant extends Model{
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool|null
      */
-    protected function performUpdate(Builder $query){
+    protected function performUpdate(\Illuminate\Database\Eloquent\Builder $query, array $options=array()){
         $this->validate('update');
-        parent::performUpdate($query);
+        parent::performUpdate($query, $options);
         $this->fireModelEvent('after_updated', false);
     }
 
