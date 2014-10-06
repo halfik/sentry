@@ -932,6 +932,14 @@ class User extends Elegant implements UserInterface {
 		return $this->hashableAttributes;
 	}
 
+    /**
+     * zwraca dane do zapisania do sesji (uzywane przez event filtrow acl)
+     * @return array
+     */
+    public function getSessionData(){
+        return $this->toArray();
+    }
+
 	/**
 	 * Set a given attribute on the model.
 	 *

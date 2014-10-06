@@ -181,7 +181,7 @@ class Sentry {
         //$this->session->put('mainRoleCode', $user->getMainGroup()->code);
         //$this->session->put('userData', $user->toArray());
         \Session::put('mainRoleCode', $user->getMainGroup()->code);
-        \Session::put('userData', $user->toArray());
+        \Session::put('userData', $user->getSessionData());
 
         $this->login($user, $remember);
 
