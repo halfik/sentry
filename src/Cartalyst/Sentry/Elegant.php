@@ -184,9 +184,9 @@ class Elegant extends Model{
 	 * Walidacja przypisanych recordów
 	 * @param $key
 	 */
-	public function checkAttachedIds($key){
+	public function checkAttachedIds($key, $message='Brak powiązanych rekordów!'){
 		if(!$this->exists && !$this->getAttribute($key)){
-			throw new ElegantAttachException();
+			throw new ElegantAttachException($message);
 		}
 
 		if(isset($this->attributes[$key])){
@@ -545,7 +545,7 @@ class ElegantDeletionException extends \Exception{
 }
 
 class ElegantAttachException extends \Exception{
-	protected $message = "Brak powiązanych rekordów";
+	protected $message = "Brak powiązanych rekordów!";
 }
 
 class ElegantValidationException extends \Exception{
