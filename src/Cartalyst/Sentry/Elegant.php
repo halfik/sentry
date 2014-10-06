@@ -185,14 +185,12 @@ class Elegant extends Model{
 	 * @param $key
 	 */
 	public function checkAttachedIds($key){
-		$input=$this->getInput();
-
-		if(!$this->exists && !isset($input[$key])){
+		if(!$this->exists && !$this->getAttribute($key)){
 			throw new ElegantAttachException();
 		}
 
-		if(isset($input[$key])){
-			$arr=explode(',',$input[$key]);
+		if(isset($this->attributes[$key])){
+			$arr=explode(',',$this->attributes[$key]);
 			if(count($arr)<1){
 				throw new ElegantAttachException();
 			}
