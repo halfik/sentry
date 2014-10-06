@@ -180,6 +180,25 @@ class Elegant extends Model{
         }
     }
 
+	/**
+	 * Walidacja przypisanych recordów
+	 * @param $key
+	 */
+	public function checkAttachedIds($key){
+		$input=$this->getInput();
+
+		if(!$this->exists && !isset($input[$key])){
+			throw new ElegantAttachException();
+		}
+
+		if(isset($input[$key])){
+			$arr=explode(',',$input[$key]);
+			if(count($arr)<1){
+				throw new ElegantAttachException();
+			}
+		}
+	}
+
 
     /**
      * Builds query alliases for fields
@@ -525,6 +544,10 @@ class Elegant extends Model{
 
 class ElegantDeletionException extends \Exception{
 
+}
+
+class ElegantAttachException extends \Exception{
+	protected $message = "Brak powiązanych rekordów";
 }
 
 class ElegantValidationException extends \Exception{
