@@ -191,8 +191,8 @@ class Elegant extends Model{
 
 		if(isset($this->attributes[$key])){
 			$arr=explode(',',$this->attributes[$key]);
-			if(count($arr)<1){
-				throw new ElegantAttachException();
+			if(count($arr)<1 || empty($arr[0])){
+				throw new ElegantAttachException($message);
 			}
 		}
 	}
