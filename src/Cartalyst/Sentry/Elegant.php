@@ -555,6 +555,18 @@ class Elegant extends Model{
 
         return \App::make('QueryBuilder', array($conn, $grammar, $conn->getPostProcessor()))->allowAclFilter(self::$queryAllowAcl);
     }
+
+
+    /**
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param  \Illuminate\Database\Query\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function newEloquentBuilder($query)
+    {
+        return \App::make('ModelBuilder', array($query));
+    }
 }
 
 class ElegantDeletionException extends \Exception{
