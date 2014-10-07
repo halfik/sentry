@@ -47,6 +47,19 @@ class Elegant extends Model{
         return parent::find($id, $columns);
     }
 
+    /**
+     * Get all of the models from the database.
+     *
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function all($columns = array('*')){
+        $columns = array();
+        $columns[] =  \App::make(get_called_class())->getTable().'.*';
+
+        return parent::all($columns);
+    }
+
     public function Validator(){
         if(is_null($this->Validator)){
             $this->Validator=\Validator::make($this->attributes,$this->getFieldsRules());
