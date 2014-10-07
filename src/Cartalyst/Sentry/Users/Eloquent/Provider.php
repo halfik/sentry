@@ -71,8 +71,7 @@ class Provider implements ProviderInterface {
 	public function findById($id)
 	{
 		$model = $this->createModel();
-        $model->allowQueryAcl(false);
-        
+
         if ( ! $user = $model->find($id))
 		{
 			throw new UserNotFoundException("A user could not be found with ID [$id].");
