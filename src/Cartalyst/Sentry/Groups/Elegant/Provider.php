@@ -55,9 +55,12 @@ class Provider implements ProviderInterface {
 	public function findById($id)
 	{
 		$model = $this->createModel();
-        $model->allowQueryAcl(false);
 
-		if ( ! $group = $model->newQuery()->find($id))
+        $model->allowQueryAcl(false);
+        $group = $model->newQuery()->find($id);
+        $model->allowQueryAcl(true);
+
+		if ( !$group)
 		{
 			throw new GroupNotFoundException("A group could not be found with ID [$id].");
 		}
@@ -75,9 +78,12 @@ class Provider implements ProviderInterface {
 	public function findByName($name)
 	{
 		$model = $this->createModel();
-        $model->allowQueryAcl(false);
 
-		if ( ! $group = $model->newQuery()->where('name', '=', $name)->first())
+        $model->allowQueryAcl(false);
+        $group = $model->newQuery()->where('name', '=', $name)->first();
+        $model->allowQueryAcl(true);
+
+		if ( ! $group )
 		{
 			throw new GroupNotFoundException("A group could not be found with the name [$name].");
 		}
@@ -93,8 +99,12 @@ class Provider implements ProviderInterface {
      */
     public function findByCode($code){
         $model = $this->createModel();
+
         $model->allowQueryAcl(false);
-        if ( ! $group = $model->newQuery()->where('code', '=', $code)->first())
+        $group = $model->newQuery()->where('code', '=', $code)->first();
+        $model->allowQueryAcl(true);
+
+        if ( ! $group)
         {
             throw new GroupNotFoundException("A group could not be found with the code [$code].");
         }
