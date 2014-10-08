@@ -95,7 +95,11 @@ class Provider implements ProviderInterface {
 	{
 		$model = $this->createModel();
 
-		if ( ! $user = $model->newQuery()->where($model->getLoginName(), '=', $login)->first())
+        $model->allowQueryAcl(false);
+        $user = $model->newQuery()->where($model->getLoginName(), '=', $login)->first();
+        $model->allowQueryAcl(true);
+
+		if ( ! $user)
 		{
 			throw new UserNotFoundException("A user could not be found with a login value of [$login].");
 		}
