@@ -19,6 +19,13 @@ class AddIsHiddenToRoles extends Migration {
 
         $userRole = App::make('sentry')->getGroupProvider()->findByCode('user');
         $guestRole = App::make('sentry')->getGroupProvider()->findByCode('guest');
+
+        $userRole->is_hidden = true;
+        $userRole->save();
+
+        $guestRole->is_hidden = true;
+        $guestRole->save();
+
     }
 
 
