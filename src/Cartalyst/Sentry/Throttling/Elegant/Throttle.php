@@ -109,14 +109,14 @@ class Throttle extends Elegant implements ThrottleInterface {
                 'title'=>'Konto zawieszone',
                 'type'=>'bool',
                 'rules'=>array(
-                    'any'=>'in:0,1'
+                    'any'=>'boolean'
                 )
             ),
             'banned' => array(
                 'title'=>'Konto zablokowane',
                 'type'=>'bool',
                 'rules'=>array(
-                    'any'=>'in:0,1'
+                    'any'=>'boolean'
                 )
             ),
             'last_attempt_at' => array(

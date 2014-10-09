@@ -161,7 +161,7 @@ class User extends Elegant implements UserInterface {
                 'type'=>'bool',
                 'sortable' => true,
                 'rules'=>array(
-                    'any'=>'in:0,1'
+                    'any'=>'boolean'
                 )
             ),
             'first_name' => array(
