@@ -522,9 +522,12 @@ class Elegant extends Model{
     public function setAttribute($key, $value)
     {
         $type = $this->getFieldType($key);
-	    if(is_scalar($value)){
-		    $value = trim($value);
-	    }
+        /**
+         * booleanow nie trimujemy, bo zamienia false na pusty string
+         */
+        if(is_scalar($value) && !is_bool($value)){
+            $value = trim($value);
+        }
         
         switch ($type){
             case 'integer':
