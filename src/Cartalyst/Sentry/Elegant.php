@@ -98,7 +98,6 @@ class Elegant extends Model{
      * @param bool $allow
      */
     public static function allowQueryAcl($allow=true){
-
         self::$queryAllowAcl = $allow;
     }
 
@@ -172,6 +171,7 @@ class Elegant extends Model{
 	 * add error into validation exception
 	 * @param $key
 	 * @param $message
+     * @return Elegant
 	 */
 	public function addValidationError($key, $message){
 		if(is_null($this->Error)){
@@ -182,6 +182,7 @@ class Elegant extends Model{
 			$MessageBag=$this->Error->getMessageBag();
 		}
 		$MessageBag->add($key,$message);
+        return $this;
 	}
 
     /**
@@ -198,7 +199,7 @@ class Elegant extends Model{
     }
 
 	/**
-	 * Walidacja przypisanych recordów
+	 * Walidacja przypisanych rekordów
 	 * @param $key
 	 */
 	public function checkAttachedIds($key, $message='Brak powiązanych rekordów!'){
@@ -236,6 +237,7 @@ class Elegant extends Model{
      * @param \Illuminate\Database\Eloquent\Builder $q
      * @param $keyword
      * @param $inFields
+     * @return Elegant
      */
     public function makeLikeWhere(\Illuminate\Database\Eloquent\Builder &$q, $keyword, $inFields){
         $keyword = trim($keyword);
@@ -249,15 +251,19 @@ class Elegant extends Model{
                 }
             }
         });
+
+        return $this;
     }
 
     /**
      * @param $field
      * @param $type
      * @param $operator
+     * @return Elegant
      */
     public function setFieldSearchable($field, $type, $operator='='){
         $this->fields[$field]['searchable'] = Searchable::$type($field, $operator);
+        return $this;
     }
 
     /**
@@ -447,6 +453,7 @@ class Elegant extends Model{
      * @param string $field
      * @param string|array $rules
      * @param null|string $group
+     * @return Elegant
      */
     public function setFieldRules($field, $rules, $group=null){
         if ($group === null){
@@ -455,14 +462,17 @@ class Elegant extends Model{
         else{
             $this->fields[$field]['rules'][$group] = $rules;
         }
+        return $this;
     }
 
     /**
      * enalbe/disable validation
      * @param bool $enalble
+     * @return Elegant
      */
     public function setValidationEnabled($enalble=true){
         $this->validationEnabled = $enalble;
+        return $this;
     }
 
     /**
