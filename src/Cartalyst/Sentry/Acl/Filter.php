@@ -17,6 +17,14 @@ class Filter {
         }
     }
 
+	public function fillModelFilter($Obj, $roleName, $userData){
+		$config = \Config::get('acl');
+		$resourceName=get_class($Obj->Record);
+		if (is_string($resourceName) && isSet($config[$roleName]['fill'][$resourceName])){
+			$config[$roleName]['fill'][$resourceName]($Obj, $userData);
+		}
+	}
+
     /**
      * filtr widokow
      * @param stdObject $view

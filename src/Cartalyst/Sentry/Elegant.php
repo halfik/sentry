@@ -525,6 +525,17 @@ class Elegant extends Model{
         return $this->Validator;
     }
 
+	public function fill(array $attributes){
+		if(count($attributes)){
+			$Obj=new \stdClass();
+			$Obj->data=$attributes;
+			$Obj->Record=$this;
+			\Event::fire('acl.filter.model.fill', $Obj);
+			$attributes=$Obj->data;
+		}
+		return parent::fill($attributes);
+	}
+
     /**
      * @param string $key
      * @param mixed $value
