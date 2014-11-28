@@ -16,24 +16,26 @@ class Elegant extends Model{
      * @var Object
      */
     protected $Error;
-    protected $input=array();
     protected $Validator;
     protected $validationEnabled = true;
 
     protected static $queryAllowAcl = true;
 
-    /**
-     * alias dla tabeli
-     * do uzywania przy budowaniu query
-     */
-    const TABLE_ALIAS='';
+
+
+    public function __construct(array $attributes = array()){
+        \Searchable::$alias = $this->getTable();
+        $this->init();
+        parent::__construct($attributes);
+    }
 
     protected function init(){
-
     }
+
 
     /**
      * Find a model by its primary key.
+     * Przeciazylismy i dodajemy nazwe tabeli z modelu przed nazwa pola
      *
      * @param  mixed  $id
      * @param  array  $columns
@@ -41,25 +43,36 @@ class Elegant extends Model{
      */
     public static function find($id, $columns = array('*'))
     {
-        $columns = array();
-        $columns[] =  \App::make(get_called_class())->getTable().'.*';
+        foreach ($columns AS &$column){
+            if (strpos('.', $column) == false){
+                $column =  \App::make(get_called_class())->getTable().'.'.$column;
+            }
+        }
 
         return parent::find($id, $columns);
     }
 
     /**
      * Get all of the models from the database.
+     * Przeciazylismy i dodajemy nazwe tabeli z modelu przed nazwa pola
      *
      * @param  array  $columns
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public static function all($columns = array('*')){
-        $columns = array();
-        $columns[] =  \App::make(get_called_class())->getTable().'.*';
+        foreach ($columns AS &$column){
+            if (strpos('.', $column) == false){
+                $column =  \App::make(get_called_class())->getTable().'.'.$column;
+            }
+        }
 
         return parent::all($columns);
     }
 
+    /**
+     * Zwraca obiekt walidatora
+     * @return Illuminate\Support\Facades\Validator
+     */
     public function Validator(){
         if(is_null($this->Validator)){
             $this->Validator=\Validator::make($this->attributes,$this->getFieldsRules());
@@ -67,29 +80,16 @@ class Elegant extends Model{
         return $this->Validator;
     }
 
-    public function __construct(array $attributes = array()){
-	    \Searchable::$alias = $this->getTable();
-        $this->init();
-        parent::__construct($attributes);
-    }
 
-    protected static function defineFields(){
-        return array();
-    }
-
+    /**
+     * Zwraca tablice z lista pol modelu wraz z informacjami o walidacji etc. etc.
+     * @return array
+     */
     public function getFields(){
         if (!$this->fields){
             $this->fields = array();
         }
         return $this->fields;
-    }
-
-    protected function setInput(array $attributes){
-        $this->input=$attributes;
-    }
-
-    public function getInput(){
-        return $this->input;
     }
 
 
@@ -103,6 +103,7 @@ class Elegant extends Model{
 
     /**
      * Perform a model insert operation.
+     * Przeciazylismy, aby dodac eventy after_create, z ktorych korzystaja np. userParams
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool|null
@@ -123,6 +124,7 @@ class Elegant extends Model{
 
     /**
      * Perform a model update operation.
+     * Przeciazylismy, aby dodac eventy after_updated, z ktorych korzystaja np. userParams
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool|null
@@ -139,6 +141,7 @@ class Elegant extends Model{
      * Validate model fields
      * @param string $rulesGroups
      * @throws ElegantValidationException
+     * @return Elegant
      */
     public function validate($rulesGroups='all'){
         if (!$this->validationEnabled){
@@ -165,12 +168,15 @@ class Elegant extends Model{
             $this->Error = new ElegantValidationException($MessageBag);
             throw $this->Error;
         }
+
+        return $this;
     }
 
 	/**
 	 * add error into validation exception
 	 * @param $key
 	 * @param $message
+     * @throws ElegantValidationException
      * @return Elegant
 	 */
 	public function addValidationError($key, $message){
@@ -235,8 +241,8 @@ class Elegant extends Model{
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $q
-     * @param $keyword
-     * @param $inFields
+     * @param string $keyword
+     * @param array $inFields
      * @return Elegant
      */
     public function makeLikeWhere(\Illuminate\Database\Eloquent\Builder &$q, $keyword, $inFields){
@@ -256,9 +262,9 @@ class Elegant extends Model{
     }
 
     /**
-     * @param $field
-     * @param $type
-     * @param $operator
+     * @param string $field
+     * @param string $type
+     * @param string $operator
      * @return Elegant
      */
     public function setFieldSearchable($field, $type, $operator='='){
@@ -290,6 +296,7 @@ class Elegant extends Model{
     /**
      * @return bool|null
      * @throws ElegantDeletionException
+     * @return mixed
      */
     public function delete(){
         if(!parent::delete()){
@@ -370,10 +377,13 @@ class Elegant extends Model{
     /**
      * return field validation rules
      * @param string $key
-     * @return mixed
+     * @return array
      */
     public function getFieldRules($key){
-        return $this->fields[$key]['rules'];
+        if (isSet($this->fields[$key]['rules'])){
+            return $this->fields[$key]['rules'];
+        }
+        return array();
     }
 
     /**
@@ -486,6 +496,7 @@ class Elegant extends Model{
         return in_array($field, $fields);
     }
 
+
     /**
      * Aliast dla isOriginal
      * @param string $field
@@ -497,6 +508,7 @@ class Elegant extends Model{
 
     /**
      * Get the attributes that have been changed since last sync.
+     * Usuwamy z dirty pola, ktore nie pochodza z tego active recordu
      *
      * @return array
      */
@@ -525,16 +537,21 @@ class Elegant extends Model{
         return $this->Validator;
     }
 
-	public function fill(array $attributes){
-		if(count($attributes)){
-			$Obj=new \stdClass();
-			$Obj->data=$attributes;
-			$Obj->Record=$this;
-			\Event::fire('acl.filter.model.fill', $Obj);
-			$attributes=$Obj->data;
-		}
-		return parent::fill($attributes);
-	}
+    /**
+     * Przeciazony fill - odpalamy nasz filtr acl sprawdzajacy prawo zapisu pol
+     * @param array $attributes
+     * @return mixed
+     */
+    public function fill(array $attributes){
+        if(count($attributes)){
+            $Obj=new \stdClass();
+            $Obj->data=$attributes;
+            $Obj->Record=$this;
+            \Event::fire('acl.filter.model.fill', $Obj);
+            $attributes=$Obj->data;
+        }
+        return parent::fill($attributes);
+    }
 
     /**
      * @param string $key
