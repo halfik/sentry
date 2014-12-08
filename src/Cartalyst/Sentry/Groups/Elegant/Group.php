@@ -22,7 +22,7 @@ use Cartalyst\Sentry\Groups\NameRequiredException;
 use Cartalyst\Sentry\Groups\GroupExistsException;
 use Cartalyst\Sentry\Groups\GroupInterface;
 
-class Group extends \Elegant implements GroupInterface {
+class Group extends Elegant implements GroupInterface {
 
 	/**
 	 * The table associated with the model.
