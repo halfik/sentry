@@ -91,7 +91,7 @@ return array(
 		|--------------------------------------------------------------------------
 		|
 		| When using the "eloquent" driver, we need to know which
-		| Eloquent models should be used throughout Sentry.
+		| Elegant models should be used throughout Sentry.
 		|
 		*/
 
@@ -116,7 +116,7 @@ return array(
 		|--------------------------------------------------------------------------
 		|
 		| When using the "eloquent" driver, we need to know which
-		| Eloquent models should be used throughout Sentry.
+		| Elegant models should be used throughout Sentry.
 		|
 		*/
 
@@ -127,7 +127,7 @@ return array(
 		| Login Attribute
 		|--------------------------------------------------------------------------
 		|
-		| If you're using the "eloquent" driver and extending the base Eloquent
+		| If you're using the "eloquent" driver and extending the base Elegant
 		| model, we allow you to globally override the login attribute without
 		| even subclassing the model, simply by specifying the attribute below.
 		|
@@ -182,7 +182,7 @@ return array(
 		|--------------------------------------------------------------------------
 		|
 		| When using the "eloquent" driver, we need to know which
-		| Eloquent models should be used throughout Sentry.
+		| Elegant models should be used throughout Sentry.
 		|
 		*/
 
@@ -193,7 +193,7 @@ return array(
 		| Attempts Limit
 		|--------------------------------------------------------------------------
 		|
-		| When using the "eloquent" driver and extending the base Eloquent model,
+		| When using the "eloquent" driver and extending the base Elegant model,
 		| you have the option to globally set the login attempts.
 		|
 		| Supported: int
@@ -207,7 +207,7 @@ return array(
 		| Suspension Time
 		|--------------------------------------------------------------------------
 		|
-		| When using the "eloquent" driver and extending the base Eloquent model,
+		| When using the "eloquent" driver and extending the base Elegant model,
 		| you have the option to globally set the suspension time, in minutes.
 		|
 		| Supported: int
@@ -228,7 +228,7 @@ return array(
         |--------------------------------------------------------------------------
         |
         | When using the "eloquent" driver, we need to know which
-        | Eloquent models should be used throughout Sentry.
+        | Elegant models should be used throughout Sentry.
         |
         */
 

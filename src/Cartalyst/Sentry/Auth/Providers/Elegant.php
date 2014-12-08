@@ -6,7 +6,7 @@ use Cartalyst\Sentry\Users\LoginRequiredException;
 use Cartalyst\Sentry\Users\PasswordRequiredException;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 
-class EloquentProvider implements AuthProviderInferface{
+class ElegantProvider implements AuthProviderInferface{
 
     /**
      * metoda autoryzacyjna
