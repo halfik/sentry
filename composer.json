@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "3.3.0",
+    "version": "3.3.1",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
@@ -63,10 +63,9 @@
 	},
 	"extra": {
 		"component": "package",
-		"frameworks": ["Laravel 3", "Laravel 4", "CodeIgniter 3", "FuelPHP 1", "Kohana"],
+		"frameworks": ["Laravel 3", "Laravel 4"],
 		"branch-alias": {
-			"dev-master": "3.2-dev",
-            "3.2" : "dev-master"
+			"dev-master": "3.3-dev"
 		}
 	},
 	"minimum-stability": "dev"
