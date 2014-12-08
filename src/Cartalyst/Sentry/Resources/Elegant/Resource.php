@@ -2,9 +2,8 @@
 
 
 use Cartalyst\Sentry\Resources\ResourceInterface;
-use Cartalyst\Sentry\Elegant AS Elegant;
 
-class Resource extends Elegant implements ResourceInterface {
+class Resource extends \Elegant implements ResourceInterface {
 
     /**
      * Indicates if the model should be timestamped.

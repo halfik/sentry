@@ -21,10 +21,9 @@
 use Cartalyst\Sentry\Throttling\ThrottleInterface;
 use Cartalyst\Sentry\Throttling\UserSuspendedException;
 use Cartalyst\Sentry\Throttling\UserBannedException;
-use Cartalyst\Sentry\Elegant AS Elegant;
 use DateTime;
 
-class Throttle extends Elegant implements ThrottleInterface {
+class Throttle extends \Elegant implements ThrottleInterface {
 
 	/**
 	 * Throttling status.
