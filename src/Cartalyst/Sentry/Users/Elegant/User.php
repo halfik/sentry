@@ -26,7 +26,7 @@ use Cartalyst\Sentry\Users\UserAlreadyActivatedException;
 use Cartalyst\Sentry\Users\UserExistsException;
 use Cartalyst\Sentry\Users\UserInterface;
 
-class User extends Elegant implements UserInterface {
+class User extends \Elegant implements UserInterface {
 
 	/**
 	 * The table associated with the model.

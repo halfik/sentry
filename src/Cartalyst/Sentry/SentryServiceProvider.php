@@ -32,6 +32,7 @@ use Illuminate\Support\ServiceProvider;
 use Cartalyst\Sentry\Auth\AuthManager;
 
 class SentryServiceProvider extends ServiceProvider {
+    protected $defer = true;
 
     /**
      * Boot the service provider.
