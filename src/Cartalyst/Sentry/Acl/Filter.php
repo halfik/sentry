@@ -4,7 +4,7 @@
 class Filter {
 
     /**
-     * filter dla query
+     * filter dla query. filtr odczytu danych z bazy
      * @param QueryBuilder $q
      * @param string $roleName
      * @param string $resourceName
@@ -17,13 +17,19 @@ class Filter {
         }
     }
 
-	public function fillModelFilter($Obj, $roleName, $userData){
-		$config = \Config::get('acl');
-		$resourceName=get_class($Obj->Record);
-		if (is_string($resourceName) && isSet($config[$roleName]['fill'][$resourceName])){
-			$config[$roleName]['fill'][$resourceName]($Obj, $userData);
-		}
-	}
+    /**
+     * filtr dla modelu. jest filtr zapisu danych do active recordu.
+     * @param $Obj
+     * @param $roleName
+     * @param $userData
+     */
+    public function fillModelFilter($Obj, $roleName, $userData){
+        $config = \Config::get('acl');
+        $resourceName=get_class($Obj->Record);
+        if (is_string($resourceName) && isSet($config[$roleName]['fill'][$resourceName])){
+            $config[$roleName]['fill'][$resourceName]($Obj, $userData);
+        }
+    }
 
     /**
      * filtr widokow
