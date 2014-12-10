@@ -8,7 +8,7 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 ![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
 
-### Features
+####### Features
 
 It also provides additional features such as user groups and additional security features:
 
