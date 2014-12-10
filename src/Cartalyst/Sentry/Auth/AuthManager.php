@@ -28,7 +28,7 @@ class AuthManager {
      */
     public function setCurrent($name){
         if(!$this->has(strtolower($name))){
-            throw new Exception("$name nie jest zarejestrowany w managerze");
+            throw new Exception(sprintf( _('[%s] nie jest zarejestrowany w managerze.'), $name ));
         }
 
         $this->current = $name;
@@ -89,7 +89,7 @@ class AuthManager {
             return $this->instances[$name];
         }
 
-        throw new Exception("$name nie jest zarejestrowany w managerze");
+        throw new Exception(sprintf( _('[%s] nie jest zarejestrowany w managerze.'), $name ));
     }
 
 }

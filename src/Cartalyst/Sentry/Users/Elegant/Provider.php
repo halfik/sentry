@@ -78,7 +78,7 @@ class Provider implements ProviderInterface {
 
 		if ( ! $user )
 		{
-			throw new UserNotFoundException("A user could not be found with ID [$id].");
+			throw new UserNotFoundException( sprintf( _('Nie odnaleziono użytkownika o ID [%s].'), $id ) );
 		}
 
 		return $user;
@@ -101,7 +101,7 @@ class Provider implements ProviderInterface {
 
 		if ( ! $user)
 		{
-			throw new UserNotFoundException("A user could not be found with a login value of [$login].");
+            throw new UserNotFoundException( sprintf( _('Nie odnaleziono użytkownika o loginie [%s].'), $login ) );
 		}
 
 		return $user;
@@ -147,7 +147,8 @@ class Provider implements ProviderInterface {
 
 		if ( ! $user = $query->first())
 		{
-			throw new UserNotFoundException("A user was not found with the given credentials.");
+
+			throw new UserNotFoundException( _('Nie znaleziono użytkownika.') );
 		}
 
 		// Now check the hashed credentials match ours
@@ -202,12 +203,12 @@ class Provider implements ProviderInterface {
 
 		if (($count = $result->count()) > 1)
 		{
-			throw new \RuntimeException("Found [$count] users with the same activation code.");
+            throw new \RuntimeException( sprintf( _('Znaleziono [%s] użytkowników z identycznym kodem aktywacyjnym.'), $count ) );
 		}
 
 		if ( ! $user = $result->first())
 		{
-			throw new UserNotFoundException("A user was not found with the given activation code.");
+            throw new UserNotFoundException( _('Nie znaleziono użytkownika dla podanego kodu aktywacyjnego.') );
 		}
 
 		return $user;
@@ -229,12 +230,12 @@ class Provider implements ProviderInterface {
 
 		if (($count = $result->count()) > 1)
 		{
-			throw new \RuntimeException("Found [$count] users with the same reset password code.");
+            throw new \RuntimeException( sprintf( _('Znaleziono [%s] użytkowników z identycznym kodem zresetowania hasła.'), $count ) );
 		}
 
 		if ( ! $user = $result->first())
 		{
-			throw new UserNotFoundException("A user was not found with the given reset password code.");
+			throw new UserNotFoundException('Nie znaleziono użytkownika dla podanego kodu zresetowania hasła.');
 		}
 
 		return $user;

@@ -452,7 +452,7 @@ class User extends \Elegant implements UserInterface {
 	{
 		if ($this->activated)
 		{
-			throw new UserAlreadyActivatedException('Cannot attempt activation on an already activated user.');
+            throw new UserAlreadyActivatedException('Nie można aktywować już aktywnego użytkownika');
 		}
 
 		if ($activationCode == $this->activation_code)

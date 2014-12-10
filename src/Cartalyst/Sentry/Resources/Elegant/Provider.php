@@ -45,7 +45,7 @@ class Provider implements ProviderInterface {
 
         if ( ! $resource = $model->newQuery()->find($id))
         {
-            throw new ResourceNotFoundException("A resource could not be found with ID [$id].");
+            throw new ResourceNotFoundException(sprintf( _('Nie odnaleziono zasobu o ID [%s]'), $id ));
         }
 
         return $resource;
@@ -64,7 +64,7 @@ class Provider implements ProviderInterface {
 
         if ( ! $resource = $model->newQuery()->where('name', '=', $name)->first())
         {
-            throw new ResourceNotFoundException("A resource could not be found with the name [$name].");
+            throw new ResourceNotFoundException(sprintf( _('Nie odnaleziono zasobu o nazwie [%s]'), $name ));
         }
 
         return $resource;
@@ -80,7 +80,7 @@ class Provider implements ProviderInterface {
 
         if ( ! $resource = $model->newQuery()->where('parent_id', '=', $id)->first())
         {
-            throw new ResourceNotFoundException("A resource could not be found with the parent_id [$id].");
+            throw new ResourceNotFoundException(sprintf( _('Nie odnaleziono zasobu o id rodzina [%s]'), $id ));
         }
 
         return $resource;
@@ -97,7 +97,7 @@ class Provider implements ProviderInterface {
 
         if ( ! $group = $model->newQuery()->where('value', '=', $value)->first())
         {
-            throw new ResourceNotFoundException("A resource could not be found with the value [$value].");
+            throw new ResourceNotFoundException(sprintf( _('Nie odnaleziono zasobu o wartości [%s]'), $value ));
         }
 
         return $group;

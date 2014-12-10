@@ -281,7 +281,7 @@ class Sentry {
 		if ( ! $user->isActivated())
 		{
 			$login = $user->getLogin();
-			throw new UserNotActivatedException("Cannot login user [$login] as they are not activated.");
+            throw new UserNotActivatedException(sprintf( _('Nie udało się zalogować użytkownika [%s] ponieważ konto nie jest aktywne.'), $login ));
 		}
 
 		$this->user = $user;

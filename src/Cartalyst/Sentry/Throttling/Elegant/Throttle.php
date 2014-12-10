@@ -313,7 +313,7 @@ class Throttle extends \Elegant implements ThrottleInterface {
 		if ($this->isBanned())
 		{
 			throw new UserBannedException(sprintf(
-				'User [%s] has been banned.',
+				'Użytkownik [%s] został zbanowany.',
 				$this->getUser()->getLogin()
 			));
 		}
@@ -321,7 +321,7 @@ class Throttle extends \Elegant implements ThrottleInterface {
 		if ($this->isSuspended())
 		{
 			throw new UserSuspendedException(sprintf(
-				'User [%s] has been suspended.',
+				'Użytkownik [%s] został zawieszony.',
 				$this->getUser()->getLogin()
 			));
 		}

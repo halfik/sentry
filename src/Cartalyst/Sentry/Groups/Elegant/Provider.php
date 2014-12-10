@@ -62,7 +62,7 @@ class Provider implements ProviderInterface {
 
 		if ( !$group)
 		{
-			throw new GroupNotFoundException("A group could not be found with ID [$id].");
+            throw new GroupNotFoundException(sprintf( _('Nie odnaleziono grupy o ID [%s]'), $id ));
 		}
 
 		return $group;
@@ -85,7 +85,7 @@ class Provider implements ProviderInterface {
 
 		if ( ! $group )
 		{
-			throw new GroupNotFoundException("A group could not be found with the name [$name].");
+			throw new GroupNotFoundException(sprintf( _('Nie odnaleziono grupy o nazwie [%s]'), $name ));
 		}
 
 		return $group;
@@ -106,7 +106,7 @@ class Provider implements ProviderInterface {
 
         if ( ! $group)
         {
-            throw new GroupNotFoundException("A group could not be found with the code [$code].");
+            throw new GroupNotFoundException(sprintf( _('Nie odnaleziono grupy o kodzie [%s]'), $code ));
         }
 
         return $group;

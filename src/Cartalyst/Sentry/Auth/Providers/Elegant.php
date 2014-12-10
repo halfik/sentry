@@ -24,7 +24,7 @@ class ElegantProvider implements AuthProviderInferface{
 
         if (empty($credentials[$loginCredentialKey]))
         {
-            throw new LoginRequiredException("The [$loginCredentialKey] attribute is required.");
+            throw new LoginRequiredException(sprintf( _('Pole [%s] jest wymagane.'), $loginCredentialKey ));
         }
 
         if (empty($credentials['password']))
