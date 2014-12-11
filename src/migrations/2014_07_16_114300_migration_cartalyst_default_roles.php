@@ -25,7 +25,8 @@ class MigrationCartalystDefaultRoles extends Migration {
 
             DB::table('roles')->insert(
                 array(
-                    'name' => 'guest'
+                    'name' => 'guest',
+                    'is_hidden' => 1
                 )
             );
         }
