@@ -29,7 +29,7 @@ class ElegantProvider implements AuthProviderInferface{
 
         if (empty($credentials['password']))
         {
-            throw new PasswordRequiredException('The password attribute is required.');
+            throw new PasswordRequiredException( _('Hasło jest wymagane.'));
         }
 
         // If the user did the fallback 'login' key for the login code which
