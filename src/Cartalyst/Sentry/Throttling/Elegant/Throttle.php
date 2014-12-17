@@ -18,12 +18,13 @@
  * @link       http://cartalyst.com
  */
 
+use Cartalyst\Sentry\BaseModel;
 use Cartalyst\Sentry\Throttling\ThrottleInterface;
 use Cartalyst\Sentry\Throttling\UserSuspendedException;
 use Cartalyst\Sentry\Throttling\UserBannedException;
 use DateTime;
 
-class Throttle extends \Elegant implements ThrottleInterface {
+class Throttle extends BaseModel implements ThrottleInterface {
 
 	/**
 	 * Throttling status.

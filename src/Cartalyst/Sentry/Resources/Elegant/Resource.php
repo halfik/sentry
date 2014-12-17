@@ -1,9 +1,10 @@
 <?php namespace Cartalyst\Sentry\Resources\Elegant;
 
 
+use Cartalyst\Sentry\BaseModel;
 use Cartalyst\Sentry\Resources\ResourceInterface;
 
-class Resource extends \Elegant implements ResourceInterface {
+class Resource extends BaseModel implements ResourceInterface {
 
     /**
      * Indicates if the model should be timestamped.

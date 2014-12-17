@@ -18,6 +18,7 @@
  * @link       http://cartalyst.com
  */
 
+use Cartalyst\Sentry\BaseModel;
 use Cartalyst\Sentry\Groups\GroupInterface;
 use Cartalyst\Sentry\Hashing\HasherInterface;
 use Cartalyst\Sentry\Users\LoginRequiredException;
@@ -26,7 +27,7 @@ use Cartalyst\Sentry\Users\UserAlreadyActivatedException;
 use Cartalyst\Sentry\Users\UserExistsException;
 use Cartalyst\Sentry\Users\UserInterface;
 
-class User extends \Elegant implements UserInterface {
+class User extends BaseModel implements UserInterface {
 
 	/**
 	 * The table associated with the model.

@@ -18,11 +18,12 @@
  * @link       http://cartalyst.com
  */
 
+use Cartalyst\Sentry\BaseModel;
 use Cartalyst\Sentry\Groups\NameRequiredException;
 use Cartalyst\Sentry\Groups\GroupExistsException;
 use Cartalyst\Sentry\Groups\GroupInterface;
 
-class Group extends \Elegant implements GroupInterface {
+class Group extends BaseModel implements GroupInterface {
 
 	/**
 	 * The table associated with the model.
