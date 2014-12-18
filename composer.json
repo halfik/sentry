@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "3.4.0",
+    "version": "3.4.1",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
@@ -35,6 +35,11 @@
             "role": "Developer"
         }
 	],
+	"require": {
+		"php": ">=5.3.3",
+        "netinteractive/gettext": "1.5.*",
+	  	"netinteractive/elegant": "1.0.*"
+    },
   "repositories": [
 	{
 	  "type":"git",
@@ -44,12 +49,7 @@
 	  "type":"git",
 	  "url": "https://bitbucket.org/niteam/laravel-elegant"
 	}
-	],
-	"require": {
-		"php": ">=5.3.3",
-        "netinteractive/gettext": "1.5.*",
-	  	"netinteractive/elegant": "@dev"
-    },
+  ],
 	"require-dev": {
 		"mockery/mockery": "0.7.2",
 
