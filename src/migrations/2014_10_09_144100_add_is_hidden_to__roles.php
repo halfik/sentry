@@ -12,10 +12,7 @@ class AddIsHiddenToRoles extends Migration {
      */
     public function up()
     {
-        Schema::table('roles', function(Blueprint $table)
-        {
-            $table->boolean('is_hidden')->default(false);
-        });
+
 
         $userRole = App::make('sentry')->getGroupProvider()->findByCode('user');
         $guestRole = App::make('sentry')->getGroupProvider()->findByCode('guest');
@@ -36,10 +33,7 @@ class AddIsHiddenToRoles extends Migration {
      */
     public function down()
     {
-        Schema::table('roles', function(Blueprint $table)
-        {
-            $table->dropColumn('is_hidden');
-        });
+
     }
 
 }

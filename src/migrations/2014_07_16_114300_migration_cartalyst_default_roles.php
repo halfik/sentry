@@ -10,7 +10,15 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function up()
     {
+
+
         if (Schema::hasTable('roles')){
+
+            Schema::table('roles', function(\Illuminate\Database\Schema\Blueprint $table)
+            {
+                $table->boolean('is_hidden')->default(false);
+            });
+
             DB::table('roles')->insert(
                 array(
                     'name' => 'admin'
@@ -29,6 +37,8 @@ class MigrationCartalystDefaultRoles extends Migration {
                     'is_hidden' => 1
                 )
             );
+
+
         }
 
     }
@@ -44,6 +54,11 @@ class MigrationCartalystDefaultRoles extends Migration {
             DB::table('roles')->where('name', 'admin')->delete();
             DB::table('roles')->where('name', 'user')->delete();
             DB::table('roles')->where('name', 'guest')->delete();
+
+            Schema::table('roles', function(Blueprint $table)
+            {
+                $table->dropColumn('is_hidden');
+            });
         }
 
     }
