@@ -29,21 +29,27 @@ class MigrationCartalystSentryAlterRoles extends Migration {
             DB::table('roles')->insert(
                 array(
                     'code' => 'admin',
-                    'name' => 'Administrator'
+                    'name' => 'Administrator',
+                    'is_hidden' => false,
+                    'weight' => 0
                 )
             );
 
             DB::table('roles')->insert(
                 array(
                     'code' => 'user',
-                    'name' => 'Użytkownik'
+                    'name' => 'Użytkownik',
+                    'is_hidden' => false,
+                    'weight' => 50
                 )
             );
 
             DB::table('roles')->insert(
                 array(
                     'code' => 'guest',
-                    'name' => 'Gość'
+                    'name' => 'Gość',
+                    'is_hidden' => true,
+                    'weight' => 100
                 )
             );
         }
