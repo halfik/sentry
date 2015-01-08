@@ -29,10 +29,10 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users_groups', function($table)
+		Schema::create('users_roles', function($table)
 		{
 			$table->integer('user_id')->unsigned();
-			$table->integer('group_id')->unsigned();
+			$table->integer('role_id')->unsigned();
 
 			// We'll need to ensure that MySQL uses the InnoDB engine to
 			// support the indexes, other engines aren't affected.
@@ -48,7 +48,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users_groups');
+		Schema::drop('users_roles');
 	}
 
 }

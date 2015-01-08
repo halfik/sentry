@@ -13,28 +13,30 @@ class MigrationCartalystDefaultRoles extends Migration {
 
 
         if (Schema::hasTable('roles')){
-
-            Schema::table('roles', function(\Illuminate\Database\Schema\Blueprint $table)
-            {
-                $table->boolean('is_hidden')->default(false);
-            });
-
             DB::table('roles')->insert(
                 array(
-                    'name' => 'admin'
+                    'code' => 'admin',
+                    'name' => 'Administrator',
+                    'is_hidden' => false,
+                    'weight' => 0
                 )
             );
 
             DB::table('roles')->insert(
                 array(
-                    'name' => 'user'
+                    'code' => 'user',
+                    'name' => 'Użytkownik',
+                    'is_hidden' => true,
+                    'weight' => 80
                 )
             );
 
             DB::table('roles')->insert(
                 array(
-                    'name' => 'guest',
-                    'is_hidden' => 1
+                    'code' => 'guest',
+                    'name' => 'Gość',
+                    'is_hidden' => true,
+                    'weight' => 100
                 )
             );
 

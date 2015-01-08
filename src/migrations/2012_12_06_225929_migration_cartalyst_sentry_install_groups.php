@@ -29,12 +29,17 @@ class MigrationCartalystSentryInstallGroups extends Migration {
      */
     public function up()
     {
-        Schema::create('groups', function($table)
+        Schema::create('roles', function($table)
         {
             $table->increments('id');
             $table->string('name');
+            $table->string('code');
             $table->text('permissions')->nullable();
-            $table->timestamps();
+            $table->boolean('is_hidden')->default(false);
+            $table->smallInteger('weight', false, true)->default(0);
+
+            $table->timestamp('created_at')->default(DB::raw('now()'));
+            $table->timestamp('updated_at')->nullable();
 
             // We'll need to ensure that MySQL uses the InnoDB engine to
             // support the indexes, other engines aren't affected.
@@ -50,7 +55,7 @@ class MigrationCartalystSentryInstallGroups extends Migration {
      */
     public function down()
     {
-        Schema::drop('groups');
+        Schema::drop('roles');
     }
 
 }
