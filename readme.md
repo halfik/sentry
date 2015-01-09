@@ -8,11 +8,16 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 ![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
 
+# Version
+ - 3.5 - added not nullable login field to users
+
+
 ####### Features
 
 It also provides additional features such as user groups and additional security features:
 
 - Configurable authentication (can use any type of authentication required, such as username or email)
+- ACL
 - Authorization
 - Activation of user *(optional)*
 - Groups and group permissions
