@@ -32,6 +32,7 @@ class MigrationCartalystSentryInstallUsers extends Migration {
         Schema::create('users', function($table)
         {
             $table->increments('id');
+            $table->string('login');
             $table->string('email');
             $table->string('password');
             $table->text('permissions')->nullable();
