@@ -99,8 +99,7 @@ class Provider implements ProviderInterface {
         $user = $model->newQuery()->where($model->getLoginName(), '=', $login)->first();
         $model->allowQueryAcl(true);
 
-		if ( ! $user)
-		{
+		if (!$user){
             throw new UserNotFoundException( sprintf( _('Nie odnaleziono użytkownika o loginie [%s].'), $login ) );
 		}
 

@@ -123,6 +123,17 @@ class User extends BaseModel implements UserInterface {
 	 */
 	protected static $userGroupsPivot = 'users_roles';
 
+
+    public function __construct(){
+        parent::__construct();
+
+        $configLoginAttr = \Config::get('packages/netinteractive/sentry/config.users.login_attribute');
+        if ($configLoginAttr){
+            self::$loginAttribute = $configLoginAttr;
+        }
+    }
+
+
     /**
      * init fields and their rules
      */
