@@ -140,8 +140,17 @@ class User extends BaseModel implements UserInterface {
                 )
 
             ),
+            'login'=>array(
+                'title'=>_('Login'),
+                'type'=>'string',
+                'sortable' => true,
+                'rules'=>array(
+                    'update'=>'required',
+                    'insert'=>'required|unique:users'
+                )
+            ),
             'email'=>array(
-                'title'=>'E-mail',
+                'title'=>_('E-mail'),
                 'type'=>'string',
                 'sortable' => true,
                 'rules'=>array(
@@ -150,14 +159,14 @@ class User extends BaseModel implements UserInterface {
                 )
             ),
             'password'=>array(
-                'title'=>'Hasło',
+                'title'=>_('Hasło'),
                 'type'=>'password',
                 'rules'=>array(
                     'any'=>'required'
                 )
             ),
             'activated'=>array(
-                'title'=>'Aktywny',
+                'title'=>_('Aktywny'),
                 'type'=>'bool',
                 'sortable' => true,
                 'rules'=>array(
@@ -165,7 +174,7 @@ class User extends BaseModel implements UserInterface {
                 )
             ),
             'first_name' => array(
-                'title'=>'Imię',
+                'title'=> _('Imię'),
                 'type'=>'string',
                 'sortable' => true,
                 'rules'=>array(
@@ -174,7 +183,7 @@ class User extends BaseModel implements UserInterface {
                 )
             ),
             'last_name' => array(
-                'title'=>'Nazwisko',
+                'title'=> _('Nazwisko'),
                 'type'=>'string',
                 'sortable' => true,
                 'rules'=>array(
@@ -183,11 +192,11 @@ class User extends BaseModel implements UserInterface {
                 )
             ),
             'permissions' => array(
-                'title'=>'Uprawnienia',
+                'title'=> _('Uprawnienia'),
                 'type'=>'string'
             ),
             'activation_code' => array(
-                'title'=>'Kod aktywacyjny',
+                'title'=> _('Kod aktywacyjny'),
                 'type'=>'string'
             ),
             'persist_code' => array(
@@ -195,27 +204,27 @@ class User extends BaseModel implements UserInterface {
                 'type'=>'string'
             ),
             'reset_password_code' => array(
-                'title'=>'Kod do odzyskiwania hasła',
+                'title'=> _('Kod do odzyskiwania hasła'),
                 'type'=>'string'
             ),
             'salt' => array(
-                'title'=>'Salt',
+                'title'=>_('Salt'),
                 'type'=>'string'
             ),
             'last_login'=> array(
-                'title'=>'Data ostatniego logowania',
+                'title'=>_('Data ostatniego logowania'),
                 'type'=>'dateTime'
             ),
             'activated_at'=> array(
-                'title'=>'Data aktywacji',
+                'title'=>_('Data aktywacji'),
                 'type'=>'dateTime'
             ),
             'created_at'=> array(
-                'title'=>'Data utworzenia',
+                'title'=>_('Data utworzenia'),
                 'type'=>'dateTime'
             ),
             'updated_at'=> array(
-                'title'=>'Data ostatniej modyfikacji',
+                'title'=>_('Data ostatniej modyfikacji'),
                 'type'=>'dateTime'
             ),
         );
