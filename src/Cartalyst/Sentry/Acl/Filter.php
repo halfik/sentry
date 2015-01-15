@@ -13,7 +13,13 @@ class Filter {
         $config = \Config::get('acl');
 
         if (is_string($resourceName) && isSet($config[$roleName]['data'][$resourceName])){
-            $config[$roleName]['data'][$resourceName]($q,$userData);
+            if (is_array($config[$roleName]['data'][$resourceName])){
+                foreach ($config[$roleName]['data'][$resourceName] AS $filter){
+                    $filter($q,$userData);
+                }
+            }else{
+                $config[$roleName]['data'][$resourceName]($q,$userData);
+            }
         }
     }
 
