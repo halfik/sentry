@@ -19,6 +19,7 @@ class AuthManager {
     protected $instances = [];
 
     protected $current = null;
+    protected $currentName = '';
 
 
     /**
@@ -32,6 +33,7 @@ class AuthManager {
         }
 
         $this->current = $name;
+        $this->currentName = $name;
     }
 
     /**
@@ -43,11 +45,19 @@ class AuthManager {
     }
 
     /**
-     * zwraca defaultowego providera
+     * zwraca aktualnego providera
      * @return null
      */
     public function getCurrent(){
         return $this->get($this->current);
+    }
+
+    /**
+     * Zwraca nazwe aktualnego providera
+     * @return string
+     */
+    public function getCurrentName(){
+        return $this->currentName;
     }
 
     /**
