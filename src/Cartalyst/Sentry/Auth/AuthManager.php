@@ -61,12 +61,16 @@ class AuthManager {
     }
 
     /**
-     * rejestruje providera w managerze
-     *
-     * @return void
-     */
+    * rejestruje providera w managerze
+    *
+    * @return void
+    */
     public function set($name, $provider) {
         $this->providers[strtolower($name)] = $provider;
+
+        if (is_object($provider)){
+            $this->instances[$name] = $provider;
+        }
 
         if ($this->current === null){
             $this->setCurrent($name);
