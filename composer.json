@@ -37,8 +37,8 @@
 	],
 	"require": {
 		"php": ">=5.3.3",
-        "netinteractive/gettext": ">=1.5.*",
-	  	"netinteractive/elegant": ">=1.0.*"
+        "netinteractive/gettext": ">=1.5",
+	  	"netinteractive/elegant": ">=1.0"
     },
   "repositories": [
 	{
