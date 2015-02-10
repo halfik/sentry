@@ -8,8 +8,12 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 ![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
 
-# Version
- - 3.5 - added not nullable login field to users
+# Changelog
+## 3.6
++ paczka powstala w zwiazku z nowa wersja Netinteractive\Elegant. Zaszly zmiany w polach modelu. Kompatybilne z Elegant 1.3>=
+
+## 3.5
++ dodano pole "login" - not nullable
 
 
 ####### Features

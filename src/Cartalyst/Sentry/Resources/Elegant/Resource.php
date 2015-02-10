@@ -32,8 +32,9 @@ class Resource extends BaseModel implements ResourceInterface {
     /**
      * init fields and their rules
      */
-    protected function init(){
-        $this->fields=array(
+    protected function init()
+    {
+        $fields=array(
             'id'=>array(
                 'title'=>'Id',
                 'type'=>'int',
@@ -62,6 +63,8 @@ class Resource extends BaseModel implements ResourceInterface {
                 )
             )
         );
+
+        $this->initFields($fields);
     }
 
     /**

@@ -140,7 +140,7 @@ class User extends BaseModel implements UserInterface {
     protected function init(){
         $this->guarded = array_merge($this->guarded, array('password_confirmation', 'rules', 'permission', 'roles'));
 
-        $this->fields=array(
+        $fields=array(
             'id'=>array(
                 'title'=>'Id',
                 'type'=>'int',
@@ -239,6 +239,8 @@ class User extends BaseModel implements UserInterface {
                 'type'=>'dateTime'
             ),
         );
+
+        $this->initFields($fields);
     }
 
 	/**

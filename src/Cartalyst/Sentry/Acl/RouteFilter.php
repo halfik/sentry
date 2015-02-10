@@ -33,9 +33,9 @@ class RouteFilter {
     /**
      * @return array
      */
-    public function getRoles(){
+    public function getRoles()
+    {
         $user = \App::make('sentry')->getUser();
-
         if ($user){
             $userRoles = $user->getGroups();
             if ($userRoles){

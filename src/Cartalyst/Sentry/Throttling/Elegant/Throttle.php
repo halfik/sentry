@@ -79,8 +79,9 @@ class Throttle extends BaseModel implements ThrottleInterface {
     /**
      * init fields and their rules
      */
-    protected function init(){
-        $this->fields=array(
+    protected function init()
+    {
+        $fields=array(
             'id'=>array(
                 'title'=>'Id',
                 'type'=>'int',
@@ -132,6 +133,8 @@ class Throttle extends BaseModel implements ThrottleInterface {
                 'type'=>'datetime'
             )
         );
+
+        $this->initFields($fields);
     }
 
 	/**
