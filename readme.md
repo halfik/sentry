@@ -9,6 +9,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 ![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
 
 # Changelog
+## 3.6.1
++ fix wymagan co do paczki Netinteractive\Gettext
+
 ## 3.6
 + paczka powstala w zwiazku z nowa wersja Netinteractive\Elegant. Zaszly zmiany w polach modelu. Kompatybilne z Elegant 1.3>=
 
