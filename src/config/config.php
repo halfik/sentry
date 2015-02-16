@@ -235,5 +235,15 @@ return array(
         'model' => 'Cartalyst\Sentry\Resources\Elegant\Resource',
 
     ),
+    
+	/*
+	|--------------------------------------------------------------------------
+	| Multiple Login
+	|--------------------------------------------------------------------------
+	|
+	| Parametr określa czy można się zalogować na to samo konto użytkownika kilkukrotnie jednocześnie
+	|
+	*/
+    'multiple_login' => true,
 
 );

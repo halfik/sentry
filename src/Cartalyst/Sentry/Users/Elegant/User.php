@@ -422,14 +422,14 @@ class User extends BaseModel implements UserInterface {
 	 */
 	public function getPersistCode()
 	{
-		$this->persist_code = $this->getRandomString();
+	    if( !$this->persist_code || !\Config::get('packages/netinteractive/sentry/config.multiple_login') )
+	    {
+		    $this->persist_code = $this->getRandomString();
 
-		// Our code got hashed
-		$persistCode = $this->persist_code;
+		    $this->save();
+        }
 
-		$this->save();
-
-		return $persistCode;
+		return $this->persist_code;
 	}
 
 	/**

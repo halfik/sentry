@@ -9,6 +9,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 ![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
 
 # Changelog
+## 3.7.0
++ możliwość wielokrotnego logowania na to samo konto
+
 ## 3.6.1
 + fix wymagan co do paczki Netinteractive\Gettext
 
