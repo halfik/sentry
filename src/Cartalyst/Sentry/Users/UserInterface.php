@@ -270,4 +270,11 @@ interface UserInterface {
 	 */
 	public function recordLogin();
 
+    /**
+     * Check if user has specific role by roleCode
+     * @param $roleCode
+     * @return bool
+     */
+    public function hasRole($roleCode);
+
 }

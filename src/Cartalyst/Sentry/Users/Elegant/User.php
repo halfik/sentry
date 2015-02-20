@@ -1067,4 +1067,20 @@ class User extends BaseModel implements UserInterface {
 		return static::$loginAttribute;
 	}
 
+    /**
+     * Check if user has specific role by roleCode
+     * @param $roleCode
+     * @return bool
+     */
+    public function hasRole($roleCode)
+    {
+        foreach($this->userGroups as $myGroup)
+        {
+            if($myGroup->code == $roleCode) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
