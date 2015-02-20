@@ -9,17 +9,21 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 ![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
 
 # Changelog
+
+#3#.7.1
+** User dostal metode do sprawdzania, czy posiada dana role:  public function hasRole($roleCode): boolean
+
 ## 3.7.0
-+ możliwość wielokrotnego logowania na to samo konto
+** możliwość wielokrotnego logowania na to samo konto
 
 ## 3.6.1
-+ fix wymagan co do paczki Netinteractive\Gettext
+** fix wymagan co do paczki Netinteractive\Gettext
 
 ## 3.6
-+ paczka powstala w zwiazku z nowa wersja Netinteractive\Elegant. Zaszly zmiany w polach modelu. Kompatybilne z Elegant 1.3>=
+** paczka powstala w zwiazku z nowa wersja Netinteractive\Elegant. Zaszly zmiany w polach modelu. Kompatybilne z Elegant 1.3>=
 
 ## 3.5
-+ dodano pole "login" - not nullable
+** dodano pole "login" - not nullable
 
 
 ####### Features
