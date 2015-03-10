@@ -14,6 +14,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
+## 3.8.1
+    + fix: blad z wersjonowaniem
+
 ## 3.8.0
     + User::toArray() zmieniony na User::toArray($displayFilters=false)
 
