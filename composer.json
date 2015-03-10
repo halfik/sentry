@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "3.7.1",
+    "version": "3.8.9",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
@@ -32,7 +32,7 @@
         {
             "name": "Piotr Pryga",
             "email": "halfik@gmail.com",
-            "role": "Developer"
+            "role": "Owner"
         }
 	],
 	"require": {

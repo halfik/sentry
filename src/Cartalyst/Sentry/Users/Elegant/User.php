@@ -995,9 +995,9 @@ class User extends BaseModel implements UserInterface {
 	 *
 	 * @return array
 	 */
-	public function toArray()
+	public function toArray($displayFilters=false)
 	{
-		$result = parent::toArray();
+		$result = parent::toArray(true);
 
 		if (isset($result['activated']))
 		{

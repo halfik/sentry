@@ -1,4 +1,8 @@
+Cartalyst\Sentry
+=====================
 # Sentry
+
+@author: halfik
 
 Sentry is a PHP 5.3+ fully-featured authentication & authorization system. It also provides additional features such as user groups and additional security features.
 
@@ -10,20 +14,23 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
-#3#.7.1
-** User dostal metode do sprawdzania, czy posiada dana role:  public function hasRole($roleCode): boolean
+## 3.8.0
+    + User::toArray() zmieniony na User::toArray($displayFilters=false)
+
+## 3.7.1
+    + User dostal metode do sprawdzania, czy posiada dana role:  public function hasRole($roleCode): boolean
 
 ## 3.7.0
-** możliwość wielokrotnego logowania na to samo konto
+    + możliwość wielokrotnego logowania na to samo konto
 
 ## 3.6.1
-** fix wymagan co do paczki Netinteractive\Gettext
+    + fix wymagan co do paczki Netinteractive\Gettext
 
 ## 3.6
-** paczka powstala w zwiazku z nowa wersja Netinteractive\Elegant. Zaszly zmiany w polach modelu. Kompatybilne z Elegant 1.3>=
+    + paczka powstala w zwiazku z nowa wersja Netinteractive\Elegant. Zaszly zmiany w polach modelu. Kompatybilne z Elegant 1.3>=
 
 ## 3.5
-** dodano pole "login" - not nullable
+    + dodano pole "login" - not nullable
 
 
 ####### Features
