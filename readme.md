@@ -14,7 +14,7 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
-## 3.8.2
+## 3.8.3
     + fix: poprawienie metody hasRole($roleCode) => dodanie sprawdzania czy uzytkownik posiada grupy
 
 ## 3.8.1
