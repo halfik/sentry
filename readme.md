@@ -17,6 +17,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 ## 3.8.3
     + fix: poprawienie metody hasRole($roleCode) => dodanie sprawdzania czy uzytkownik posiada grupy
 
+## 3.8.2
+    + usunale z modelu User::toArray mapowanie activated na bool. do tego uzywamy mechanizmu filtrow display.
+
 ## 3.8.1
     + fix: blad z wersjonowaniem
 

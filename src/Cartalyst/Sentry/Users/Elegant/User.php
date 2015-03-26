@@ -313,16 +313,6 @@ class User extends BaseModel implements UserInterface {
 		return (bool) $this->activated;
 	}
 
-	/**
-	 * Get mutator for giving the activated property.
-	 *
-	 * @param  mixed  $activated
-	 * @return bool
-	 */
-	public function getActivatedAttribute($activated)
-	{
-		return (bool) $activated;
-	}
 
 	/**
 	 * Mutator for giving permissions.
@@ -999,10 +989,7 @@ class User extends BaseModel implements UserInterface {
 	{
 		$result = parent::toArray(true);
 
-		if (isset($result['activated']))
-		{
-			$result['activated'] = $this->getActivatedAttribute($result['activated']);
-		}
+
 		if (isset($result['permissions']))
 		{
 			$result['permissions'] = $this->getPermissionsAttribute($result['permissions']);
