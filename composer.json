@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "3.8.3",
+    "version": "3.8.4",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
@@ -34,11 +34,11 @@
             "email": "halfik@gmail.com",
             "role": "Owner"
         },
-      {
-        "name": "Emil Jaszczuk",
-        "email": "ejaszczuk1989k@gmail.com",
-        "role": "Developer"
-      }
+        {
+          "name": "Emil Jaszczuk",
+          "email": "ejaszczuk1989k@gmail.com",
+          "role": "Developer"
+        }
 	],
 	"require": {
 		"php": ">=5.3.3",

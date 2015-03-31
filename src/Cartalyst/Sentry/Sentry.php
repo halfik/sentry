@@ -763,5 +763,25 @@ class Sentry {
 		throw new \BadMethodCallException("Method [$method] is not supported by Sentry or no User has been set on Sentry to access shortcut method.");
 	}
 
+    /**
+     * Metoda wyszukująca użytkowników po roleCode
+     * @param $roleName
+     * @return mixed
+     */
+    public function findUsersByRole($roleCode)
+    {
+        $q = App('User')->getQuery();
+        $q->select('users.*')
+            ->join('users_roles','users_roles.user_id','=','users.id')
+            ->join('roles','roles.id','=','users_roles.role_id')
+        ;
+
+        if(!empty($roleCode)){
+            $q->where('roles.code','=',$roleCode);
+        }
+
+        return $q->get();
+    }
+
 }
 

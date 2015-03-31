@@ -14,6 +14,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
+## 3.8.4
+    + dodalem metode findUsersByRole($roleCode) która służy do wyszukiwania użytkowników po roli
+
 ## 3.8.3
     + fix: poprawienie metody hasRole($roleCode) => dodanie sprawdzania czy uzytkownik posiada grupy
 
