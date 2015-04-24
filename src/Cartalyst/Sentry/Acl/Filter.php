@@ -15,9 +15,11 @@ class Filter {
         if (is_string($resourceName) && isSet($config[$roleName]['data'][$resourceName])){
             if (is_array($config[$roleName]['data'][$resourceName])){
                 foreach ($config[$roleName]['data'][$resourceName] AS $filter){
+                    $q->addComment("[Filtr: read] [Rola: $roleName] [Tabela: $resourceName]");
                     $filter($q,$userData);
                 }
             }else{
+                $q->addComment("[Filtr: read] [Rola: $roleName] [Tabela: $resourceName]");
                 $config[$roleName]['data'][$resourceName]($q,$userData);
             }
         }
