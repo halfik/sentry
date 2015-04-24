@@ -34,7 +34,7 @@ class User extends BaseModel implements UserInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'user';
+	protected $table = 'users';
 
 	/**
 	 * The attributes that should be hidden for arrays.
@@ -157,7 +157,7 @@ class User extends BaseModel implements UserInterface {
                 'sortable' => true,
                 'rules'=>array(
                     'update'=>'required',
-                    'insert'=>'required|unique:user'
+                    'insert'=>'required|unique:users'
                 )
             ),
             'email'=>array(
@@ -166,7 +166,7 @@ class User extends BaseModel implements UserInterface {
                 'sortable' => true,
                 'rules'=>array(
                     'update'=>'required|email',
-                    'insert'=>'required|email|unique:user'
+                    'insert'=>'required|email|unique:users'
                 )
             ),
             'password'=>array(

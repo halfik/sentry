@@ -15,9 +15,16 @@ class Filter {
         if (is_string($resourceName) && isSet($config[$roleName]['data'][$resourceName])){
             if (is_array($config[$roleName]['data'][$resourceName])){
                 foreach ($config[$roleName]['data'][$resourceName] AS $filter){
+                    if (method_exists($q,'addComment')){
+                        $q->addComment("[Filter: read] [Role: $roleName] [Table: $resourceName]");
+                    }
+
                     $filter($q,$userData);
                 }
             }else{
+                if (method_exists($q,'addComment')){
+                    $q->addComment("[Filter: read] [Role: $roleName] [Table: $resourceName]");
+                }
                 $config[$roleName]['data'][$resourceName]($q,$userData);
             }
         }
