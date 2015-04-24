@@ -29,7 +29,7 @@ class MigrationCartalystSentryInstallUsers extends Migration {
      */
     public function up()
     {
-        Schema::create('users', function($table)
+        Schema::create('user', function($table)
         {
             $table->increments('id');
             $table->string('login');
@@ -62,7 +62,7 @@ class MigrationCartalystSentryInstallUsers extends Migration {
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('user');
     }
 
 }
