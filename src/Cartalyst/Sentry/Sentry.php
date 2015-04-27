@@ -771,8 +771,8 @@ class Sentry {
     public function findUsersByRole($roleCode)
     {
         $q = App('User')->getQuery();
-        $q->select('user.*')
-            ->join('users_roles','users_roles.user_id','=','user.id')
+        $q->select('users.*')
+            ->join('users_roles','users_roles.user_id','=','users.id')
             ->join('roles','roles.id','=','users_roles.role_id')
         ;
 

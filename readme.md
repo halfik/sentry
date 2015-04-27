@@ -14,31 +14,31 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
-## 3.9.0
-    + zmiana nazwy tabeli users na tabele user, wymaga to również zmiany w corze w modelu User.php
+## 3.8.5
+    + filtry acl dodaja komentarz do sql, ktory modyfikuja
 
 ## 3.8.4
     + dodalem metode findUsersByRole($roleCode) która służy do wyszukiwania użytkowników po roli
 
-## 3.8.3
+### 3.8.3
     + fix: poprawienie metody hasRole($roleCode) => dodanie sprawdzania czy uzytkownik posiada grupy
 
-## 3.8.2
+### 3.8.2
     + usunale z modelu User::toArray mapowanie activated na bool. do tego uzywamy mechanizmu filtrow display.
 
-## 3.8.1
+### 3.8.1
     + fix: blad z wersjonowaniem
 
 ## 3.8.0
     + User::toArray() zmieniony na User::toArray($displayFilters=false)
 
-## 3.7.1
+### 3.7.1
     + User dostal metode do sprawdzania, czy posiada dana role:  public function hasRole($roleCode): boolean
 
 ## 3.7.0
     + możliwość wielokrotnego logowania na to samo konto
 
-## 3.6.1
+### 3.6.1
     + fix wymagan co do paczki Netinteractive\Gettext
 
 ## 3.6
