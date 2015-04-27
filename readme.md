@@ -14,6 +14,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
+## 3.9.0
+    + zmiana nazwy tabeli users na tabele user, wymaga to również zmiany w corze w modelu User.php
+
 ## 3.8.5
     + filtry acl dodaja komentarz do sql, ktory modyfikuja
 
