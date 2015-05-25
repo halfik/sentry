@@ -1061,7 +1061,7 @@ class User extends BaseModel implements UserInterface {
      */
     public function hasRole($roleCode)
     {
-        $groups = $this->userGroups;
+        $groups = $this->getGroups();
         if($groups) {
             foreach ($this->userGroups as $myGroup) {
                 if ($myGroup->code == $roleCode) {

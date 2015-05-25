@@ -14,6 +14,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
+## 3.9.1
+    + poprawka bledu w metodzie Uuser::hasRole
+
 ## 3.9.0
     + zmiana nazwy tabeli users na tabele user, wymaga to również zmiany w corze w modelu User.php
 
