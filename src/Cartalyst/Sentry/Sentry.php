@@ -31,6 +31,8 @@ use Cartalyst\Sentry\Throttling\ProviderInterface as ThrottleProviderInterface;
 use Cartalyst\Sentry\Users\LoginRequiredException;
 use Cartalyst\Sentry\Users\PasswordRequiredException;
 use Cartalyst\Sentry\Users\Elegant\Provider as UserProvider;
+use Cartalyst\Sentry\SocialProfile\ProviderInterface as SocialProfileProviderInterface;
+use Cartalyst\Sentry\SocialProfile\Elegant\Provider as SocialProfileProvider;
 use Cartalyst\Sentry\Users\ProviderInterface as UserProviderInterface;
 use Cartalyst\Sentry\Resources\Elegant\Provider as ResourceProvider;
 use Cartalyst\Sentry\Resources\ProviderInterface as ResourceProviderInterface;
@@ -82,6 +84,11 @@ class Sentry {
 	 */
 	protected $groupProvider;
 
+    /**
+     * @var \Cartalyst\Sentry\SocialProfile\ProviderInterface
+     */
+    protected $socialProfileProvider;
+
 	/**
 	 * The throttle provider, used for retrieving
 	 * objects which implement the Sentry throttling
@@ -119,6 +126,7 @@ class Sentry {
 		GroupProviderInterface $groupProvider = null,
 		ThrottleProviderInterface $throttleProvider = null,
         ResourceProviderInterface $resourceProvider = null,
+        SocialProfileProviderInterface $socialProfileProvider = null,
 		SessionInterface $session = null,
 		CookieInterface $cookie = null,
 		$ipAddress = null
@@ -126,6 +134,7 @@ class Sentry {
 	{
 		$this->userProvider     = $userProvider ?: new UserProvider(new NativeHasher);
 		$this->groupProvider    = $groupProvider ?: new GroupProvider;
+        $this->socialProfileProvider   = $socialProfileProvider ?: new SocialProfileProvider;
 		$this->throttleProvider = $throttleProvider ?: new ThrottleProvider($this->userProvider);
         $this->resourceProvider = $resourceProvider ?: new ResourceProvider();
 
@@ -427,6 +436,16 @@ class Sentry {
 		$this->userProvider = $userProvider;
 	}
 
+    /**
+     * Sets the social profile provider
+     *
+     * @param SocialProfileProviderInterface $socialProfileProvider
+     */
+    public function setSocialProfileProvider(SocialProfileProviderInterface $socialProfileProvider)
+    {
+        $this->socialProfileProvider = $socialProfileProvider;
+    }
+
 	/**
 	 * Gets the user provider for Sentry.
 	 *
@@ -436,6 +455,16 @@ class Sentry {
 	{
 		return $this->userProvider;
 	}
+
+    /**
+     * Gets the social profile for Sentry.
+     *
+     *  @return \Cartalyst\Sentry\SocialProfile\ProviderInterface
+     */
+    public function getSocialProfileProvider()
+    {
+        return $this->socialProfileProvider;
+    }
 
 	/**
 	 * Sets the throttle provider for Sentry.

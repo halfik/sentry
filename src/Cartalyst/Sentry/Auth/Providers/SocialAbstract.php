@@ -19,5 +19,5 @@ abstract class SocialAbstract implements AuthProviderInferface {
      * rejestracja uzytkownika w systemie
      * @return mixed
      */
-    public abstract function register();
+    public abstract function register(array $credentials);
 }
