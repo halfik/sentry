@@ -14,6 +14,12 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
+## 3.10.2
+    + Register facebook provider
+
+## 3.10.1
+    + Sentry constructor fix
+
 ## 3.10.0
     + Social Facebook provider
 
