@@ -66,18 +66,18 @@ class Provider implements ProviderInterface {
      * @param $profileId
      * @return mixed
      */
-    public function findByProfileId($profileId){
+    public function findByProfile($profileId, $type){
         $model = $this->createModel();
 
 
 
         $model->allowQueryAcl(false);
-        $social = $model->where('profile_id','=',$profileId)->where('type','=','facebook')->first();
+        $social = $model->where('profile_id','=',$profileId)->where('type','=',$type)->first();
         $model->allowQueryAcl(true);
 
         if ( ! $social )
         {
-            throw new SocialProfileNotFoundException( sprintf( _('Nie odnaleziono profilu facebook o ID [%s].'), $id ) );
+            throw new SocialProfileNotFoundException( sprintf( _('Nie odnaleziono profilu socialnego o ID [%s].'), $profileId ) );
         }
 
 

@@ -4,7 +4,7 @@
 interface ProviderInterface {
     public function findById($id);
 
-    public function findByProfileId($socialId);
+    public function findByProfile($profileId, $type);
 
     public function create(array $data);
 }

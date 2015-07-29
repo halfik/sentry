@@ -13,7 +13,7 @@ class ElegantProvider implements AuthProviderInferface{
      * @param array $credentianls
      * @return User
      */
-    public function authorize(array $credentials, $remember=false){
+    public function authenticate(array $credentials, $remember=false){
         $userProvider = \App::make('sentry')->getUserProvider();
         $throttleProvider = \App::make('sentry')->getThrottleProvider();
 
@@ -72,6 +72,19 @@ class ElegantProvider implements AuthProviderInferface{
         }
 
         $user->clearResetPassword();
+
+        return $user;
+    }
+
+    public function register(array $credentials, $activate=false){
+
+        $userProvider = \App::make('sentry')->getUserProvider();
+        $user = $userProvider->create($credentials);
+
+        if ($activate)
+        {
+            $user->attemptActivation($user->getActivationCode());
+        }
 
         return $user;
     }

@@ -157,14 +157,10 @@ class Sentry {
 	 */
 	public function register(array $credentials, $activate = false)
 	{
-		$user = $this->userProvider->create($credentials);
+        $authManager =  \App::make('AuthManager');
+        $authProvider = $authManager->getCurrent();
+        return $authProvider->register($credentials, $activate);
 
-		if ($activate)
-		{
-			$user->attemptActivation($user->getActivationCode());
-		}
-
-		return $user;
 	}
 
 
@@ -181,21 +177,11 @@ class Sentry {
      * @throws \Cartalyst\Sentry\Users\PasswordRequiredException
      * @throws \Cartalyst\Sentry\Users\UserNotFoundException
      */
-    public function authenticate(array $credentials, $remember = false)
+    public function authenticate(array $credentials)
     {
         $authManager =  \App::make('AuthManager');
         $authProvider = $authManager->getCurrent();
-
-        $user = $authProvider->authorize($credentials, $remember);
-
-        //$this->session->put('mainRoleCode', $user->getMainGroup()->code);
-        //$this->session->put('userData', $user->toArray());
-        \Session::put('mainRoleCode', $user->getMainGroup()->code);
-        \Session::put('userData', $user->getSessionData());
-
-        $this->login($user, $remember);
-
-        return $this->user;
+        return $authProvider->authenticate($credentials);
     }
 
 	/**
@@ -208,7 +194,8 @@ class Sentry {
 	{
 		return $this->authenticate($credentials, true);
 	}
-
+     //$this->session->put('mainRoleCode', $user->getMainGroup()->code);
+        //$this->session->put('userData', $user->toArray());
 	/**
 	 * Check to see if the user is logged in and activated, and hasn't been banned or suspended.
 	 *
@@ -306,6 +293,9 @@ class Sentry {
 		{
 			$this->cookie->forever($toPersist);
 		}
+
+        \Session::put('mainRoleCode', $user->getMainGroup()->code);
+        \Session::put('userData', $user->getSessionData());
 
 		// The user model can attach any handlers
 		// to the "recordLogin" event.

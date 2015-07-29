@@ -20,3 +20,4 @@
 
 class SocialProfileNotFoundException extends \UnexpectedValueException {}
 class SocialProfileAlreadyExistsException extends \UnexpectedValueException {}
+class SocialProfileIdRequiredException extends \UnexpectedValueException {}
