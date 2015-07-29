@@ -4,7 +4,7 @@
 use Cartalyst\Sentry\BaseModel;
 use Cartalyst\Sentry\Hashing\HasherInterface;
 
-class Social extends BaseModel {
+class SocialProfile extends BaseModel {
 
 	/**
 	 * The table associated with the model.

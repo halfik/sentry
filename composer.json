@@ -72,6 +72,7 @@
 			"src/Cartalyst/Sentry/Groups/Exceptions.php",
 			"src/Cartalyst/Sentry/Throttling/Exceptions.php",
 			"src/Cartalyst/Sentry/Users/Exceptions.php",
+            "src/Cartalyst/Sentry/SocialProfile/Exceptions.php",
 			"src/migrations"
 		],
 		"psr-0": {

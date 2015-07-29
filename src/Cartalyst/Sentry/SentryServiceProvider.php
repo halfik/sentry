@@ -216,6 +216,8 @@ class SentryServiceProvider extends ServiceProvider {
         });
     }
 
+
+
     /**
      * Register the throttle provider used by Sentry.
      *

@@ -11,7 +11,7 @@ class Provider implements ProviderInterface {
 	 *
 	 * @var string
 	 */
-	protected $model = 'Cartalyst\Sentry\SocialProvider\Elegant\SocialProvider';
+	protected $model = 'Cartalyst\Sentry\SocialProvider\Elegant\SocialProfile';
 
     /**
      * @param null $model

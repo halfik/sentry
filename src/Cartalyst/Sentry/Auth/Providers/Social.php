@@ -51,7 +51,7 @@ abstract class SocialProvider implements  AuthProviderInferface{
             throw new SocialProfileIdRequiredException();
         }
 
-        $profile=$socialProfileProvider->findByProfileId($profileId);
+        $profile=$socialProfileProvider->findByProfile($profileId,$this->getType());
 
         if($profile){
             throw new SocialProfileAlreadyExistsException();
