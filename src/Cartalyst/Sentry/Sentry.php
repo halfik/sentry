@@ -126,10 +126,10 @@ class Sentry {
 		GroupProviderInterface $groupProvider = null,
 		ThrottleProviderInterface $throttleProvider = null,
         ResourceProviderInterface $resourceProvider = null,
-        SocialProfileProviderInterface $socialProfileProvider = null,
 		SessionInterface $session = null,
 		CookieInterface $cookie = null,
-		$ipAddress = null
+		$ipAddress = null,
+        SocialProfileProviderInterface $socialProfileProvider = null
 	)
 	{
 		$this->userProvider     = $userProvider ?: new UserProvider(new NativeHasher);
