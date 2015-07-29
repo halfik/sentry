@@ -5,8 +5,7 @@ use Cartalyst\Sentry\Users\UserExistsException;
 use Cartalyst\Sentry\SocialProfile\SocialProfileNotFoundException;
 use Cartalyst\Sentry\SocialProfile\SocialProfileIdNotSetException;
 use Cartalyst\Sentry\Users\LoginRequiredException;
-
-
+use Cartalyst\Sentry\Users\UserNotFoundException;
 
 
 abstract class SocialProvider implements  AuthProviderInferface{
@@ -51,28 +50,48 @@ abstract class SocialProvider implements  AuthProviderInferface{
             throw new SocialProfileIdRequiredException();
         }
 
-        $profile=$socialProfileProvider->findByProfile($profileId,$this->getType());
+        try{
+            $profile=$socialProfileProvider->findByProfile($profileId,$this->getType());
+        }
+        catch(SocialProfileNotFoundException $e){
+            $profile=null;
+        }
 
         if($profile){
             throw new SocialProfileAlreadyExistsException();
         }
 
         //Sprawdzamy czy nie jest juz zarejestrowany uzytkownik o takim loginie
-        $user=$userProvider->findByLogin($login);
+        try{
+            $user=$userProvider->findByLogin($login);
+        }
+        catch(UserNotFoundException $e){
+            $user=null;
+        }
+
 
         if($user){
             throw new UserExistsException();
         }
 
         unset($credentials['profileId']);
-        $user=$userProvider->create($credentials);
 
+        \DB::beginTransaction();
+        $user=$userProvider->create($credentials);
 
         $socialProfile=$socialProfileProvider->create(array(
             'profile_id'=>$profileId,
             'type'=>$this->getType(),
             'user__id'=>$user->id
         ));
+
+        \DB::commit();
+
+        if ($activate)
+        {
+            $user->attemptActivation($user->getActivationCode());
+        }
+
 
         return $user;
     }

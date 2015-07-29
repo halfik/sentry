@@ -13,6 +13,8 @@ class SocialProfile extends BaseModel {
 	 */
 	protected $table = 'social_profile';
 
+    public $guarded=array();
+
 
 	/**
 	 * The hasher the model uses.
@@ -46,7 +48,7 @@ class SocialProfile extends BaseModel {
                     'any'=>'required'
                 )
             ),
-            'profile__id'=>array(
+            'profile_id'=>array(
                 'title'=>_('Typ profilu'),
                 'type'=>'text',
                 'sortable' => true,
