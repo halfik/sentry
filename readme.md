@@ -14,6 +14,9 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 # Changelog
 
+## 3.10.0
+    + Social Facebook provider
+
 ## 3.9.1
     + poprawka bledu w metodzie Uuser::hasRole
 
