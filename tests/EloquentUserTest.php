@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,14 +12,14 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Users\Eloquent\User;
+use Netinteractive\Sentry\Users\Eloquent\User;
 use PHPUnit_Framework_TestCase;
 
 class EloquentUserTest extends PHPUnit_Framework_TestCase {
@@ -37,7 +37,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testUserIdCallsKey()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[getKey]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[getKey]');
 		$user->shouldReceive('getKey')->once()->andReturn('foo');
 
 		$this->assertEquals('foo', $user->getId());
@@ -53,14 +53,14 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testUserLoginNameCallsLoginName()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[getLoginName]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[getLoginName]');
 		$user->shouldReceive('getLoginName')->once()->andReturn('foo');
 		$this->assertEquals('foo', $user->getLoginName());
 	}
 
 	public function testUserPasswordCallsPasswordAttribute()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$hasher->shouldReceive('hash')->with('unhashed_password_here')->once()->andReturn('hashed_password_here');
 		$user = new User;
 		$user->password = 'unhashed_password_here';
@@ -73,7 +73,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 		$pivot = m::mock('StdClass');
 		$pivot->shouldReceive('get')->once()->andReturn('foo');
 
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[groups]');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[groups]');
 		$user->shouldReceive('groups')->once()->andReturn($pivot);
 
 		$this->assertEquals('foo', $user->getGroups());
@@ -81,13 +81,13 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testInGroup()
 	{
-		$group1 = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$group1 = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$group1->shouldReceive('getId')->once()->andReturn(123);
 
-		$group2 = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$group2 = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$group2->shouldReceive('getId')->once()->andReturn(124);
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[getGroups]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[getGroups]');
 		$user->shouldReceive('getGroups')->once()->andReturn(array($group2));
 
 		$this->assertFalse($user->inGroup($group1));
@@ -95,8 +95,8 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddingToGroupChecksIfAlreadyInThatGroup()
 	{
-		$group = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups]');
+		$group = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[inGroup,groups]');
 		$user->shouldReceive('inGroup')->with($group)->once()->andReturn(true);
 		$user->shouldReceive('groups')->never();
 
@@ -105,12 +105,12 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddingGroupAttachesToRelationship()
 	{
-		$group = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$group = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 
 		$relationship = m::mock('StdClass');
 		$relationship->shouldReceive('attach')->with($group)->once();
 
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups,invalidateMergedPermissionsCache,invalidateUserGroupsCache]');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[inGroup,groups,invalidateMergedPermissionsCache,invalidateUserGroupsCache]');
 		$user->shouldReceive('inGroup')->once()->andReturn(false);
 		$user->shouldReceive('groups')->once()->andReturn($relationship);
 		$user->shouldReceive('invalidateUserGroupsCache')->once();
@@ -121,12 +121,12 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testRemovingFromGroupDetachesRelationship()
 	{
-		$group = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$group = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 
 		$relationship = m::mock('StdClass');
 		$relationship->shouldReceive('detach')->with($group)->once();
 
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups,invalidateMergedPermissionsCache,invalidateUserGroupsCache]');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[inGroup,groups,invalidateMergedPermissionsCache,invalidateUserGroupsCache]');
 		$user->shouldReceive('inGroup')->once()->andReturn(true);
 		$user->shouldReceive('groups')->once()->andReturn($relationship);
 		$user->shouldReceive('invalidateUserGroupsCache')->once();
@@ -137,8 +137,8 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testUpdateGroupWithOneId()
 	{
-		$group = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[addGroup]');
+		$group = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[addGroup]');
 
 		$user->shouldReceive('addGroup')->once()->andReturn(true);
 		$this->assertTrue($user->addGroup($group));
@@ -146,8 +146,8 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testUpdateGroupWithMultipleIds()
 	{
-		$group = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[addGroup]');
+		$group = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[addGroup]');
 
 		$user->shouldReceive('addGroup')->times(3)->andReturn(true);
 
@@ -159,9 +159,9 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testUpdateGroupWithOneIdToRemove()
 	{
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[removeGroup]');
-		$groupProvider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[findById]');
-		$groupProvider->shouldReceive('findById')->once()->with(\Mockery::type('int'))->andReturn($group = m::mock('Cartalyst\Sentry\Groups\GroupInterface'));
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[removeGroup]');
+		$groupProvider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[findById]');
+		$groupProvider->shouldReceive('findById')->once()->with(\Mockery::type('int'))->andReturn($group = m::mock('Netinteractive\Sentry\Groups\GroupInterface'));
 		$user->shouldReceive('removeGroup')->andReturn(true);
 
 		$this->assertTrue($user->removeGroup($groupProvider->findById(1)));
@@ -171,9 +171,9 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	public function testUpdateGroupWithMultipleIdsToRemove()
 	{
 		$count = 3;
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[removeGroup]');
-		$groupProvider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[findById]');
-		$groupProvider->shouldReceive('findById')->times($count)->with(\Mockery::type('int'))->andReturn($group = m::mock('Cartalyst\Sentry\Groups\GroupInterface'));
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[removeGroup]');
+		$groupProvider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[findById]');
+		$groupProvider->shouldReceive('findById')->times($count)->with(\Mockery::type('int'))->andReturn($group = m::mock('Netinteractive\Sentry\Groups\GroupInterface'));
 		$user->shouldReceive('removeGroup')->times($count)->andReturn(true);
 
 		for ($i = 0; $i < $count; $i++)
@@ -184,19 +184,19 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testMergedPermissions()
 	{
-		$group1 = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$group1 = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$group1->shouldReceive('getPermissions')->once()->andReturn(array(
 			'foo' => 1,
 			'bar' => 1,
 			'baz' => 1,
 		));
 
-		$group2 = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$group2 = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$group2->shouldReceive('getPermissions')->once()->andReturn(array(
 			'qux' => 1,
 		));
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[getGroups,getPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[getGroups,getPermissions]');
 		$user->shouldReceive('getGroups')->once()->andReturn(array($group1, $group2));
 		$user->shouldReceive('getPermissions')->once()->andReturn(array(
 			'corge' => 1,
@@ -217,7 +217,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testSuperUserHasAccessToEverything()
 	{
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser]');
+		$user  = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser]');
 		$user->shouldReceive('isSuperUser')->once()->andReturn(true);
 
 		$this->assertTrue($user->hasAccess('bar'));
@@ -225,7 +225,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testHasAccess()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
 		$user->shouldReceive('isSuperUser')->twice()->andReturn(false);
 		$user->shouldReceive('getMergedPermissions')->twice()->andReturn(array(
 			'foo' => -1,
@@ -239,7 +239,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testHasAccessWithMultipleProperties()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
 		$user->shouldReceive('isSuperUser')->twice()->andReturn(false);
 		$user->shouldReceive('getMergedPermissions')->twice()->andReturn(array(
 			'foo' => -1,
@@ -256,7 +256,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testWildcardPermissionsCheck()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
 		$user->shouldReceive('isSuperUser')->atLeast(1)->andReturn(false);
 		$user->shouldReceive('getMergedPermissions')->atLeast(1)->andReturn(array(
 			'users.edit' => 1,
@@ -272,7 +272,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testWildcardPermissionsSetting()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
 		$user->shouldReceive('isSuperUser')->atLeast(1)->andReturn(false);
 		$user->shouldReceive('getMergedPermissions')->atLeast(1)->andReturn(array(
 			'users.*' => 1,
@@ -286,7 +286,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testAnyPermissions()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
 		$user->shouldReceive('isSuperUser')->once()->andReturn(false);
 		$user->shouldReceive('getMergedPermissions')->once()->andReturn(array(
 			'foo' => -1,
@@ -298,7 +298,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testAnyPermissionsWithInvalidPermissions()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[isSuperUser,getMergedPermissions]');
 		$user->shouldReceive('isSuperUser')->once()->andReturn(false);
 		$user->shouldReceive('getMergedPermissions')->once()->andReturn(array(
 			'foo' => -1,
@@ -310,7 +310,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testHasAnyAccess()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[hasAccess]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[hasAccess]');
 		$user->shouldReceive('hasAccess')->with(array('foo', 'bar'), false)->once()->andReturn(true);
 
 		$this->assertTrue($user->hasAnyAccess(array('foo', 'bar')));
@@ -354,7 +354,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\LoginRequiredException
+	 * @expectedException Netinteractive\Sentry\Users\LoginRequiredException
 	 */
 	public function testValidationThrowsLoginExceptionIfNoneGiven()
 	{
@@ -363,7 +363,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\PasswordRequiredException
+	 * @expectedException Netinteractive\Sentry\Users\PasswordRequiredException
 	 */
 	public function testValidationThrowsPasswordExceptionIfNoneGiven()
 	{
@@ -373,17 +373,17 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\UserExistsException
+	 * @expectedException Netinteractive\Sentry\Users\UserExistsException
 	 */
 	public function testValidationFailsWhenUserAlreadyExists()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$hasher->shouldReceive('hash')->with('bazbat')->once()->andReturn('hashed_bazbat');
 
-		$persistedUser = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$persistedUser = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$persistedUser->shouldReceive('getId')->once()->andReturn(123);
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[newQuery]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[newQuery]');
 		$user->email = 'foo@bar.com';
 		$user->password = 'bazbat';
 
@@ -397,17 +397,17 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\UserExistsException
+	 * @expectedException Netinteractive\Sentry\Users\UserExistsException
 	 */
 	public function testValidationFailsWhenUserAlreadyExistsOnExistent()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$hasher->shouldReceive('hash')->with('bazbat')->once()->andReturn('hashed_bazbat');
 
-		$persistedUser = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$persistedUser = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$persistedUser->shouldReceive('getId')->once()->andReturn(123);
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[newQuery]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[newQuery]');
 		$user->id = 124;
 		$user->email = 'foo@bar.com';
 		$user->password = 'bazbat';
@@ -423,13 +423,13 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testValidationDoesNotThrowAnExceptionIfPersistedUserIsThisUser()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$hasher->shouldReceive('hash')->with('bazbat')->once()->andReturn('hashed_bazbat');
 
-		$persistedUser = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$persistedUser = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$persistedUser->shouldReceive('getId')->once()->andReturn(123);
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[newQuery]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[newQuery]');
 		$user->id = 123;
 		$user->email = 'foo@bar.com';
 		$user->password = 'bazbat';
@@ -445,11 +445,11 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testClearResetPassword()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[save]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[save]');
 		$user->shouldReceive('save')->never();
 		$user->clearResetPassword();
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[save]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[save]');
 
 		$user->reset_password_code = 'foo_bar_baz';
 		$user->shouldReceive('save')->once();
@@ -460,7 +460,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	public function testHasherSettingAndGetting()
 	{
 		$this->assertNull(User::getHasher());
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$this->assertEquals($hasher, User::getHasher());
 	}
 
@@ -497,10 +497,10 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 		$randomString = 'random_string_here';
 		$hashedRandomString = 'hashed_random_string_here';
 
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$hasher->shouldReceive('hash')->with($randomString)->once()->andReturn($hashedRandomString);
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[save,getRandomString]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[save,getRandomString]');
 
 		$this->assertNull($user->persist_code);
 		$user->shouldReceive('save')->once();
@@ -513,7 +513,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingPersistCode()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$user = new User;
 
 		// Create a new hash
@@ -528,7 +528,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetActivationCode()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[save,getRandomString]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[save,getRandomString]');
 
 		$this->assertNull($user->activation_code);
 		$user->shouldReceive('save')->once();
@@ -541,7 +541,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetResetPasswordCode()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[save,getRandomString]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[save,getRandomString]');
 
 		$this->assertNull($user->reset_password_code);
 		$user->shouldReceive('save')->once();
@@ -553,11 +553,11 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\UserAlreadyActivatedException
+	 * @expectedException Netinteractive\Sentry\Users\UserAlreadyActivatedException
 	 */
 	public function testUserIsNotActivatedTwice()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[checkHash]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[checkHash]');
 		$user->shouldReceive('checkHash')->never();
 		$user->activated = true;
 
@@ -566,7 +566,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testUserActivation()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[getActivationCode,checkHash,save]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[getActivationCode,checkHash,save]');
 		$this->addMockConnection($user);
 		$user->getConnection()->getQueryGrammar()->shouldReceive('getDateFormat')->andReturn('Y-m-d H:i:s');
 
@@ -582,7 +582,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingPassword()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[getPassword,checkHash]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[getPassword,checkHash]');
 		$user->shouldReceive('getPassword')->once()->andReturn('hashed_password');
 		$user->shouldReceive('checkHash')->with('password', 'hashed_password')->once()->andReturn(true);
 
@@ -591,7 +591,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingResetPasswordCode()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
 		$user = new User;
 
 		// Check the hash
@@ -602,8 +602,8 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testResettingPassword()
 	{
-		User::setHasher($hasher = m::mock('Cartalyst\Sentry\Hashing\HasherInterface'));
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[checkResetPasswordCode,save]');
+		User::setHasher($hasher = m::mock('Netinteractive\Sentry\Hashing\HasherInterface'));
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[checkResetPasswordCode,save]');
 		$user->shouldReceive('checkResetPasswordCode')->with('reset_code')->andReturn(true);
 
 		$hasher->shouldReceive('hash')->with('new_password')->once()->andReturn('hashed_new_password');
@@ -670,7 +670,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 		$relationship = m::mock('StdClass');
 		$relationship->shouldReceive('detach')->once();
 
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[groups]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[groups]');
 		$user->shouldReceive('groups')->once()->andReturn($relationship);
 
 		$user->delete();
@@ -686,7 +686,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testRecordingLogin()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\Eloquent\User[save]');
+		$user = m::mock('Netinteractive\Sentry\Users\Eloquent\User[save]');
 		$this->addMockConnection($user);
 		$user->getConnection()->getQueryGrammar()->shouldReceive('getDateFormat')->andReturn('Y-m-d H:i:s');
 

@@ -12,9 +12,9 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
@@ -95,7 +95,7 @@ return array(
 		|
 		*/
 
-		'model' => 'Cartalyst\Sentry\Groups\Eloquent\Group',
+		'model' => 'Netinteractive\Sentry\Groups\Eloquent\Group',
 
 	),
 
@@ -120,7 +120,7 @@ return array(
 		|
 		*/
 
-		'model' => 'Cartalyst\Sentry\Users\Eloquent\User',
+		'model' => 'Netinteractive\Sentry\Users\Eloquent\User',
 
 		/*
 		|--------------------------------------------------------------------------
@@ -186,7 +186,7 @@ return array(
 		|
 		*/
 
-		'model' => 'Cartalyst\Sentry\Throttling\Eloquent\Throttle',
+		'model' => 'Netinteractive\Sentry\Throttling\Eloquent\Throttle',
 
 		/*
 		|--------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,17 +12,17 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Sentry;
-use Cartalyst\Sentry\Throttling\UserBannedException;
-use Cartalyst\Sentry\Throttling\UserSuspendedException;
-use Cartalyst\Sentry\Users\UserNotFoundException;
+use Netinteractive\Sentry\Sentry;
+use Netinteractive\Sentry\Throttling\UserBannedException;
+use Netinteractive\Sentry\Throttling\UserSuspendedException;
+use Netinteractive\Sentry\Users\UserNotFoundException;
 use PHPUnit_Framework_TestCase;
 
 class SentryTest extends PHPUnit_Framework_TestCase {
@@ -49,11 +49,11 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 	public function setUp()
 	{
 		$this->sentry = new Sentry(
-			$this->userProvider     = m::mock('Cartalyst\Sentry\Users\ProviderInterface'),
-			$this->groupProvider    = m::mock('Cartalyst\Sentry\Groups\ProviderInterface'),
-			$this->throttleProvider = m::mock('Cartalyst\Sentry\Throttling\ProviderInterface'),
-			$this->session          = m::mock('Cartalyst\Sentry\Sessions\SessionInterface'),
-			$this->cookie           = m::mock('Cartalyst\Sentry\Cookies\CookieInterface')
+			$this->userProvider     = m::mock('Netinteractive\Sentry\Users\ProviderInterface'),
+			$this->groupProvider    = m::mock('Netinteractive\Sentry\Groups\ProviderInterface'),
+			$this->throttleProvider = m::mock('Netinteractive\Sentry\Throttling\ProviderInterface'),
+			$this->session          = m::mock('Netinteractive\Sentry\Sessions\SessionInterface'),
+			$this->cookie           = m::mock('Netinteractive\Sentry\Cookies\CookieInterface')
 		);
 	}
 
@@ -68,11 +68,11 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\UserNotActivatedException
+	 * @expectedException Netinteractive\Sentry\Users\UserNotActivatedException
 	 */
 	public function testLoggingInUnactivatedUser()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$user->shouldReceive('isActivated')->once()->andReturn(false);
 		$user->shouldReceive('getLogin')->once()->andReturn('foo');
 
@@ -81,7 +81,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoggingInUser()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$user->shouldReceive('isActivated')->once()->andReturn(true);
 		$user->shouldReceive('getId')->once()->andReturn('foo');
 		$user->shouldReceive('getPersistCode')->once()->andReturn('persist_code');
@@ -94,26 +94,26 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoggingInAndRemembering()
 	{
-		$sentry = m::mock('Cartalyst\Sentry\Sentry[login]', array(null, null, null, $this->session));
-		$sentry->shouldReceive('login')->with($user = m::mock('Cartalyst\Sentry\Users\UserInterface'), true)->once();
+		$sentry = m::mock('Netinteractive\Sentry\Sentry[login]', array(null, null, null, $this->session));
+		$sentry->shouldReceive('login')->with($user = m::mock('Netinteractive\Sentry\Users\UserInterface'), true)->once();
 		$sentry->loginAndRemember($user);
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\LoginRequiredException
+	 * @expectedException Netinteractive\Sentry\Users\LoginRequiredException
 	 */
 	public function testAuthenticatingUserWhenLoginIsNotProvided()
 	{
 		$credentials = array();
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$user->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->sentry->authenticate($credentials);
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\PasswordRequiredException
+	 * @expectedException Netinteractive\Sentry\Users\PasswordRequiredException
 	 */
 	public function testAuthenticatingUserWhenPasswordIsNotProvided()
 	{
@@ -121,14 +121,14 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'email' => 'foo@bar.com',
 		);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$user->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->sentry->authenticate($credentials);
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\UserNotFoundException
+	 * @expectedException Netinteractive\Sentry\Users\UserNotFoundException
 	 */
 	public function testAuthenticatingUserWhereTheUserDoesNotExist()
 	{
@@ -139,7 +139,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(false);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$user->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->userProvider->shouldReceive('findByCredentials')->with($credentials)->once()->andThrow(new UserNotFoundException);
@@ -148,7 +148,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Throttling\UserBannedException
+	 * @expectedException Netinteractive\Sentry\Throttling\UserBannedException
 	 */
 	public function testAuthenticatingWhenUserIsBanned()
 	{
@@ -157,11 +157,11 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'password' => 'baz_bat',
 		);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$emptyUser->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(true);
-		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface'));
+		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface'));
 
 		$throttle->shouldReceive('check')->once()->andThrow(new UserBannedException);
 
@@ -169,7 +169,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Throttling\UserSuspendedException
+	 * @expectedException Netinteractive\Sentry\Throttling\UserSuspendedException
 	 */
 	public function testAuthenticatingWhenUserIsSuspended()
 	{
@@ -178,11 +178,11 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'password' => 'baz_bat',
 		);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$emptyUser->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(true);
-		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface'));
+		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface'));
 
 		$throttle->shouldReceive('check')->once()->andThrow(new UserSuspendedException);
 
@@ -190,7 +190,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Users\UserNotFoundException
+	 * @expectedException Netinteractive\Sentry\Users\UserNotFoundException
 	 */
 	public function testAuthenticatingUserWhereTheUserDoesNotExistWithThrottling()
 	{
@@ -199,11 +199,11 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'password' => 'baz_bat',
 		);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$emptyUser->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(true);
-		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface'));
+		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface'));
 
 		$throttle->shouldReceive('check')->once();
 
@@ -218,7 +218,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testAuthenticatingUser()
 	{
-		$this->sentry = m::mock('Cartalyst\Sentry\Sentry[login]', array($this->userProvider, $this->groupProvider, $this->throttleProvider, $this->session, $this->cookie));
+		$this->sentry = m::mock('Netinteractive\Sentry\Sentry[login]', array($this->userProvider, $this->groupProvider, $this->throttleProvider, $this->session, $this->cookie));
 
 		$credentials = array(
 			'email'    => 'foo@bar.com',
@@ -227,10 +227,10 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(false);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$user->shouldReceive('getLoginName')->once()->andReturn('email');
 
-		$this->userProvider->shouldReceive('findByCredentials')->with($credentials)->once()->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('findByCredentials')->with($credentials)->once()->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 
 		$user->shouldReceive('clearResetPassword')->once();
 
@@ -240,7 +240,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testAuthenticatingUserWithThrottling()
 	{
-		$this->sentry = m::mock('Cartalyst\Sentry\Sentry[login]', array($this->userProvider, $this->groupProvider, $this->throttleProvider, $this->session, $this->cookie));
+		$this->sentry = m::mock('Netinteractive\Sentry\Sentry[login]', array($this->userProvider, $this->groupProvider, $this->throttleProvider, $this->session, $this->cookie));
 
 		$credentials = array(
 			'email'    => 'foo@bar.com',
@@ -252,15 +252,15 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'password' => 'baz_bat',
 		);
 
-		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('getEmptyUser')->once()->andReturn($emptyUser = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$emptyUser->shouldReceive('getLoginName')->once()->andReturn('email');
 
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(true);
-		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface'));
+		$this->throttleProvider->shouldReceive('findByUserLogin')->with('foo@bar.com', '0.0.0.0')->once()->andReturn($throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface'));
 
 		$throttle->shouldReceive('check')->once();
 
-		$this->userProvider->shouldReceive('findByCredentials')->with($credentials)->once()->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('findByCredentials')->with($credentials)->once()->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 
 		// Upon successful login with throttling, the throttle
 		// attempts are cleared
@@ -278,7 +278,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testAuthenticatingUserAndRemembering()
 	{
-		$this->sentry = m::mock('Cartalyst\Sentry\Sentry[authenticate]', array(null, null, null, $this->session));
+		$this->sentry = m::mock('Netinteractive\Sentry\Sentry[authenticate]', array(null, null, null, $this->session));
 
 		$credentials = array(
 			'email'    => 'foo@bar.com',
@@ -291,7 +291,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckLoggingOut()
 	{
-		$this->sentry->setUser(m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->sentry->setUser(m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$this->session->shouldReceive('get')->once();
 		$this->session->shouldReceive('forget')->once();
 		$this->cookie->shouldReceive('get')->once();
@@ -303,8 +303,8 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingUserWhenUserIsSetAndActivated()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface');
+		$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface');
 		$throttle->shouldReceive('isBanned')->once()->andReturn(false);
 		$throttle->shouldReceive('isSuspended')->once()->andReturn(false);
 
@@ -319,10 +319,10 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingUserWhenUserIsSetAndSuspended()
 	{
-		$user     = m::mock('Cartalyst\Sentry\Users\UserInterface');
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface');
-		$session  = m::mock('Cartalyst\Sentry\Sessions\SessionInterface');
-		$cookie   = m::mock('Cartalyst\Sentry\Cookies\CookieInterface');
+		$user     = m::mock('Netinteractive\Sentry\Users\UserInterface');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface');
+		$session  = m::mock('Netinteractive\Sentry\Sessions\SessionInterface');
+		$cookie   = m::mock('Netinteractive\Sentry\Cookies\CookieInterface');
 
 		$throttle->shouldReceive('isBanned')->once()->andReturn(false);
 		$throttle->shouldReceive('isSuspended')->once()->andReturn(true);
@@ -343,10 +343,10 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingUserWhenUserIsSetAndBanned()
 	{
-		$user     = m::mock('Cartalyst\Sentry\Users\UserInterface');
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface');
-		$session  = m::mock('Cartalyst\Sentry\Sessions\SessionInterface');
-		$cookie   = m::mock('Cartalyst\Sentry\Cookies\CookieInterface');
+		$user     = m::mock('Netinteractive\Sentry\Users\UserInterface');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface');
+		$session  = m::mock('Netinteractive\Sentry\Sessions\SessionInterface');
+		$cookie   = m::mock('Netinteractive\Sentry\Cookies\CookieInterface');
 
 		$throttle->shouldReceive('isBanned')->once()->andReturn(true);
 
@@ -366,7 +366,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckingUserWhenUserIsSetAndNotActivated()
 	{
-		$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$user->shouldReceive('isActivated')->once()->andReturn(false);
 
 		$this->sentry->setUser($user);
@@ -378,14 +378,14 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 		$this->session->shouldReceive('get')->once()->andReturn(array('foo', 'persist_code'));
 		$this->cookie->shouldReceive('get')->never();
 
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface');
 		$throttle->shouldReceive('isBanned')->once()->andReturn(false);
 		$throttle->shouldReceive('isSuspended')->once()->andReturn(false);
 
 		$this->throttleProvider->shouldReceive('findByUser')->once()->andReturn($throttle);
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(true);
 
-		$this->userProvider->shouldReceive('findById')->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('findById')->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 
 		$user->shouldReceive('checkPersistCode')->with('persist_code')->once()->andReturn(true);
 		$user->shouldReceive('isActivated')->once()->andReturn(true);
@@ -398,11 +398,11 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 		$this->session->shouldReceive('get')->once();
 		$this->cookie->shouldReceive('get')->once()->andReturn(array('foo', 'persist_code'));
 
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\ThrottleInterface');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\ThrottleInterface');
 		$throttle->shouldReceive('isBanned')->once()->andReturn(false);
 		$throttle->shouldReceive('isSuspended')->once()->andReturn(false);
 
-		$this->userProvider->shouldReceive('findById')->andReturn($user = m::mock('Cartalyst\Sentry\Users\UserInterface'));
+		$this->userProvider->shouldReceive('findById')->andReturn($user = m::mock('Netinteractive\Sentry\Users\UserInterface'));
 		$this->throttleProvider->shouldReceive('findByUser')->once()->andReturn($throttle);
 		$this->throttleProvider->shouldReceive('isEnabled')->once()->andReturn(true);
 
@@ -442,7 +442,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'password' => 'sdf_sdf',
 		);
 
-		$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$user->shouldReceive('getActivationCode')->never();
 		$user->shouldReceive('attemptActivation')->never();
 		$user->shouldReceive('isActivated')->once()->andReturn(false);
@@ -460,7 +460,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 			'password' => 'sdf_sdf',
 		);
 
-		$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+		$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 		$user->shouldReceive('getActivationCode')->once()->andReturn('activation_code_here');
 		$user->shouldReceive('attemptActivation')->with('activation_code_here')->once();
 		$user->shouldReceive('isActivated')->once()->andReturn(true);
@@ -473,7 +473,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetUserWithCheck()
 	{
-		$sentry = m::mock('Cartalyst\Sentry\Sentry[check]', array(null, null, null, $this->session));
+		$sentry = m::mock('Netinteractive\Sentry\Sentry[check]', array(null, null, null, $this->session));
 		$sentry->shouldReceive('check')->once();
 		$sentry->getUser();
 	}
@@ -539,7 +539,7 @@ class SentryTest extends PHPUnit_Framework_TestCase {
 
     public function testFindAllUsersInGroup()
     {
-        $group = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+        $group = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
         $this->userProvider->shouldReceive('findAllInGroup')->once()->andReturn(true);
         $this->assertTrue($this->sentry->findAllUsersInGroup($group));
     }

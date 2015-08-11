@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,14 +12,14 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Throttling\Eloquent\Throttle;
+use Netinteractive\Sentry\Throttling\Eloquent\Throttle;
 use DateTime;
 use PHPUnit_Framework_TestCase;
 
@@ -52,7 +52,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 		$user = m::mock('StdClass');
 		$user->shouldReceive('getResults')->once()->andReturn('foo');
 
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[user]');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[user]');
 		$throttle->shouldReceive('user')->once()->andReturn($user);
 
 		$this->assertEquals('foo', $throttle->getUser());
@@ -66,7 +66,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 
 	public function testGettingLoginAttemptsWhenNoAttemptHasBeenMadeBefore()
 	{
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[clearLoginAttemptsIfAllowed]');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[clearLoginAttemptsIfAllowed]');
 		$throttle->shouldReceive('clearLoginAttemptsIfAllowed')->never();
 
 		$this->assertEquals(0, $throttle->getLoginAttempts());
@@ -76,7 +76,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 
 	public function testGettingLoginAttemptsResetsIfSuspensionTimeHasPassedSinceLastAttempt()
 	{
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[save]');
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[save]');
 		$this->addMockConnection($throttle);
 		$throttle->getConnection()->getQueryGrammar()->shouldReceive('getDateFormat')->andReturn('Y-m-d H:i:s');
 
@@ -104,7 +104,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 		$connection->shouldReceive('getQueryGrammar')->atLeast(1)->andReturn($connection);
 		$connection->shouldReceive('getDateFormat')->atLeast(1)->andReturn('Y-m-d H:i:s');
 
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[save,getConnection]');;
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[save,getConnection]');;
 		$throttle->shouldReceive('getConnection')->atLeast(1)->andReturn($connection);
 		$throttle->shouldReceive('save')->once();
 
@@ -121,7 +121,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 		$connection->shouldReceive('getQueryGrammar')->atLeast(1)->andReturn($connection);
 		$connection->shouldReceive('getDateFormat')->atLeast(1)->andReturn('Y-m-d H:i:s');
 
-		$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[save,getConnection]');;
+		$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[save,getConnection]');;
 		$throttle->shouldReceive('getConnection')->atLeast(1)->andReturn($connection);
 
 		$throttle->shouldReceive('save')->once();
@@ -150,7 +150,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 
 	// public function testIsSuspendedRemovesSuspensionIfEnoughTimeHasPassed()
 	// {
-	// 	$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[save]');
+	// 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[save]');
 	// 	$throttle->shouldReceive('save')->once();
 	// 	$throttle->suspended = true;
 
@@ -172,7 +172,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 
 	// public function testAddLoginAttempt()
 	// {
-	// 	$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[suspend,save]');
+	// 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[suspend,save]');
 	// 	$throttle->shouldReceive('save')->once();
 	// 	$throttle->shouldReceive('suspend')->once();
 
@@ -188,7 +188,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 
 	// public function testBanning()
 	// {
-	// 	$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[save]');
+	// 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[save]');
 	// 	$throttle->shouldReceive('save')->twice();
 
 	// 	$throttle->ban();
@@ -198,14 +198,14 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 	// }
 
 	// /**
-	//  * @expectedException Cartalyst\Sentry\Throttling\UserBannedException
+	//  * @expectedException Netinteractive\Sentry\Throttling\UserBannedException
 	//  */
 	// public function testCheckingThrowsProperExceptionWhenUserIsBanned()
 	// {
-	// 	$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+	// 	$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 	// 	$user->shouldReceive('getLogin')->once()->andReturn('foo');
 
-	// 	$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended,getUser]');
+	// 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended,getUser]');
 	// 	$throttle->shouldReceive('isBanned')->once()->andReturn(true);
 	// 	$throttle->shouldReceive('isSuspended')->never();
 	// 	$throttle->shouldReceive('getUser')->once()->andReturn($user);
@@ -214,14 +214,14 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 	// }
 
 	// /**
-	//  * @expectedException Cartalyst\Sentry\Throttling\UserSuspendedException
+	//  * @expectedException Netinteractive\Sentry\Throttling\UserSuspendedException
 	//  */
 	// public function testCheckingThrowsProperExceptionWhenUserIsSuspended()
 	// {
-	// 	$user = m::mock('Cartalyst\Sentry\Users\UserInterface');
+	// 	$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
 	// 	$user->shouldReceive('getLogin')->once()->andReturn('foo');
 
-	// 	$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended,getUser]');
+	// 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended,getUser]');
 	// 	$throttle->shouldReceive('isBanned')->once()->andReturn(false);
 	// 	$throttle->shouldReceive('isSuspended')->once()->andReturn(true);
 	// 	$throttle->shouldReceive('getUser')->once()->andReturn($user);
@@ -231,7 +231,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
 
 	// public function testCheckingWhenUserIsOkay()
 	// {
-	// 	$throttle = m::mock('Cartalyst\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended]');
+	// 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended]');
 	// 	$throttle->shouldReceive('isBanned')->once()->andReturn(false);
 	// 	$throttle->shouldReceive('isSuspended')->once()->andReturn(false);
 

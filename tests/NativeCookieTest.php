@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,13 +12,13 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
-use Cartalyst\Sentry\Cookies\NativeCookie;
+use Netinteractive\Sentry\Cookies\NativeCookie;
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
 
@@ -42,7 +42,7 @@ class NativeCookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testPut()
 	{
-		$cookie = m::mock('Cartalyst\Sentry\Cookies\NativeCookie[minutesToLifetime,setCookie]');
+		$cookie = m::mock('Netinteractive\Sentry\Cookies\NativeCookie[minutesToLifetime,setCookie]');
 
 		$cookie->shouldReceive('minutesToLifetime')->with(123)->andReturn(12345);
 
@@ -53,7 +53,7 @@ class NativeCookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testForever()
 	{
-		$cookie = m::mock('Cartalyst\Sentry\Cookies\NativeCookie[put]');
+		$cookie = m::mock('Netinteractive\Sentry\Cookies\NativeCookie[put]');
 
 		$me = $this;
 		$cookie->shouldReceive('put')->with('bar', m::on(function($value) use ($me)
@@ -75,7 +75,7 @@ class NativeCookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetWhenCookieDoesNotExist()
 	{
-		$cookie = m::mock('Cartalyst\Sentry\Cookies\NativeCookie[getCookie]');
+		$cookie = m::mock('Netinteractive\Sentry\Cookies\NativeCookie[getCookie]');
 
 		$cookie->shouldReceive('getCookie')->once();
 
@@ -84,7 +84,7 @@ class NativeCookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testGet()
 	{
-		$cookie = m::mock('Cartalyst\Sentry\Cookies\NativeCookie[getCookie]');
+		$cookie = m::mock('Netinteractive\Sentry\Cookies\NativeCookie[getCookie]');
 
 		$cookie->shouldReceive('getCookie')->once()->andReturn('bar');
 
@@ -93,7 +93,7 @@ class NativeCookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testForget()
 	{
-		$cookie = m::mock('Cartalyst\Sentry\Cookies\NativeCookie[put]');
+		$cookie = m::mock('Netinteractive\Sentry\Cookies\NativeCookie[put]');
 
 		$me = $this;
 		$cookie->shouldReceive('put')->with(null, m::on(function($value) use ($me)

@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,13 +12,13 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
-use Cartalyst\Sentry\Sessions\NativeSession;
+use Netinteractive\Sentry\Sessions\NativeSession;
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
 use stdClass;
@@ -37,19 +37,19 @@ class NativeSessionTest extends PHPUnit_Framework_TestCase {
 
 	public function testFoo()
 	{
-		$session = $this->getMock('Cartalyst\Sentry\Sessions\NativeSession', array('startSession'));
+		$session = $this->getMock('Netinteractive\Sentry\Sessions\NativeSession', array('startSession'));
 	}
 
 	public function testOverridingKey()
 	{
-		$session = $this->getMock('Cartalyst\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
+		$session = $this->getMock('Netinteractive\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
 
 		$this->assertEquals('foo', $session->getKey());
 	}
 
 	public function testPutting()
 	{
-		$session = $this->getMock('Cartalyst\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
+		$session = $this->getMock('Netinteractive\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
 
 		$class = new stdClass;
 		$class->foo = 'bar';
@@ -60,14 +60,14 @@ class NativeSessionTest extends PHPUnit_Framework_TestCase {
 
 	public function testGettingWhenNothingIsInSessionReturnsNull()
 	{
-		$session = $this->getMock('Cartalyst\Sentry\Sessions\NativeSession', array('startSession', 'getSession'));
+		$session = $this->getMock('Netinteractive\Sentry\Sessions\NativeSession', array('startSession', 'getSession'));
 
 		$this->assertNull($session->get());
 	}
 
 	public function testGetting()
 	{
-		$session = $this->getMock('Cartalyst\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
+		$session = $this->getMock('Netinteractive\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
 
 		$class = new stdClass;
 		$class->foo = 'bar';
@@ -80,7 +80,7 @@ class NativeSessionTest extends PHPUnit_Framework_TestCase {
 	{
 		$_SESSION['foo'] = 'bar';
 
-		$session = $this->getMock('Cartalyst\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
+		$session = $this->getMock('Netinteractive\Sentry\Sessions\NativeSession', array('startSession'), array('foo'));
 
 		$this->assertEquals('bar', $_SESSION['foo']);
 		$session->forget();

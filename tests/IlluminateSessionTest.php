@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,14 +12,14 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Sessions\IlluminateSession;
+use Netinteractive\Sentry\Sessions\IlluminateSession;
 use PHPUnit_Framework_TestCase;
 
 class IlluminateSessionTest extends PHPUnit_Framework_TestCase {

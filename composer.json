@@ -1,11 +1,11 @@
 {
-	"name": "cartalyst/sentry",
+	"name": "netinteractive/sentry",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel", "codeigniter", "fuelphp", "kohana"],
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
-			"name": "Cartalyst LLC",
+			"name": "Netinteractive LLC",
 			"email": "help@cartalyst.com"
 		},
 		{
@@ -48,13 +48,13 @@
 	},
 	"autoload": {
 		"classmap": [
-			"src/Cartalyst/Sentry/Groups/Exceptions.php",
-			"src/Cartalyst/Sentry/Throttling/Exceptions.php",
-			"src/Cartalyst/Sentry/Users/Exceptions.php",
+			"src/Netinteractive/Sentry/Groups/Exceptions.php",
+			"src/Netinteractive/Sentry/Throttling/Exceptions.php",
+			"src/Netinteractive/Sentry/Users/Exceptions.php",
 			"src/migrations"
 		],
 		"psr-0": {
-			"Cartalyst\\Sentry": "src/"
+			"Netinteractive\\Sentry": "src/"
 		}
 	},
 	"extra": {

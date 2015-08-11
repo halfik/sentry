@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,14 +12,14 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Groups\Eloquent\Group;
+use Netinteractive\Sentry\Groups\Eloquent\Group;
 use PHPUnit_Framework_TestCase;
 
 class EloquentGroupTest extends PHPUnit_Framework_TestCase {
@@ -182,7 +182,7 @@ class EloquentGroupTest extends PHPUnit_Framework_TestCase {
 
 	public function testValidation()
 	{
-		$group = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group[newQuery]');
+		$group = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group[newQuery]');
 		$group->name = 'foo';
 
 		$query = m::mock('StdClass');
@@ -195,7 +195,7 @@ class EloquentGroupTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Groups\NameRequiredException
+	 * @expectedException Netinteractive\Sentry\Groups\NameRequiredException
 	 */
 	public function testValidationThrowsExceptionForMissingName()
 	{
@@ -204,14 +204,14 @@ class EloquentGroupTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Groups\GroupExistsException
+	 * @expectedException Netinteractive\Sentry\Groups\GroupExistsException
 	 */
 	public function testValidationThrowsExceptionForDuplicateNameOnNonExistent()
 	{
-		$persistedGroup = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$persistedGroup = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$persistedGroup->shouldReceive('getId')->once()->andReturn(123);
 
-		$group = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group[newQuery]');
+		$group = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group[newQuery]');
 		$group->name = 'foo';
 
 		$query = m::mock('StdClass');
@@ -224,14 +224,14 @@ class EloquentGroupTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Groups\GroupExistsException
+	 * @expectedException Netinteractive\Sentry\Groups\GroupExistsException
 	 */
 	public function testValidationThrowsExceptionForDuplicateNameOnExistent()
 	{
-		$persistedGroup = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$persistedGroup = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$persistedGroup->shouldReceive('getId')->once()->andReturn(123);
 
-		$group = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group[newQuery]');
+		$group = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group[newQuery]');
 		$group->id   = 124;
 		$group->name = 'foo';
 
@@ -246,10 +246,10 @@ class EloquentGroupTest extends PHPUnit_Framework_TestCase {
 
 	public function testValidationDoesNotThrowAnExceptionIfPersistedGroupIsThisGroup()
 	{
-		$persistedGroup = m::mock('Cartalyst\Sentry\Groups\GroupInterface');
+		$persistedGroup = m::mock('Netinteractive\Sentry\Groups\GroupInterface');
 		$persistedGroup->shouldReceive('getId')->once()->andReturn(123);
 
-		$group = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group[newQuery]');
+		$group = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group[newQuery]');
 		$group->id   = 123;
 		$group->name = 'foo';
 
@@ -291,7 +291,7 @@ class EloquentGroupTest extends PHPUnit_Framework_TestCase {
 		$relationship = m::mock('StdClass');
 		$relationship->shouldReceive('detach')->once();
 
-		$group = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group[users]');
+		$group = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group[users]');
 		$group->shouldReceive('users')->once()->andReturn($relationship);
 
 		$group->delete();

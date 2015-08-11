@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,14 +12,14 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Cookies\CICookie;
+use Netinteractive\Sentry\Cookies\CICookie;
 use CI_Input;
 use PHPUnit_Framework_TestCase;
 
@@ -70,7 +70,7 @@ class CICookieTest extends PHPUnit_Framework_TestCase {
 
 	public function testForever()
 	{
-		$cookie = m::mock('Cartalyst\Sentry\Cookies\CICookie[put]', array(new CI_Input()));
+		$cookie = m::mock('Netinteractive\Sentry\Cookies\CICookie[put]', array(new CI_Input()));
 
 		$me = $this;
 		$cookie->shouldReceive('put')->with('bar', m::on(function($value) use ($me)

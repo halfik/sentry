@@ -1,4 +1,4 @@
-<?php namespace Cartalyst\Sentry\Tests;
+<?php namespace Netinteractive\Sentry\Tests;
 /**
  * Part of the Sentry package.
  *
@@ -12,14 +12,14 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Cartalyst LLC
+ * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
 
 use Mockery as m;
-use Cartalyst\Sentry\Groups\Eloquent\Provider;
+use Netinteractive\Sentry\Groups\Eloquent\Provider;
 use GroupModelStub1;
 use GroupModelStub2;
 use PHPUnit_Framework_TestCase;
@@ -48,7 +48,7 @@ class EloquentGroupProviderTest extends PHPUnit_Framework_TestCase {
 
 	public function testFindingById()
 	{
-		$provider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[createModel]');
+		$provider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[createModel]');
 
 		$query = m::mock('StdClass');
 		$query->shouldReceive('newQuery')->andReturn($query);
@@ -60,11 +60,11 @@ class EloquentGroupProviderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Groups\GroupNotFoundException
+	 * @expectedException Netinteractive\Sentry\Groups\GroupNotFoundException
 	 */
 	public function testFailedFindingByIdThrowsExceptionIfNotFound()
 	{
-		$provider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[createModel]');
+		$provider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[createModel]');
 
 		$query = m::mock('StdClass');
 		$query->shouldReceive('newQuery')->andReturn($query);
@@ -77,7 +77,7 @@ class EloquentGroupProviderTest extends PHPUnit_Framework_TestCase {
 
 	public function testFindingByName()
 	{
-		$provider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[createModel]');
+		$provider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[createModel]');
 
 		$query = m::mock('StdClass');
 		$query->shouldReceive('newQuery')->andReturn($query);
@@ -90,11 +90,11 @@ class EloquentGroupProviderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Cartalyst\Sentry\Groups\GroupNotFoundException
+	 * @expectedException Netinteractive\Sentry\Groups\GroupNotFoundException
 	 */
 	public function testFailedFindingByNameThrowsExceptionIfNotFound()
 	{
-		$provider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[createModel]');
+		$provider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[createModel]');
 
 		$query = m::mock('StdClass');
 		$query->shouldReceive('newQuery')->andReturn($query);
@@ -108,12 +108,12 @@ class EloquentGroupProviderTest extends PHPUnit_Framework_TestCase {
 
 	public function testFindingAll()
 	{
-		$provider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[createModel]');
+		$provider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[createModel]');
 
 		$provider->shouldReceive('createModel')->once()->andReturn($query = m::mock('StdClass'));
 
-		$group1 = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group')->shouldReceive('hasGetMutator')->andReturn(false);
-		$group2 = m::mock('Cartalyst\Sentry\Groups\Eloquent\Group')->shouldReceive('hasGetMutator')->andReturn(false);
+		$group1 = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group')->shouldReceive('hasGetMutator')->andReturn(false);
+		$group2 = m::mock('Netinteractive\Sentry\Groups\Eloquent\Group')->shouldReceive('hasGetMutator')->andReturn(false);
 
 		$query->shouldReceive('newQuery')->andReturn($query);
 		$query->shouldReceive('get')->andReturn($query);
@@ -128,11 +128,11 @@ class EloquentGroupProviderTest extends PHPUnit_Framework_TestCase {
 			'name' => 'foo',
 		);
 
-		$group = m::mock('Cartalyst\Sentry\Groups\EloquentGroup');
+		$group = m::mock('Netinteractive\Sentry\Groups\EloquentGroup');
 		$group->shouldReceive('fill')->with($attributes)->once();
 		$group->shouldReceive('save')->once();
 
-		$provider = m::mock('Cartalyst\Sentry\Groups\Eloquent\Provider[createModel]');
+		$provider = m::mock('Netinteractive\Sentry\Groups\Eloquent\Provider[createModel]');
 		$provider->shouldReceive('createModel')->once()->andReturn($group);
 
 		$this->assertEquals($group, $provider->create($attributes));
