@@ -15,11 +15,14 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 # Changelog
 
 
+## 3.11.00
+    + event sentry.register przekazuje teraz 2 argumenty do funkcji bindujacych sie: obiekt uzytkownika oraz dane, ktore przyszly z inputa.
+
 ## 3.10.0
     + Social Facebook provider
 
 ## 3.9.1
-    + poprawka bledu w metodzie Uuser::hasRole
+    + poprawka bledu w metodzie User::hasRole
 
 ## 3.9.0
     + zmiana nazwy tabeli users na tabele user, wymaga to również zmiany w corze w modelu User.php

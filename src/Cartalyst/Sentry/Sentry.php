@@ -159,8 +159,10 @@ class Sentry {
 	{
         $authManager =  \App::make('AuthManager');
         $authProvider = $authManager->getCurrent();
-        $user=$authProvider->register($credentials, $activate);
-        \Event::fire('sentry.register', array($user));
+        $user = $authProvider->register($credentials, $activate);
+
+        \Event::fire('sentry.register', array($user, $credentials));
+
         return $user;
 
 	}
