@@ -15,7 +15,12 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 # Changelog
 
 
-## 3.11.00
+
+## 3.11.1
+    Usnnalem z modelu User z tablicy guarded pola: activation_code, reset_password_code, persist_code. 
+    Wersja eleganta 1.7+, nie zapisuje na baze danych pol guarded.
+    
+## 3.11.0
     + event sentry.register przekazuje teraz 2 argumenty do funkcji bindujacych sie: obiekt uzytkownika oraz dane, ktore przyszly z inputa.
 
 ## 3.10.0
