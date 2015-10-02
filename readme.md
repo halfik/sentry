@@ -15,6 +15,8 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 # Changelog
 
 
+## 3.11.2
+    LinkedIn Auth provider
 
 ## 3.11.1
     Usnnalem z modelu User z tablicy guarded pola: activation_code, reset_password_code, persist_code. 
