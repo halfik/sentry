@@ -44,6 +44,7 @@ class SentryServiceProvider extends ServiceProvider {
         $this->package('netinteractive/sentry', 'cartalyst/sentry');
         $this->app['sentry.auth.manager']->set('elegant', $this->app['sentry.auth.providers.elegant']);
         $this->app['sentry.auth.manager']->set('facebook', $this->app['sentry.auth.providers.facebook']);
+        $this->app['sentry.auth.manager']->set('linkedin', $this->app['sentry.auth.providers.linkedin']);
     }
 
     /**
@@ -90,6 +91,11 @@ class SentryServiceProvider extends ServiceProvider {
         $this->app['sentry.auth.providers.facebook'] = $this->app->share(function($app)
         {
             return 'FacebookProvider';
+        });
+
+        $this->app['sentry.auth.providers.linkedin'] = $this->app->share(function($app)
+        {
+            return 'LinkedInProvider';
         });
     }
 
