@@ -86,7 +86,7 @@ abstract class SocialProvider implements  AuthProviderInferface{
 
         \DB::commit();
 
-        if ($activate)
+        if ($activate && $user->isActivated() == false)
         {
             $user->attemptActivation($user->getActivationCode());
         }
