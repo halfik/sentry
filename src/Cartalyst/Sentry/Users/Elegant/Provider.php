@@ -107,6 +107,28 @@ class Provider implements ProviderInterface {
 	}
 
 	/**
+	 * Finds a user by the email value.
+	 *
+	 * @param  string  $email
+	 * @return \Cartalyst\Sentry\Users\UserInterface
+	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
+	 */
+	public function findByEmail($email)
+	{
+		$model = $this->createModel();
+
+		$model->allowQueryAcl(false);
+		$user = $model->newQuery()->where('email', '=', $email)->first();
+		$model->allowQueryAcl(true);
+
+		if (!$user){
+			throw new UserNotFoundException( sprintf( _('Nie odnaleziono użytkownika o emailu [%s].'), $email ) );
+		}
+
+		return $user;
+	}
+
+	/**
 	 * Finds a user by the given credentials.
 	 *
 	 * @param  array  $credentials

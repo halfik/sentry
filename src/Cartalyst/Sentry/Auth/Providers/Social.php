@@ -78,7 +78,7 @@ abstract class SocialProvider implements  AuthProviderInferface{
 
         \DB::beginTransaction();
         if($user){
-            $user=$userProvider->findByLogin(array_get($credentials, 'email', null));
+            $user=$userProvider->findByEmail(array_get($credentials, 'email', null));
         } else {
             $user=$userProvider->create($credentials);
         }

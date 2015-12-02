@@ -16,6 +16,7 @@ Sentry is a framework agnostic set of interfaces with default implementations, t
 
 ## 3.11.4
     + Jak użytkownik loguje/rejestruje się przez facebooka, a ma wcześniej konto zarejestrowane w inny sposób, to wyszukuje go, i podpina pod niego sociala
+    + Dopisałem do Providera metode findByEmail($email);
 
 ## 3.11.3
     LinkedIn fix
