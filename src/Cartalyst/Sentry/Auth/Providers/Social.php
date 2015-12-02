@@ -69,11 +69,6 @@ abstract class SocialProvider implements  AuthProviderInferface{
             $user=null;
         }
 
-
-        if($user){
-            throw new UserExistsException();
-        }
-
         unset($credentials['profileId']);
 
         \DB::beginTransaction();
