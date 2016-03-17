@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "3.11.7",
+    "version": "5.0.0@dev",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
@@ -47,22 +47,21 @@
 	],
 	"require": {
 		"php": ">=5.3.3",
-        "netinteractive/gettext": ">=1.5",
-	  	"netinteractive/elegant": ">=1.3"
+        "netinteractive/gettext": ">=2.0",
+	  	"netinteractive/elegant": ">=2.0"
     },
   "repositories": [
-	{
-	  "type":"git",
-	  "url": "https://bitbucket.org/niteam/laravel-gettext"
-	},
-	{
-	  "type":"git",
-	  "url": "https://bitbucket.org/niteam/laravel-elegant"
-	}
+    {
+      "type":"git",
+      "url": "ssh://git.nidev.pl/laravel/gettext"
+    },
+    {
+      "type":"git",
+      "url": "ssh://git.nidev.pl/laravel/elegant"
+    }
   ],
 	"require-dev": {
 		"mockery/mockery": "0.7.2",
-
 		"illuminate/cookie": ">=4.0.9,<4.2",
 		"illuminate/database": ">=4.0.9,<4.2",
 		"illuminate/http": ">=4.0.9,<4.2",
@@ -73,17 +72,17 @@
 
 	},
 	"autoload": {
-		"classmap": [
-			"src/Cartalyst/Sentry/Groups/Exceptions.php",
-			"src/Cartalyst/Sentry/Throttling/Exceptions.php",
-			"src/Cartalyst/Sentry/Users/Exceptions.php",
-            "src/Cartalyst/Sentry/SocialProfile/Exceptions.php",
-			"src/migrations"
-		],
-		"psr-0": {
-			"Cartalyst\\Sentry": "src/"
-		}
-	],
+      "classmap": [
+        "src/Netinteractive/Sentry/Groups/Exceptions.php",
+        "src/Netinteractive/Sentry/Throttling/Exceptions.php",
+        "src/Netinteractive/Sentry/Users/Exceptions.php",
+        "src/Netinteractive/Sentry/SocialProfile/Exceptions.php",
+        "src/migrations"
+      ],
+      "psr-0": {
+        "Netinteractive\\Sentry": "src/"
+      }
+    },
 	"require": {
 		"php": ">=5.3.3"
 	},
@@ -100,17 +99,6 @@
 		"illuminate/database": "Default sentry user, group and throttling implementations.",
 		"ircmaxell/password-compat": "Default hashing uses PHP 5.5 password_* functions, with forward-compatible support.",
 		"happydemon/txt": "Required Text helpers when using the Kohana implementation"
-	},
-	"autoload": {
-		"classmap": [
-			"src/Netinteractive/Sentry/Groups/Exceptions.php",
-			"src/Netinteractive/Sentry/Throttling/Exceptions.php",
-			"src/Netinteractive/Sentry/Users/Exceptions.php",
-			"src/migrations"
-		],
-		"psr-0": {
-			"Netinteractive\\Sentry": "src/"
-		}
 	},
 	"extra": {
 		"component": "package",
