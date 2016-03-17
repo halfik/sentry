@@ -12,8 +12,8 @@ class MigrationCartalystDefaultRoles extends Migration {
     {
 
 
-        if (Schema::hasTable('roles')){
-            DB::table('roles')->insert(
+        if (Schema::hasTable('role')){
+            DB::table('role')->insert(
                 array(
                     'code' => 'admin',
                     'name' => 'Administrator',
@@ -22,7 +22,7 @@ class MigrationCartalystDefaultRoles extends Migration {
                 )
             );
 
-            DB::table('roles')->insert(
+            DB::table('role')->insert(
                 array(
                     'code' => 'user',
                     'name' => 'Użytkownik',
@@ -31,7 +31,7 @@ class MigrationCartalystDefaultRoles extends Migration {
                 )
             );
 
-            DB::table('roles')->insert(
+            DB::table('role')->insert(
                 array(
                     'code' => 'guest',
                     'name' => 'Gość',
@@ -52,12 +52,12 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function down()
     {
-        if (Schema::hasTable('roles')){
-            DB::table('roles')->where('name', 'admin')->delete();
-            DB::table('roles')->where('name', 'user')->delete();
-            DB::table('roles')->where('name', 'guest')->delete();
+        if (Schema::hasTable('role')){
+            DB::table('role')->where('name', 'admin')->delete();
+            DB::table('role')->where('name', 'user')->delete();
+            DB::table('role')->where('name', 'guest')->delete();
 
-            Schema::table('roles', function(Blueprint $table)
+            Schema::table('role', function(Blueprint $table)
             {
                 $table->dropColumn('is_hidden');
             });
