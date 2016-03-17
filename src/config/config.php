@@ -33,7 +33,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'eloquent',
+	'driver' => 'elegant',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -91,11 +91,11 @@ return array(
 		|--------------------------------------------------------------------------
 		|
 		| When using the "eloquent" driver, we need to know which
-		| Eloquent models should be used throughout Sentry.
+		| Elegant models should be used throughout Sentry.
 		|
 		*/
 
-		'model' => 'Netinteractive\Sentry\Groups\Eloquent\Group',
+		'model' => 'Cartalyst\Sentry\Groups\Elegant\Group',
 
 	),
 
@@ -116,24 +116,24 @@ return array(
 		|--------------------------------------------------------------------------
 		|
 		| When using the "eloquent" driver, we need to know which
-		| Eloquent models should be used throughout Sentry.
+		| Elegant models should be used throughout Sentry.
 		|
 		*/
 
-		'model' => 'Netinteractive\Sentry\Users\Eloquent\User',
+		'model' => 'User',
 
 		/*
 		|--------------------------------------------------------------------------
 		| Login Attribute
 		|--------------------------------------------------------------------------
 		|
-		| If you're using the "eloquent" driver and extending the base Eloquent
+		| If you're using the "eloquent" driver and extending the base Elegant
 		| model, we allow you to globally override the login attribute without
 		| even subclassing the model, simply by specifying the attribute below.
 		|
 		*/
 
-		'login_attribute' => 'email',
+		'login_attribute' => 'login',
 
 	),
 
@@ -149,7 +149,7 @@ return array(
 	|
 	*/
 
-	'user_groups_pivot_table' => 'users_groups',
+	'user_groups_pivot_table' => 'users_roles',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -174,7 +174,7 @@ return array(
 		|
 		*/
 
-		'enabled' => true,
+		'enabled' => false,
 
 		/*
 		|--------------------------------------------------------------------------
@@ -217,5 +217,33 @@ return array(
 		'suspension_time' => 15,
 
 	),
+
+    'resources' => array(
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Model
+        |--------------------------------------------------------------------------
+        |
+        | When using the "eloquent" driver, we need to know which
+        | Elegant models should be used throughout Sentry.
+        |
+        */
+
+        'model' => 'Cartalyst\Sentry\Resources\Elegant\Resource',
+
+    ),
+    
+	/*
+	|--------------------------------------------------------------------------
+	| Multiple Login
+	|--------------------------------------------------------------------------
+	|
+	| Parametr określa czy można się zalogować na to samo konto użytkownika kilkukrotnie jednocześnie
+	|
+	*/
+    'multiple_login' => true,
 
 );

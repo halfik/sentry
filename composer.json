@@ -1,11 +1,12 @@
 {
 	"name": "netinteractive/sentry",
+    "version": "3.11.7",
 	"description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
-	"keywords": ["auth", "security", "laravel", "codeigniter", "fuelphp", "kohana"],
+	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
-			"name": "Netinteractive LLC",
+			"name": "Cartalyst LLC",
 			"email": "help@cartalyst.com"
 		},
 		{
@@ -27,6 +28,60 @@
 			"name": "Bruno Gaspar",
 			"email": "bruno.gaspar@cartalyst.com",
 			"role": "Developer"
+		},
+        {
+            "name": "Piotr Pryga",
+            "email": "halfik@gmail.com",
+            "role": "Owner"
+        },
+        {
+          "name": "Emil Jaszczuk",
+          "email": "ejaszczuk1989k@gmail.com",
+          "role": "Developer"
+        },
+        {
+            "name": "Michał Szapowałow",
+            "email": "smikebox@gmail.com",
+            "role": "Developer"
+        }
+	],
+	"require": {
+		"php": ">=5.3.3",
+        "netinteractive/gettext": ">=1.5",
+	  	"netinteractive/elegant": ">=1.3"
+    },
+  "repositories": [
+	{
+	  "type":"git",
+	  "url": "https://bitbucket.org/niteam/laravel-gettext"
+	},
+	{
+	  "type":"git",
+	  "url": "https://bitbucket.org/niteam/laravel-elegant"
+	}
+  ],
+	"require-dev": {
+		"mockery/mockery": "0.7.2",
+
+		"illuminate/cookie": ">=4.0.9,<4.2",
+		"illuminate/database": ">=4.0.9,<4.2",
+		"illuminate/http": ">=4.0.9,<4.2",
+		"illuminate/session": ">=4.0.9,<4.2",
+		"ircmaxell/password-compat": "1.0.*"
+	},
+	"suggest": {
+
+	},
+	"autoload": {
+		"classmap": [
+			"src/Cartalyst/Sentry/Groups/Exceptions.php",
+			"src/Cartalyst/Sentry/Throttling/Exceptions.php",
+			"src/Cartalyst/Sentry/Users/Exceptions.php",
+            "src/Cartalyst/Sentry/SocialProfile/Exceptions.php",
+			"src/migrations"
+		],
+		"psr-0": {
+			"Cartalyst\\Sentry": "src/"
 		}
 	],
 	"require": {
@@ -59,14 +114,7 @@
 	},
 	"extra": {
 		"component": "package",
-		"frameworks": ["Laravel 3", "Laravel 4", "CodeIgniter 3", "FuelPHP 1", "Kohana"],
-		"versions": {
-			"1": "1.1/master",
-			"2": "master"
-		},
-		"branch-alias": {
-			"dev-master": "2.2.x-dev"
-		}
+		"frameworks": ["Laravel 5"]
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "stable"
 }

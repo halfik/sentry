@@ -24,42 +24,42 @@ use PHPUnit_Framework_TestCase;
 
 class Sha256HasherTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * Setup resources and dependencies.
-	 *
-	 * @return void
-	 */
-	public function setUp()
-	{
+    /**
+     * Setup resources and dependencies.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
 
-	}
+    }
 
-	/**
-	 * Close mockery.
-	 *
-	 * @return void
-	 */
-	public function tearDown()
-	{
-		m::close();
-	}
+    /**
+     * Close mockery.
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        m::close();
+    }
 
-	public function testSaltMatchesLength()
-	{
-		$hasher = new Hasher;
-		$hasher->saltLength = 32;
+    public function testSaltMatchesLength()
+    {
+        $hasher = new Hasher;
+        $hasher->saltLength = 32;
 
-		$this->assertEquals(32, strlen($hasher->createSalt()));
-	}
+        $this->assertEquals(32, strlen($hasher->createSalt()));
+    }
 
-	public function testHashingIsAlwaysCorrect()
-	{
-		$hasher         = new Hasher;
-		$password       = 'f00b@rB@zb@T';
-		$hashedPassword = $hasher->hash($password);
+    public function testHashingIsAlwaysCorrect()
+    {
+        $hasher         = new Hasher;
+        $password       = 'f00b@rB@zb@T';
+        $hashedPassword = $hasher->hash($password);
 
-		$this->assertTrue($hasher->checkhash($password, $hashedPassword));
-		$this->assertFalse($hasher->checkhash($password.'$', $hashedPassword));
-	}
+        $this->assertTrue($hasher->checkhash($password, $hashedPassword));
+        $this->assertFalse($hasher->checkhash($password.'$', $hashedPassword));
+    }
 
 }

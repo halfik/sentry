@@ -12,9 +12,9 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Netinteractive LLC
+ * @author     Cartalyst LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Netinteractive LLC
+ * @copyright  (c) 2011 - 2013, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 
@@ -58,8 +58,8 @@ class BcryptHasherTest extends PHPUnit_Framework_TestCase {
 		$password       = 'f00b@rB@zb@T';
 		$hashedPassword = $hasher->hash($password);
 
-		$this->assertTrue($hasher->checkhash($password, $hashedPassword));
-		$this->assertFalse($hasher->checkhash($password.'$', $hashedPassword));
+		$this->assertTrue($hasher->checkHash($password, $hashedPassword));
+		$this->assertFalse($hasher->checkHash($password.'$', $hashedPassword));
 	}
 
 }

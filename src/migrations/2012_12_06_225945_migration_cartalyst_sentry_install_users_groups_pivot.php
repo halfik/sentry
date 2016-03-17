@@ -12,9 +12,9 @@
  *
  * @package    Sentry
  * @version    2.0.0
- * @author     Netinteractive LLC
+ * @author     Cartalyst LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Netinteractive LLC
+ * @copyright  (c) 2011 - 2013, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 
@@ -29,15 +29,15 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users_groups', function($table)
+		Schema::create('users_roles', function($table)
 		{
 			$table->integer('user_id')->unsigned();
-			$table->integer('group_id')->unsigned();
+			$table->integer('role_id')->unsigned();
 
 			// We'll need to ensure that MySQL uses the InnoDB engine to
 			// support the indexes, other engines aren't affected.
 			$table->engine = 'InnoDB';
-			$table->primary(array('user_id', 'group_id'));
+			$table->primary(array('user_id', 'role_id'));
 		});
 	}
 
@@ -48,7 +48,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users_groups');
+		Schema::drop('users_roles');
 	}
 
 }
