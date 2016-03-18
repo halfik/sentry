@@ -202,7 +202,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
     //  */
     // public function testCheckingThrowsProperExceptionWhenUserIsBanned()
     // {
-    // 	$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
+    // 	$user = m::mock('Netinteractive\Sentry\User\UserInterface');
     // 	$user->shouldReceive('getLogin')->once()->andReturn('foo');
 
     // 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended,getUser]');
@@ -218,7 +218,7 @@ class EloquentThrottleTest extends PHPUnit_Framework_TestCase {
     //  */
     // public function testCheckingThrowsProperExceptionWhenUserIsSuspended()
     // {
-    // 	$user = m::mock('Netinteractive\Sentry\Users\UserInterface');
+    // 	$user = m::mock('Netinteractive\Sentry\User\UserInterface');
     // 	$user->shouldReceive('getLogin')->once()->andReturn('foo');
 
     // 	$throttle = m::mock('Netinteractive\Sentry\Throttling\Eloquent\Throttle[isBanned,isSuspended,getUser]');

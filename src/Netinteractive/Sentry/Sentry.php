@@ -365,7 +365,7 @@ class Sentry {
 	/**
 	 * Sets the user to be used by Sentry.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\UserInterface
+	 * @param  \Netinteractive\Sentry\User\UserInterface
 	 * @return void
 	 */
 	public function setUser(UserInterface $user)
@@ -455,7 +455,7 @@ class Sentry {
 	/**
 	 * Sets the user provider for Sentry.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\ProviderInterface
+	 * @param  \Netinteractive\Sentry\User\ProviderInterface
 	 * @return void
 	 */
 	public function setUserProvider(UserProviderInterface $userProvider)

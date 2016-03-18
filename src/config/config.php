@@ -101,7 +101,7 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Users
+	| User
 	|--------------------------------------------------------------------------
 	|
 	| Configuration specific to the user management component of Sentry.
