@@ -1,4 +1,4 @@
-<?php namespace Netinteractive\Sentry\Groups\Eloquent;
+<?php namespace Netinteractive\Sentry\Role\Eloquent;
 /**
  * Part of the Sentry package.
  *
@@ -18,9 +18,9 @@
  * @link       http://cartalyst.com
  */
 
-use Netinteractive\Sentry\Groups\GroupInterface;
-use Netinteractive\Sentry\Groups\GroupNotFoundException;
-use Netinteractive\Sentry\Groups\ProviderInterface;
+use Netinteractive\Sentry\Role\RoleInterface;
+use Netinteractive\Sentry\Role\GroupNotFoundException;
+use Netinteractive\Sentry\Role\ProviderInterface;
 
 class Provider implements ProviderInterface {
 
@@ -29,7 +29,7 @@ class Provider implements ProviderInterface {
 	 *
 	 * @var string
 	 */
-	protected $model = 'Netinteractive\Sentry\Groups\Eloquent\Group';
+	protected $model = 'Netinteractive\Sentry\Role\Eloquent\Group';
 
 	/**
 	 * Create a new Eloquent Group provider.
@@ -49,8 +49,8 @@ class Provider implements ProviderInterface {
 	 * Find the group by ID.
 	 *
 	 * @param  int  $id
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface  $group
-	 * @throws \Netinteractive\Sentry\Groups\GroupNotFoundException
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
 	public function findById($id)
 	{
@@ -68,8 +68,8 @@ class Provider implements ProviderInterface {
 	 * Find the group by name.
 	 *
 	 * @param  string  $name
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface  $group
-	 * @throws \Netinteractive\Sentry\Groups\GroupNotFoundException
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
 	public function findByName($name)
 	{
@@ -99,7 +99,7 @@ class Provider implements ProviderInterface {
 	 * Creates a group.
 	 *
 	 * @param  array  $attributes
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface
+	 * @return \Netinteractive\Sentry\Role\RoleInterface
 	 */
 	public function create(array $attributes)
 	{

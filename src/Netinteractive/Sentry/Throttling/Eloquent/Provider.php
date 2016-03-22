@@ -36,7 +36,7 @@ class Provider implements ProviderInterface {
 	 * The user provider used for finding users
 	 * to attach throttles to.
 	 *
-	 * @var \Netinteractive\Sentry\Users\UserInterface
+	 * @var \Netinteractive\Sentry\User\UserInterface
 	 */
 	protected $userProvider;
 
@@ -50,7 +50,7 @@ class Provider implements ProviderInterface {
 	/**
 	 * Creates a new throttle provider.
 	 *
-	 * @param \Netinteractive\Sentry\Users\ProviderInterface $userProvider
+	 * @param \Netinteractive\Sentry\User\ProviderInterface $userProvider
 	 * @param  string $model
 	 * @return void
 	 */
@@ -67,7 +67,7 @@ class Provider implements ProviderInterface {
 	/**
 	 * Finds a throttler by the given Model.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\UserInterface $user
+	 * @param  \Netinteractive\Sentry\User\UserInterface $user
 	 * @param  string  $ipAddress
 	 * @return \Netinteractive\Sentry\Throttling\ThrottleInterface
 	 */

@@ -23,7 +23,7 @@ interface ThrottleInterface {
 	/**
 	 * Returns the associated user with the throttler.
 	 *
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 */
 	public function getUser();
 

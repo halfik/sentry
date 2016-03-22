@@ -76,7 +76,7 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Groups
+	| Role
 	|--------------------------------------------------------------------------
 	|
 	| Configuration specific to the group management component of Sentry.
@@ -139,7 +139,7 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| User Groups Pivot Table
+	| User Role Pivot Table
 	|--------------------------------------------------------------------------
 	|
 	| When using the "eloquent" driver, you can specify the table name

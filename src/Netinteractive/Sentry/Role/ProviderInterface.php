@@ -1,4 +1,4 @@
-<?php namespace Netinteractive\Sentry\Groups;
+<?php namespace Netinteractive\Sentry\Role;
 /**
  * Part of the Sentry package.
  *
@@ -24,8 +24,8 @@ interface ProviderInterface {
 	 * Find the group by ID.
 	 *
 	 * @param  int  $id
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface  $group
-	 * @throws \Netinteractive\Sentry\Groups\GroupNotFoundException
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
 	public function findById($id);
 
@@ -33,8 +33,8 @@ interface ProviderInterface {
 	 * Find the group by name.
 	 *
 	 * @param  string  $name
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface  $group
-	 * @throws \Netinteractive\Sentry\Groups\GroupNotFoundException
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
 	public function findByName($name);
 
@@ -49,7 +49,7 @@ interface ProviderInterface {
 	 * Creates a group.
 	 *
 	 * @param  array  $attributes
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface
+	 * @return \Netinteractive\Sentry\Role\RoleInterface
 	 */
 	public function create(array $attributes);
 

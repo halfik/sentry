@@ -27,7 +27,7 @@ interface ProviderInterface {
 	/**
 	 * Finds a throttler by the given user ID.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\UserInterface   $user
+	 * @param  \Netinteractive\Sentry\User\UserInterface   $user
 	 * @param  string  $ipAddress
 	 * @return \Netinteractive\Sentry\Throttling\ThrottleInterface
 	 */

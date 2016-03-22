@@ -4,6 +4,7 @@ use Netinteractive\Sentry\User\ProviderInterface;
 use Netinteractive\Elegant\Mapper\MapperInterface;
 use Netinteractive\Sentry\Hashing\HasherInterface;
 use Netinteractive\Sentry\User\UserNotFoundException;
+use Netinteractive\Sentry\Role\RoleInterface;
 
 class Provider  implements ProviderInterface
 {
@@ -59,8 +60,8 @@ class Provider  implements ProviderInterface
      * Finds a user by the given user ID.
      *
      * @param  mixed $id
-     * @return \Netinteractive\Sentry\Users\UserInterface
-     * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+     * @return \Netinteractive\Sentry\User\UserInterface
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
      */
     public function findById($id)
     {
@@ -76,8 +77,8 @@ class Provider  implements ProviderInterface
      * Finds a user by the login value.
      *
      * @param  string $login
-     * @return \Netinteractive\Sentry\Users\UserInterface
-     * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+     * @return \Netinteractive\Sentry\User\UserInterface
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
      */
     public function findByLogin($login)
     {
@@ -88,8 +89,8 @@ class Provider  implements ProviderInterface
      * Finds a user by the given credentials.
      *
      * @param  array $credentials
-     * @return \Netinteractive\Sentry\Users\UserInterface
-     * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+     * @return \Netinteractive\Sentry\User\UserInterface
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
      */
     public function findByCredentials(array $credentials)
     {
@@ -100,8 +101,8 @@ class Provider  implements ProviderInterface
      * Finds a user by the given activation code.
      *
      * @param  string $code
-     * @return \Netinteractive\Sentry\Users\UserInterface
-     * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+     * @return \Netinteractive\Sentry\User\UserInterface
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -114,9 +115,9 @@ class Provider  implements ProviderInterface
      * Finds a user by the given reset password code.
      *
      * @param  string $code
-     * @return \Netinteractive\Sentry\Users\UserInterface
+     * @return \Netinteractive\Sentry\User\UserInterface
      * @throws RuntimeException
-     * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
      */
     public function findByResetPasswordCode($code)
     {
@@ -137,10 +138,10 @@ class Provider  implements ProviderInterface
      * Returns all users who belong to
      * a group.
      *
-     * @param  \Netinteractive\Sentry\Groups\GroupInterface $group
+     * @param  \Netinteractive\Sentry\Role\RoleInterface $group
      * @return array
      */
-    public function findAllInGroup(GroupInterface $group)
+    public function findAllInGroup(RoleInterface $group)
     {
         // TODO: Implement findAllInGroup() method.
     }
@@ -173,7 +174,7 @@ class Provider  implements ProviderInterface
      * Creates a user.
      *
      * @param  array $credentials
-     * @return \Netinteractive\Sentry\Users\UserInterface
+     * @return \Netinteractive\Sentry\User\UserInterface
      */
     public function create(array $credentials)
     {
@@ -183,7 +184,7 @@ class Provider  implements ProviderInterface
     /**
      * Returns an empty user object.
      *
-     * @return \Netinteractive\Sentry\Users\UserInterface
+     * @return \Netinteractive\Sentry\User\UserInterface
      */
     public function getEmptyUser()
     {

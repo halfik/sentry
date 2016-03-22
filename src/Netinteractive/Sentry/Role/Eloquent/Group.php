@@ -1,4 +1,4 @@
-<?php namespace Netinteractive\Sentry\Groups\Eloquent;
+<?php namespace Netinteractive\Sentry\Role\Eloquent;
 /**
  * Part of the Sentry package.
  *
@@ -18,12 +18,12 @@
  * @link       http://cartalyst.com
  */
 
-use Netinteractive\Sentry\Groups\NameRequiredException;
-use Netinteractive\Sentry\Groups\GroupExistsException;
-use Netinteractive\Sentry\Groups\GroupInterface;
+use Netinteractive\Sentry\Role\NameRequiredException;
+use Netinteractive\Sentry\Role\GroupExistsException;
+use Netinteractive\Sentry\Role\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model implements GroupInterface {
+class Group extends Model implements RoleInterface {
 
 	/**
 	 * The table associated with the model.
@@ -361,8 +361,8 @@ class Group extends Model implements GroupInterface {
 	 * Exceptions if validation fails.
 	 *
 	 * @return bool
-	 * @throws \Netinteractive\Sentry\Groups\NameRequiredException
-	 * @throws \Netinteractive\Sentry\Groups\GroupExistsException
+	 * @throws \Netinteractive\Sentry\Role\NameRequiredException
+	 * @throws \Netinteractive\Sentry\Role\GroupExistsException
 	 */
 	public function validate()
 	{

@@ -18,7 +18,7 @@
  * @link       http://cartalyst.com
  */
 
-use Netinteractive\Sentry\Groups\GroupInterface;
+use Netinteractive\Sentry\Role\RoleInterface;
 
 interface UserInterface {
 
@@ -84,8 +84,8 @@ interface UserInterface {
 	 * Exceptions if validation fails.
 	 *
 	 * @return bool
-	 * @throws \Netinteractive\Sentry\Users\LoginRequiredException
-	 * @throws \Netinteractive\Sentry\Users\UserExistsException
+	 * @throws \Netinteractive\Sentry\User\LoginRequiredException
+	 * @throws \Netinteractive\Sentry\User\UserExistsException
 	 */
 	public function validate();
 
@@ -134,7 +134,7 @@ interface UserInterface {
 	 *
 	 * @param  string  $activationCode
 	 * @return bool
-	 * @throws \Netinteractive\Sentry\Users\UserAlreadyActivatedException
+	 * @throws \Netinteractive\Sentry\User\UserAlreadyActivatedException
 	 */
 	public function attemptActivation($activationCode);
 
@@ -191,18 +191,18 @@ interface UserInterface {
 	/**
 	 * Adds the user to the given group
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function addGroup(GroupInterface $group);
+	public function addGroup(RoleInterface $group);
 
 	/**
 	 * Removes the user from the given group.
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function removeGroup(GroupInterface $group);
+	public function removeGroup(RoleInterface $group);
 
 	/**
 	 * Updates the user to the given group(s).
@@ -216,10 +216,10 @@ interface UserInterface {
 	/**
 	 * See if the user is in the given group.
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function inGroup(GroupInterface $group);
+	public function inGroup(RoleInterface $group);
 
 	/**
 	 * Returns an array of merged permissions for each

@@ -22,8 +22,8 @@ use Netinteractive\Sentry\Cookies\CookieInterface;
 use Netinteractive\Sentry\Cookies\NativeCookie;
 use Netinteractive\Sentry\Facades\ConnectionResolver;
 use Netinteractive\Sentry\Facades\Facade;
-use Netinteractive\Sentry\Groups\Eloquent\Provider as GroupProvider;
-use Netinteractive\Sentry\Groups\ProviderInterface as GroupProviderInterface;
+use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
+use Netinteractive\Sentry\Role\ProviderInterface as GroupProviderInterface;
 use Netinteractive\Sentry\Hashing\NativeHasher;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
@@ -40,8 +40,8 @@ class Sentry extends Facade {
 	/**
 	 * Creates a Sentry instance.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\ProviderInterface $userProvider
-	 * @param  \Netinteractive\Sentry\Groups\ProviderInterface $groupProvider
+	 * @param  \Netinteractive\Sentry\User\ProviderInterface $userProvider
+	 * @param  \Netinteractive\Sentry\Role\ProviderInterface $groupProvider
 	 * @param  \Netinteractive\Sentry\Throttling\ProviderInterface $throttleProvider
 	 * @param  \Netinteractive\Sentry\Sessions\SessionInterface $session
 	 * @param  \Netinteractive\Sentry\Cookies\CookieInterface $cookie

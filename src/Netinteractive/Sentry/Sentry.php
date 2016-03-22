@@ -20,8 +20,8 @@
 
 use Netinteractive\Sentry\Cookies\CookieInterface;
 use Netinteractive\Sentry\Cookies\NativeCookie;
-use Netinteractive\Sentry\Groups\Eloquent\Provider as GroupProvider;
-use Netinteractive\Sentry\Groups\ProviderInterface as GroupProviderInterface;
+use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
+use Netinteractive\Sentry\Role\ProviderInterface as GroupProviderInterface;
 use Netinteractive\Sentry\Hashing\NativeHasher;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
@@ -43,7 +43,7 @@ class Sentry {
 	 * are available for finding the user to set
 	 * here.
 	 *
-	 * @var \Netinteractive\Sentry\Users\UserInterface
+	 * @var \Netinteractive\Sentry\User\UserInterface
 	 */
 	protected $user;
 
@@ -66,7 +66,7 @@ class Sentry {
 	 * objects which implement the Sentry user
 	 * interface.
 	 *
-	 * @var \Netinteractive\Sentry\Users\ProviderInterface
+	 * @var \Netinteractive\Sentry\User\ProviderInterface
 	 */
 	protected $userProvider;
 
@@ -75,7 +75,7 @@ class Sentry {
 	 * objects which implement the Sentry group
 	 * interface.
 	 *
-	 * @var \Netinteractive\Sentry\Groups\ProviderInterface
+	 * @var \Netinteractive\Sentry\Role\ProviderInterface
 	 */
 	protected $groupProvider;
 
@@ -98,8 +98,8 @@ class Sentry {
 	/**
 	 * Create a new Sentry object.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\ProviderInterface $userProvider
-	 * @param  \Netinteractive\Sentry\Groups\ProviderInterface $groupProvider
+	 * @param  \Netinteractive\Sentry\User\ProviderInterface $userProvider
+	 * @param  \Netinteractive\Sentry\Role\ProviderInterface $groupProvider
 	 * @param  \Netinteractive\Sentry\Throttling\ProviderInterface $throttleProvider
 	 * @param  \Netinteractive\Sentry\Sessions\SessionInterface $session
 	 * @param  \Netinteractive\Sentry\Cookies\CookieInterface $cookie
@@ -134,7 +134,7 @@ class Sentry {
 	 *
 	 * @param  array  $credentials
 	 * @param  bool   $activate
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 */
 	public function register(array $credentials, $activate = false)
 	{
@@ -155,12 +155,12 @@ class Sentry {
 	 *
 	 * @param  array  $credentials
 	 * @param  bool   $remember
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 * @throws \Netinteractive\Sentry\Throttling\UserBannedException
 	 * @throws \Netinteractive\Sentry\Throttling\UserSuspendedException
-	 * @throws \Netinteractive\Sentry\Users\LoginRequiredException
-	 * @throws \Netinteractive\Sentry\Users\PasswordRequiredException
-	 * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+	 * @throws \Netinteractive\Sentry\User\LoginRequiredException
+	 * @throws \Netinteractive\Sentry\User\PasswordRequiredException
+	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function authenticate(array $credentials, $remember = false)
 	{
@@ -229,7 +229,7 @@ class Sentry {
 	 * Alias for authenticating with the remember flag checked.
 	 *
 	 * @param  array  $credentials
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 */
 	public function authenticateAndRemember(array $credentials)
 	{
@@ -308,10 +308,10 @@ class Sentry {
 	 * Logs in the given user and sets properties
 	 * in the session.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\UserInterface  $user
+	 * @param  \Netinteractive\Sentry\User\UserInterface  $user
 	 * @param  bool  $remember
 	 * @return void
-	 * @throws \Netinteractive\Sentry\Users\UserNotActivatedException
+	 * @throws \Netinteractive\Sentry\User\UserNotActivatedException
 	 */
 	public function login(UserInterface $user, $remember = false)
 	{
@@ -342,7 +342,7 @@ class Sentry {
 	/**
 	 * Alias for logging in and remembering.
 	 *
-	 * @param  \Netinteractive\Sentry\Users\UserInterface  $user
+	 * @param  \Netinteractive\Sentry\User\UserInterface  $user
 	 */
 	public function loginAndRemember(UserInterface $user)
 	{
@@ -376,7 +376,7 @@ class Sentry {
 	/**
 	 * Returns the current user being used by Sentry, if any.
 	 *
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 */
 	public function getUser()
 	{
@@ -434,7 +434,7 @@ class Sentry {
 	/**
 	 * Sets the group provider for Sentry.
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\ProviderInterface
+	 * @param  \Netinteractive\Sentry\Role\ProviderInterface
 	 * @return void
 	 */
 	public function setGroupProvider(GroupProviderInterface $groupProvider)
@@ -445,7 +445,7 @@ class Sentry {
 	/**
 	 * Gets the group provider for Sentry.
 	 *
-	 * @return \Netinteractive\Sentry\Groups\ProviderInterface
+	 * @return \Netinteractive\Sentry\Role\ProviderInterface
 	 */
 	public function getGroupProvider()
 	{
@@ -466,7 +466,7 @@ class Sentry {
 	/**
 	 * Gets the user provider for Sentry.
 	 *
-	 * @return \Netinteractive\Sentry\Users\ProviderInterface
+	 * @return \Netinteractive\Sentry\User\ProviderInterface
 	 */
 	public function getUserProvider()
 	{
@@ -519,8 +519,8 @@ class Sentry {
 	 * Find the group by ID.
 	 *
 	 * @param  int  $id
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface  $group
-	 * @throws \Netinteractive\Sentry\Groups\GroupNotFoundException
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
 	public function findGroupById($id)
 	{
@@ -531,8 +531,8 @@ class Sentry {
 	 * Find the group by name.
 	 *
 	 * @param  string  $name
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface  $group
-	 * @throws \Netinteractive\Sentry\Groups\GroupNotFoundException
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
 	public function findGroupByName($name)
 	{
@@ -553,7 +553,7 @@ class Sentry {
 	 * Creates a group.
 	 *
 	 * @param  array  $attributes
-	 * @return \Netinteractive\Sentry\Groups\GroupInterface
+	 * @return \Netinteractive\Sentry\Role\RoleInterface
 	 */
 	public function createGroup(array $attributes)
 	{
@@ -565,8 +565,8 @@ class Sentry {
 	 * Finds a user by the given user ID.
 	 *
 	 * @param  mixed  $id
-	 * @return \Netinteractive\Sentry\Users\UserInterface
-	 * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+	 * @return \Netinteractive\Sentry\User\UserInterface
+	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function findUserById($id)
 	{
@@ -577,8 +577,8 @@ class Sentry {
 	 * Finds a user by the login value.
 	 *
 	 * @param  string  $login
-	 * @return \Netinteractive\Sentry\Users\UserInterface
-	 * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+	 * @return \Netinteractive\Sentry\User\UserInterface
+	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function findUserByLogin($login)
 	{
@@ -589,8 +589,8 @@ class Sentry {
 	 * Finds a user by the given credentials.
 	 *
 	 * @param  array  $credentials
-	 * @return \Netinteractive\Sentry\Users\UserInterface
-	 * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+	 * @return \Netinteractive\Sentry\User\UserInterface
+	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function findUserByCredentials(array $credentials){
 		return $this->userProvider->findByCredentials($credentials);
@@ -600,9 +600,9 @@ class Sentry {
 	 * Finds a user by the given activation code.
 	 *
 	 * @param  string  $code
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 * @throws \RuntimeException
-	 * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function findUserByActivationCode($code)
 	{
@@ -613,9 +613,9 @@ class Sentry {
 	 * Finds a user by the given reset password code.
 	 *
 	 * @param  string  $code
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 * @throws \RuntimeException
-	 * @throws \Netinteractive\Sentry\Users\UserNotFoundException
+	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function findUserByResetPasswordCode($code)
 	{
@@ -636,7 +636,7 @@ class Sentry {
 	 * Returns all users who belong to
 	 * a group.
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return array
 	 */
 	public function findAllUsersInGroup($group)
@@ -672,7 +672,7 @@ class Sentry {
 	 * Creates a user.
 	 *
 	 * @param  array  $credentials
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 */
 	public function createUser(array $credentials)
 	{
@@ -682,7 +682,7 @@ class Sentry {
 	/**
 	 * Returns an empty user object.
 	 *
-	 * @return \Netinteractive\Sentry\Users\UserInterface
+	 * @return \Netinteractive\Sentry\User\UserInterface
 	 */
 	public function getEmptyUser()
 	{

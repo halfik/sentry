@@ -1,4 +1,4 @@
-<?php namespace Netinteractive\Sentry\Groups;
+<?php namespace Netinteractive\Sentry\Role;
 /**
  * Part of the Sentry package.
  *
@@ -18,6 +18,41 @@
  * @link       http://cartalyst.com
  */
 
-class GroupExistsException extends \UnexpectedValueException {}
-class GroupNotFoundException extends \UnexpectedValueException {}
-class NameRequiredException extends \UnexpectedValueException {}
+interface RoleInterface {
+
+	/**
+	 * Returns the group's ID.
+	 *
+	 * @return mixed
+	 */
+	public function getId();
+
+	/**
+	 * Returns the group's name.
+	 *
+	 * @return string
+	 */
+	public function getName();
+
+	/**
+	 * Returns permissions for the group.
+	 *
+	 * @return array
+	 */
+	public function getPermissions();
+
+	/**
+	 * Saves the group.
+	 *
+	 * @return bool
+	 */
+	public function save();
+
+	/**
+	 * Delete the group.
+	 *
+	 * @return bool
+	 */
+	public function delete();
+
+}

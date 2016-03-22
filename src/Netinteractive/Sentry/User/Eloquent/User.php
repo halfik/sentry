@@ -19,8 +19,8 @@
  */
 
 use Illuminate\Database\Eloquent\Model;
-use Netinteractive\Sentry\Groups\GroupInterface;
-use Netinteractive\Sentry\Groups\Eloquent\Provider as GroupProvider;
+use Netinteractive\Sentry\Role\RoleInterface;
+use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
 use Netinteractive\Sentry\Hashing\HasherInterface;
 use Netinteractive\Sentry\Users\LoginRequiredException;
 use Netinteractive\Sentry\Users\PasswordRequiredException;
@@ -115,7 +115,7 @@ class User extends Model implements UserInterface {
 	 *
 	 * @var string
 	 */
-	protected static $groupModel = 'Netinteractive\Sentry\Groups\Eloquent\Group';
+	protected static $groupModel = 'Netinteractive\Sentry\Role\Eloquent\Group';
 
 	/**
 	 * The Eloquent group provider model.
@@ -284,9 +284,9 @@ class User extends Model implements UserInterface {
 	 * Exceptions if validation fails.
 	 *
 	 * @return bool
-	 * @throws \Netinteractive\Sentry\Users\LoginRequiredException
-	 * @throws \Netinteractive\Sentry\Users\PasswordRequiredException
-	 * @throws \Netinteractive\Sentry\Users\UserExistsException
+	 * @throws \Netinteractive\Sentry\User\LoginRequiredException
+	 * @throws \Netinteractive\Sentry\User\PasswordRequiredException
+	 * @throws \Netinteractive\Sentry\User\UserExistsException
 	 */
 	public function validate()
 	{
@@ -392,7 +392,7 @@ class User extends Model implements UserInterface {
 	 *
 	 * @param  string  $activationCode
 	 * @return bool
-	 * @throws \Netinteractive\Sentry\Users\UserAlreadyActivatedException
+	 * @throws \Netinteractive\Sentry\User\UserAlreadyActivatedException
 	 */
 	public function attemptActivation($activationCode)
 	{
@@ -523,10 +523,10 @@ class User extends Model implements UserInterface {
 	/**
 	 * Adds the user to the given group.
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function addGroup(GroupInterface $group)
+	public function addGroup(RoleInterface $group)
 	{
 		if ( ! $this->inGroup($group))
 		{
@@ -543,10 +543,10 @@ class User extends Model implements UserInterface {
 	/**
 	 * Removes the user from the given group.
 	 *
-	 * @param \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function removeGroup(GroupInterface $group)
+	public function removeGroup(RoleInterface $group)
 	{
 		if ($this->inGroup($group))
 		{
@@ -629,10 +629,10 @@ class User extends Model implements UserInterface {
 	/**
 	 * See if the user is in the given group.
 	 *
-	 * @param  \Netinteractive\Sentry\Groups\GroupInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function inGroup(GroupInterface $group)
+	public function inGroup(RoleInterface $group)
 	{
 		foreach ($this->getGroups() as $_group)
 		{

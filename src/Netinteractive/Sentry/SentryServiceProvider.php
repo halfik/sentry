@@ -19,7 +19,7 @@
  */
 
 use Netinteractive\Sentry\Cookies\IlluminateCookie;
-use Netinteractive\Sentry\Groups\Eloquent\Provider as GroupProvider;
+use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
 use Netinteractive\Sentry\Hashing\BcryptHasher;
 use Netinteractive\Sentry\Hashing\NativeHasher;
 use Netinteractive\Sentry\Hashing\Sha256Hasher;
