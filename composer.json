@@ -76,7 +76,6 @@
         "src/Netinteractive/Sentry/Groups/Exceptions.php",
         "src/Netinteractive/Sentry/Throttling/Exceptions.php",
         "src/Netinteractive/Sentry/User/Exceptions.php",
-        "src/Netinteractive/Sentry/SocialProfile/Exceptions.php",
         "src/migrations"
       ],
       "psr-0": {
