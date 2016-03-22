@@ -20,8 +20,8 @@
 
 use Netinteractive\Sentry\Throttling\ThrottleInterface;
 use Netinteractive\Sentry\Throttling\ProviderInterface;
-use Netinteractive\Sentry\Users\ProviderInterface as UserProviderInterface;
-use Netinteractive\Sentry\Users\UserInterface;
+use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
+use Netinteractive\Sentry\User\UserInterface;
 
 class Provider implements ProviderInterface {
 

@@ -59,7 +59,7 @@ class Throttle extends Model implements ThrottleInterface {
 	 *
 	 * @var string
 	 */
-	protected static $userModel = 'Netinteractive\Sentry\Users\Eloquent\User';
+	protected static $userModel = 'Netinteractive\Sentry\User\Elegant\Record';
 
 
 	/**

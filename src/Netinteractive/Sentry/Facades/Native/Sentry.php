@@ -30,8 +30,8 @@ use Netinteractive\Sentry\Sessions\SessionInterface;
 use Netinteractive\Sentry\Sentry as BaseSentry;
 use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface as ThrottleProviderInterface;
-use Netinteractive\Sentry\Users\Eloquent\Provider as UserProvider;
-use Netinteractive\Sentry\Users\ProviderInterface as UserProviderInterface;
+use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
+use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use PDO;
 

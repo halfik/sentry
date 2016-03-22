@@ -1,4 +1,4 @@
-<?php namespace Netinteractive\Sentry\Users\Eloquent;
+<?php namespace Netinteractive\Sentry\User\Eloquent;
 /**
  * Part of the Sentry package.
  *
@@ -20,11 +20,11 @@
 
 use Netinteractive\Sentry\Hashing\HasherInterface;
 use Netinteractive\Sentry\Groups\GroupInterface;
-use Netinteractive\Sentry\Users\ProviderInterface;
-use Netinteractive\Sentry\Users\UserInterface;
-use Netinteractive\Sentry\Users\UserNotActivatedException;
-use Netinteractive\Sentry\Users\UserNotFoundException;
-use Netinteractive\Sentry\Users\WrongPasswordException;
+use Netinteractive\Sentry\User\ProviderInterface;
+use Netinteractive\Sentry\User\UserInterface;
+use Netinteractive\Sentry\User\UserNotActivatedException;
+use Netinteractive\Sentry\User\UserNotFoundException;
+use Netinteractive\Sentry\User\WrongPasswordException;
 
 class Provider implements ProviderInterface {
 
@@ -33,7 +33,7 @@ class Provider implements ProviderInterface {
 	 *
 	 * @var string
 	 */
-	protected $model = 'Netinteractive\Sentry\Users\Eloquent\User';
+	protected $model = 'Netinteractive\Sentry\User\Elegant\Record';
 
 	/**
 	 * The hasher for the model.

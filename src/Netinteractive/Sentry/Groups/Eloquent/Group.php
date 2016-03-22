@@ -55,7 +55,7 @@ class Group extends Model implements GroupInterface {
 	 *
 	 * @var string
 	 */
-	protected static $userModel = 'Netinteractive\Sentry\Users\Eloquent\User';
+	protected static $userModel = 'Netinteractive\Sentry\User\Elegant\Record';
 
 	/**
 	 * The user groups pivot table name.

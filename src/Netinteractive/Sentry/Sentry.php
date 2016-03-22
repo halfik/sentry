@@ -27,13 +27,13 @@ use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
 use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface as ThrottleProviderInterface;
-use Netinteractive\Sentry\Users\LoginRequiredException;
-use Netinteractive\Sentry\Users\PasswordRequiredException;
-use Netinteractive\Sentry\Users\Eloquent\Provider as UserProvider;
-use Netinteractive\Sentry\Users\ProviderInterface as UserProviderInterface;
-use Netinteractive\Sentry\Users\UserInterface;
-use Netinteractive\Sentry\Users\UserNotFoundException;
-use Netinteractive\Sentry\Users\UserNotActivatedException;
+use Netinteractive\Sentry\User\LoginRequiredException;
+use Netinteractive\Sentry\User\PasswordRequiredException;
+use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
+use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
+use Netinteractive\Sentry\User\UserInterface;
+use Netinteractive\Sentry\User\UserNotFoundException;
+use Netinteractive\Sentry\User\UserNotActivatedException;
 
 class Sentry {
 

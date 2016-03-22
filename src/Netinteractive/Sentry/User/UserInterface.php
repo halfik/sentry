@@ -1,4 +1,4 @@
-<?php namespace Netinteractive\Sentry\Users;
+<?php namespace Netinteractive\Sentry\User;
 /**
  * Part of the Sentry package.
  *

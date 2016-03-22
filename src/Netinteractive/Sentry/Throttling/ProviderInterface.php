@@ -1,5 +1,6 @@
 <?php namespace Netinteractive\Sentry\Throttling;
-use Netinteractive\Sentry\Users\UserInterface;
+
+use Netinteractive\Sentry\User\UserInterface;
 
 /**
  * Part of the Sentry package.
