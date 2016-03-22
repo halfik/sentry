@@ -29,7 +29,9 @@ class MigrationCartalystSentryInstallUsers extends Migration {
      */
     public function up()
     {
-        Schema::create('user', function($table)
+        $tableName =  \Config::get('netinteractive.sentry.user_table');
+
+        Schema::create($tableName, function($table)
         {
             $table->increments('id');
             $table->string('login');
@@ -65,7 +67,9 @@ class MigrationCartalystSentryInstallUsers extends Migration {
      */
     public function down()
     {
-        Schema::drop('user');
+        $tableName =  \Config::get('netinteractive.sentry.user_table');
+
+        Schema::drop($tableName);
     }
 
 }

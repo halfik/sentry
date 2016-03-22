@@ -81,10 +81,10 @@ interface ProviderInterface {
 	 * Returns all users who belong to
 	 * a group.
 	 *
-	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @param  string  $code
 	 * @return array
 	 */
-	public function findAllInGroup(RoleInterface $group);
+	public function findAllWithRole($code);
 
 	/**
 	 * Returns all users with access to

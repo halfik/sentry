@@ -20,10 +20,6 @@
 
 use Netinteractive\Sentry\Cookies\IlluminateCookie;
 use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
-use Netinteractive\Sentry\Hashing\BcryptHasher;
-use Netinteractive\Sentry\Hashing\NativeHasher;
-use Netinteractive\Sentry\Hashing\Sha256Hasher;
-use Netinteractive\Sentry\Hashing\WhirlpoolHasher;
 use Netinteractive\Sentry\Sentry;
 use Netinteractive\Sentry\Sessions\IlluminateSession;
 use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
@@ -43,7 +39,6 @@ class SentryServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->prepareResources();
-		$this->registerHasher();
 		$this->registerUserProvider();
 		$this->registerRoleProvider();
 		$this->registerThrottleProvider();
@@ -70,39 +65,6 @@ class SentryServiceProvider extends ServiceProvider
 		]);
 	}
 
-	/**
-	 * Register the hasher used by Sentry.
-	 *
-	 * @return void
-	 */
-	protected function registerHasher()
-	{
-		$this->app['sentry.hasher'] = $this->app->share(function($app)
-		{
-			$hasher = $app['config']->get('netinteractive.sentry.hasher');
-
-			switch ($hasher)
-			{
-				case 'native':
-					return new NativeHasher;
-					break;
-
-				case 'bcrypt':
-					return new BcryptHasher;
-					break;
-
-				case 'sha256':
-					return new Sha256Hasher;
-					break;
-
-				case 'whirlpool':
-					return new WhirlpoolHasher;
-					break;
-			}
-
-			throw new \InvalidArgumentException("Invalid hasher [$hasher] chosen for Sentry.");
-		});
-	}
 
 	/**
 	 * Register the user provider used by Sentry.
@@ -122,7 +84,7 @@ class SentryServiceProvider extends ServiceProvider
 			// model's login attribute here. If you are manually using the
 			// attribute outside of Sentry, you will need to ensure you are
 			// overriding at runtime.
-			if (method_exists($model, 'setLoginAttributeName'))
+			/*if (method_exists($model, 'setLoginAttributeName'))
 			{
 				$loginAttribute = array_get($config, 'users.login_attribute');
 
@@ -130,7 +92,7 @@ class SentryServiceProvider extends ServiceProvider
 					array($model, 'setLoginAttributeName'),
 					array($loginAttribute)
 				);
-			}
+			}*/
 
 			// Define the Group model to use for relationships.
 			/*if (method_exists($model, 'setGroupModel'))
@@ -154,7 +116,7 @@ class SentryServiceProvider extends ServiceProvider
 				);
 			}*/
 
-			return new UserProvider($app['sentry.hasher'], $model);
+			return new UserProvider($model);
 		});
 	}
 
@@ -172,7 +134,7 @@ class SentryServiceProvider extends ServiceProvider
 			$model = array_get($config, 'groups.model');
 
 			// Define the User model to use for relationships.
-			if (method_exists($model, 'setUserModel'))
+			/*if (method_exists($model, 'setUserModel'))
 			{
 				$userModel = array_get($config, 'users.model');
 
@@ -191,7 +153,7 @@ class SentryServiceProvider extends ServiceProvider
 					array($model, 'setUserGroupsPivot'),
 					array($pivotTable)
 				);
-			}
+			}*/
 
 			return new GroupProvider($model);
 		});

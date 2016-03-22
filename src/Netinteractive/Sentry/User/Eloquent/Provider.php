@@ -249,9 +249,9 @@ class Provider implements ProviderInterface {
 	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return array
 	 */
-	public function findAllInGroup(RoleInterface $group)
+	public function findAllWithRole(RoleInterface $role)
 	{
-		return $group->users()->get();
+		return $role->users()->get();
 	}
 
 	/**
@@ -333,17 +333,5 @@ class Provider implements ProviderInterface {
 		$this->setupHasherWithModel();
 	}
 
-	/**
-	 * Statically sets the hasher with the model.
-	 *
-	 * @return void
-	 */
-	public function setupHasherWithModel()
-	{
-		if (method_exists($this->model, 'setHasher'))
-		{
-			forward_static_call_array(array($this->model, 'setHasher'), array($this->hasher));
-		}
-	}
 
 }

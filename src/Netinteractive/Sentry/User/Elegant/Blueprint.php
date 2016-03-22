@@ -5,15 +5,6 @@ use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
 class Blueprint extends BaseBlueprint
 {
-    /**
-     * Attributes that should be hashed.
-     *
-     * @var array
-     */
-    protected $hashableAttributes = array(
-        'password',
-        'persist_code',
-    );
 
     /**
      * Allowed permissions values.
@@ -34,12 +25,21 @@ class Blueprint extends BaseBlueprint
      */
     protected static $loginAttribute = 'email';
 
+    /**
+     * @return mixed
+     */
     protected function init()
     {
-        $this->setStorageName('user');
+        $table = \Config::get('netinteractive.sentry.user_table');
+
+        $this->setStorageName($table);
         $this->primaryKey = array('id');
         $this->incrementingPk = 'id';
 
+        $config = \Config::get('netinteractive.sentry');
+        $this->getRelationManager()
+            ->belongsToMany('roles', $config['role']['model'],$config['user_role_pivot_table'], 'user__id', array('role__id') )
+        ;
 
         $this->fields = array(
             'id' => array(
@@ -74,6 +74,7 @@ class Blueprint extends BaseBlueprint
             'password'=>array(
                 'title' => _('Password'),
                 'type'=> static::TYPE_PASSWORD,
+                'hashable' => true,
                 'rules' => array(
                     'insert'=>'required'
                 )
@@ -104,6 +105,14 @@ class Blueprint extends BaseBlueprint
             'permissions' => array(
                 'title' => _('Permissions'),
                 'type'=> static::TYPE_STRING,
+                'filters' => array(
+                    'save' => array(
+                        'jsonEncode'
+                    ),
+                    'fill' => array(
+                        'jsonDecode'
+                    )
+                )
             ),
             'activated' => array(
                 'title' => _('Is active'),
@@ -146,6 +155,7 @@ class Blueprint extends BaseBlueprint
             ),
             'persist_code' => array(
                 'title' => _('Persist code'),
+                'hashable' => true,
                 'type' => static::TYPE_STRING
             ),
             'reset_password_code' => array(
@@ -188,4 +198,16 @@ class Blueprint extends BaseBlueprint
     {
         return static::$loginAttribute;
     }
+
+    /**
+     * Returns the name for the user's password.
+     *
+     * @return string
+     */
+    public function getPasswordName()
+    {
+        return 'password';
+    }
+
+
 } 

@@ -22,7 +22,6 @@ use Netinteractive\Sentry\Cookies\CookieInterface;
 use Netinteractive\Sentry\Cookies\NativeCookie;
 use Netinteractive\Sentry\Role\Eloquent\Provider as RoleProvider;
 use Netinteractive\Sentry\Role\ProviderInterface as RoleProviderInterface;
-use Netinteractive\Sentry\Hashing\NativeHasher;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
 use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
@@ -115,7 +114,7 @@ class Sentry {
 		$ipAddress = null
 	)
 	{
-		$this->userProvider     = $userProvider ?: new UserProvider(new NativeHasher);
+		$this->userProvider     = $userProvider ?: new UserProvider();
 		$this->roleProvider    = $roleProvider ?: new RoleProvider();
 		$this->throttleProvider = $throttleProvider ?: new ThrottleProvider($this->userProvider);
 

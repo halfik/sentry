@@ -35,18 +35,6 @@ return array(
 
 	'driver' => 'elegant',
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Hasher
-	|--------------------------------------------------------------------------
-	|
-	| This option allows you to specify the default hasher used by Sentry
-	|
-	| Supported: "native", "bcrypt", "sha256", "whirlpool"
-	|
-	*/
-
-	'hasher' => 'native',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -95,7 +83,7 @@ return array(
 		|
 		*/
 
-		'model' => 'Netinteractive\Sentry\Groups\Elegant\Group',
+		'model' => 'Netinteractive\Sentry\Role\Elegant\Record',
 
 	),
 
@@ -149,7 +137,11 @@ return array(
 	|
 	*/
 
-	'user_groups_pivot_table' => 'user__role',
+	'user_role_pivot_table' => 'user__role',
+    'user_table' => 'user',
+    'role_table' => 'role',
+    'throttle_table' => 'throttle',
+    'social_profile_table' => 'social_profile',
 
 	/*
 	|--------------------------------------------------------------------------

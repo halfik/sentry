@@ -29,7 +29,9 @@ class MigrationCartalystSentryInstallGroups extends Migration {
      */
     public function up()
     {
-        Schema::create('role', function($table)
+        $tableName =  \Config::get('netinteractive.sentry.role_table');
+
+        Schema::create($tableName, function($table)
         {
             $table->increments('id');
             $table->string('name');
@@ -55,7 +57,9 @@ class MigrationCartalystSentryInstallGroups extends Migration {
      */
     public function down()
     {
-        Schema::drop('role');
+        $tableName =  \Config::get('netinteractive.sentry.role_table');
+
+        Schema::drop($tableName);
     }
 
 }

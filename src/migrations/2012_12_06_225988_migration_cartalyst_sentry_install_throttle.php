@@ -29,7 +29,9 @@ class MigrationCartalystSentryInstallThrottle extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('throttle', function($table)
+        $tableName =  \Config::get('netinteractive.sentry.throttle_table');
+
+		Schema::create($tableName, function($table)
 		{
 			$table->increments('id');
 			$table->integer('user__id')->unsigned()->nullable();
@@ -55,7 +57,9 @@ class MigrationCartalystSentryInstallThrottle extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('throttle');
+        $tableName =  \Config::get('netinteractive.sentry.throttle_table');
+
+		Schema::drop($tableName);
 	}
 
 }

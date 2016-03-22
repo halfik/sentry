@@ -10,8 +10,10 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function up()
     {
-        if (Schema::hasTable('role')){
-            DB::table('role')->insert(
+        $tableName =  \Config::get('netinteractive.sentry.role_table');
+
+        if (Schema::hasTable($tableName)){
+            DB::table($tableName)->insert(
                 array(
                     'code' => 'admin',
                     'name' => _('Administrator'),
@@ -20,7 +22,7 @@ class MigrationCartalystDefaultRoles extends Migration {
                 )
             );
 
-            DB::table('role')->insert(
+            DB::table($tableName)->insert(
                 array(
                     'code' => 'user',
                     'name' => _('Użytkownik'),
@@ -29,7 +31,7 @@ class MigrationCartalystDefaultRoles extends Migration {
                 )
             );
 
-            DB::table('role')->insert(
+            DB::table($tableName)->insert(
                 array(
                     'code' => 'guest',
                     'name' => _('Gość'),
@@ -50,15 +52,12 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function down()
     {
-        if (Schema::hasTable('role')){
-            DB::table('role')->where('name', 'admin')->delete();
-            DB::table('role')->where('name', 'user')->delete();
-            DB::table('role')->where('name', 'guest')->delete();
+        $tableName =  \Config::get('netinteractive.sentry.role_table');
 
-            Schema::table('role', function(Blueprint $table)
-            {
-                $table->dropColumn('is_hidden');
-            });
+        if (Schema::hasTable($tableName)){
+            DB::table($tableName)->where('name', 'admin')->delete();
+            DB::table($tableName)->where('name', 'user')->delete();
+            DB::table($tableName)->where('name', 'guest')->delete();
         }
 
     }

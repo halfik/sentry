@@ -2,9 +2,9 @@
 
 use Netinteractive\Sentry\User\ProviderInterface;
 use Netinteractive\Elegant\Mapper\MapperInterface;
-use Netinteractive\Sentry\Hashing\HasherInterface;
 use Netinteractive\Sentry\User\UserNotFoundException;
 use Netinteractive\Sentry\Role\RoleInterface;
+use Netinteractive\Sentry\User\WrongPasswordException;
 
 class Provider  implements ProviderInterface
 {
@@ -13,12 +13,6 @@ class Provider  implements ProviderInterface
      */
     protected $mapper;
 
-    /**
-     * The hasher for the password.
-     *
-     * @var \Netinteractive\Sentry\Hashing\HasherInterface
-     */
-    protected $hasher;
 
     /**
      * The Eloquent user model.
@@ -29,14 +23,13 @@ class Provider  implements ProviderInterface
 
 
 
-    public function __construct(HasherInterface $hasher, $model=null)
+    public function __construct($model=null)
     {
         if (isset($model)) {
             $this->model = $model;
         }
 
         $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
-        $this->hasher = $hasher;
     }
 
     /**
@@ -97,9 +90,8 @@ class Provider  implements ProviderInterface
     {
         $record = $this->createRecord();
 
-        if ( ! $user = $this->getMapper()->where($record->getBlueprint()->getLoginName(), '=', $login)->first())
-        {
-            throw new UserNotFoundException("A user could not be found with a login value of [$login].");
+        if ( !$user = $this->getMapper()->where($record->getBlueprint()->getLoginName(), '=', $login)->first()) {
+            throw new UserNotFoundException( sprintf( _("A user could not be found with a login value of [%s]."), $login ));
         }
 
         return $user;
@@ -114,7 +106,59 @@ class Provider  implements ProviderInterface
      */
     public function findByCredentials(array $credentials)
     {
-        // TODO: Implement findByCredentials() method.
+        $record     = $this->createRecord();
+        $loginName = $record->getBlueprint()->getLoginName();
+
+        if ( ! array_key_exists($loginName, $credentials)) {
+            throw new \InvalidArgumentException( sprintf( _("Login attribute [%s] was not provided."), $loginName));
+        }
+
+        $passwordName = $record->getBlueprint()->getPasswordName();
+
+
+        $hashableAttributes = $record->getBlueprint()->getHashableAttributes();
+        $hashedCredentials  = array();
+
+        // build query from given credentials
+        foreach ($credentials as $credential => $value) {
+            // Remove hashed attributes to check later as we need to check these
+            // values after we retrieved them because of salts
+            if (in_array($credential, $hashableAttributes)) {
+                $hashedCredentials = array_merge($hashedCredentials, array($credential => $value));
+            }
+            else {
+                $this->getMapper()->where($credential, '=', $value);
+            }
+        }
+
+        if ( ! $user = $this->getMapper()->first()){
+            throw new UserNotFoundException( _("A user was not found with the given credentials."));
+        }
+
+        // Now check the hashed credentials match ours
+        foreach ($hashedCredentials as $credential => $value) {
+            if ( ! $record->getBlueprint()->getHasher()->checkhash($value, $user->{$credential})) {
+                $message = sprintf( _("A user was found to match all plain text credentials however hashed credential [%s] did not match."), $credential);
+
+                if ($credential == $passwordName) {
+                    throw new WrongPasswordException($message);
+                }
+
+                throw new UserNotFoundException($message);
+            }
+            else if ($credential == $passwordName) {
+                if (method_exists($record->getBlueprint()->getHasher(), 'needsRehashed') &&
+                    $record->getBlueprint()->getHasher()->needsRehashed($user->{$credential}))
+                {
+                    // The algorithm used to create the hash is outdated and insecure.
+                    // Rehash the password and save.
+                    $user->{$credential} = $value;
+                    $this->getMapper()->save($user);
+                }
+            }
+        }
+
+        return $user;
     }
 
     /**
@@ -123,12 +167,27 @@ class Provider  implements ProviderInterface
      * @param  string $code
      * @return \Netinteractive\Sentry\User\UserInterface
      * @throws \Netinteractive\Sentry\User\UserNotFoundException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function findByActivationCode($code)
     {
-        // TODO: Implement findByActivationCode() method.
+        if ( !$code) {
+            throw new \InvalidArgumentException( _("No activation code passed.") );
+        }
+
+        $result = $this->getMapper()->where('activation_code', '=', $code)->get();
+
+
+        if (($count = $result->count()) > 1) {
+            throw new \RuntimeException( sprintf( _("Found [%s] users with the same activation code."), $code) );
+        }
+
+        if ( ! $user = $result->first()) {
+            throw new UserNotFoundException( _("A user was not found with the given activation code.") );
+        }
+
+        return $user;
     }
 
     /**
@@ -136,34 +195,54 @@ class Provider  implements ProviderInterface
      *
      * @param  string $code
      * @return \Netinteractive\Sentry\User\UserInterface
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @throws \Netinteractive\Sentry\User\UserNotFoundException
      */
     public function findByResetPasswordCode($code)
     {
-        // TODO: Implement findByResetPasswordCode() method.
+        $result = $this->getMapper()->where('reset_password_code', '=', $code)->get();
+
+        if (($count = $result->count()) > 1) {
+            throw new \RuntimeException( sprintf(_("Found [%s] users with the same reset password code."), $count) );
+        }
+
+        if ( ! $user = $result->first()) {
+            throw new UserNotFoundException( _("A user was not found with the given reset password code.") );
+        }
+
+        return $user;
     }
 
     /**
      * Returns an all users.
      *
-     * @return array
+     * @return \Netinteractive\Elegant\Model\Collection
      */
     public function findAll()
     {
-        // TODO: Implement findAll() method.
+        return $this->getMapper()->get();
     }
 
     /**
      * Returns all users who belong to
      * a group.
      *
-     * @param  \Netinteractive\Sentry\Role\RoleInterface $group
+     * @param  string $code
      * @return array
      */
-    public function findAllInGroup(RoleInterface $group)
+    public function findAllWithRole( $code)
     {
-        // TODO: Implement findAllInGroup() method.
+        $privotTable = \Config::get('netinteractive.sentry.user_role_pivot_table');
+        $roleTable = \Config::get('netinteractive.sentry.role_table');
+        $userTable = \Config::get('netinteractive.sentry.user_table');
+
+        return $this->getMapper()
+            ->selectRaw('"'.$userTable.'".*')
+            ->join($privotTable, $privotTable.'.user__id', '=', $userTable.'.id')
+            ->join($roleTable, $roleTable.'.id', '=', $privotTable.'.role__id')
+            ->where($roleTable.'.code', '=', $code)
+            ->get()
+        ;
     }
 
     /**

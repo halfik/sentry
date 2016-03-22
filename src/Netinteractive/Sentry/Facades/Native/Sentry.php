@@ -24,7 +24,6 @@ use Netinteractive\Sentry\Facades\ConnectionResolver;
 use Netinteractive\Sentry\Facades\Facade;
 use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
 use Netinteractive\Sentry\Role\ProviderInterface as GroupProviderInterface;
-use Netinteractive\Sentry\Hashing\NativeHasher;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
 use Netinteractive\Sentry\Sentry as BaseSentry;
@@ -57,7 +56,7 @@ class Sentry extends Facade {
 		$ipAddress = null
 	)
 	{
-		$userProvider = $userProvider ?: new UserProvider(new NativeHasher);
+		$userProvider = $userProvider ?: new UserProvider();
 
 		return new BaseSentry(
 			$userProvider,
