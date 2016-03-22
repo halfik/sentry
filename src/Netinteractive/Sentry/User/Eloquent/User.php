@@ -97,11 +97,11 @@ class User extends Model implements UserInterface {
 	protected static $hasher;
 
 	/**
-	 * The user groups.
+	 * The user roles.
 	 *
 	 * @var array
 	 */
-	protected $userGroups;
+	protected $userRoles;
 
 	/**
 	 * The user merged permissions.
@@ -115,21 +115,21 @@ class User extends Model implements UserInterface {
 	 *
 	 * @var string
 	 */
-	protected static $groupModel = 'Netinteractive\Sentry\Role\Eloquent\Group';
+	protected static $roleModel = 'Netinteractive\Sentry\Role\Eloquent\Group';
 
 	/**
 	 * The Eloquent group provider model.
 	 *
 	 * @var string
 	 */
-	protected static $groupProviderModel = null;
+	protected static $roleProviderModel = null;
 
 	/**
-	 * The user groups pivot table name.
+	 * The user roles pivot table name.
 	 *
 	 * @var string
 	 */
-	protected static $userGroupsPivot = 'users_groups';
+	protected static $userRolesPivot = 'user__role';
 
 	/**
 	 * Returns the user's ID.
@@ -332,7 +332,7 @@ class User extends Model implements UserInterface {
 	 */
 	public function delete()
 	{
-		$this->groups()->detach();
+		$this->roles()->detach();
 		return parent::delete();
 	}
 
@@ -490,14 +490,14 @@ class User extends Model implements UserInterface {
 	 *
 	 * @return array
 	 */
-	public function getGroups()
+	public function getRoles()
 	{
-		if ( ! $this->userGroups)
+		if ( ! $this->userRoles)
 		{
-			$this->userGroups = $this->groups()->get();
+			$this->userRoles = $this->roles()->get();
 		}
 
-		return $this->userGroups;
+		return $this->userRoles;
 	}
 
 	/**
@@ -515,24 +515,24 @@ class User extends Model implements UserInterface {
 	 *
 	 * @return null
 	 */
-	public function invalidateUserGroupsCache()
+	public function invalidateUserRolesCache()
 	{
-		$this->userGroups = null;
+		$this->userRoles = null;
 	}
 
 	/**
 	 * Adds the user to the given group.
 	 *
-	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $role
 	 * @return bool
 	 */
-	public function addGroup(RoleInterface $group)
+	public function addRole(RoleInterface $role)
 	{
-		if ( ! $this->inGroup($group))
+		if ( ! $this->hasRole($role))
 		{
-			$this->groups()->attach($group);
+			$this->roles()->attach($role);
 
-			$this->invalidateUserGroupsCache();
+			$this->invalidateUserRolesCache();
 
 			$this->invalidateMergedPermissionsCache();
 		}
@@ -546,13 +546,13 @@ class User extends Model implements UserInterface {
 	 * @param \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function removeGroup(RoleInterface $group)
+	public function removeRole(RoleInterface $role)
 	{
-		if ($this->inGroup($group))
+		if ($this->hasRole($role))
 		{
-			$this->groups()->detach($group);
+			$this->roles()->detach($role);
 
-			$this->invalidateUserGroupsCache();
+			$this->invalidateUserRolesCache();
 
 			$this->invalidateMergedPermissionsCache();
 		}
@@ -563,11 +563,11 @@ class User extends Model implements UserInterface {
 	/**
 	 * Updates the user to the given group(s).
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Collection  $groups
+	 * @param  \Illuminate\Database\Eloquent\Collection  $roles
 	 * @param  bool  $remove
 	 * @return bool
 	 */
-	public function updateGroups($groups, $remove = true)
+	public function updateRoles($roles, $remove = true)
 	{
 		$newGroupIds = array();
 
@@ -575,22 +575,22 @@ class User extends Model implements UserInterface {
 
 		$existingGroupIds = array();
 
-		foreach ($groups as $group)
+		foreach ($roles as $role)
 		{
-			if (is_object($group))
+			if (is_object($role))
 			{
-				$newGroupIds[] = $group->getId();
+				$newGroupIds[] = $role->getId();
 
-				if ( ! $this->addGroup($group))
+				if ( ! $this->addRole($role))
 				{
 					return false;
 				}
 			}
 			else
 			{
-				$newGroupIds[] = $groups->getId();
+				$newGroupIds[] = $role->getId();
 
-				if ( ! $this->addGroup($groups))
+				if ( ! $this->addRole($role))
 				{
 					return false;
 				}
@@ -600,9 +600,9 @@ class User extends Model implements UserInterface {
 
 		if ($remove)
 		{
-			foreach ($this->groups as $userGroup)
+			foreach ($this->roles as $userRole)
 			{
-				$existingGroupIds[] = $userGroup->getId();
+				$existingGroupIds[] = $userRole->getId();
 			}
 
 			$removeGroupIds = array_diff($existingGroupIds, $newGroupIds);
@@ -627,16 +627,16 @@ class User extends Model implements UserInterface {
 	}
 
 	/**
-	 * See if the user is in the given group.
+	 * See if the user has role
 	 *
-	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $role
 	 * @return bool
 	 */
-	public function inGroup(RoleInterface $group)
+	public function hasRole(RoleInterface $role)
 	{
-		foreach ($this->getGroups() as $_group)
+		foreach ($this->getRoles() as $_role)
 		{
-			if ($_group->getId() == $group->getId())
+			if ($_role->getId() == $role->getId())
 			{
 				return true;
 			}
@@ -657,9 +657,9 @@ class User extends Model implements UserInterface {
 		{
 			$permissions = array();
 
-			foreach ($this->getGroups() as $group)
+			foreach ($this->getRoles() as $role)
 			{
-				$permissions = array_merge($permissions, $group->getPermissions());
+				$permissions = array_merge($permissions, $role->getPermissions());
 			}
 
 			$this->mergedPermissions = array_merge($permissions, $this->getPermissions());
@@ -842,13 +842,13 @@ class User extends Model implements UserInterface {
 	}
 
 	/**
-	 * Returns the relationship between users and groups.
+	 * Returns the relationship between users and roles.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function groups()
+	public function roles()
 	{
-		return $this->belongsToMany(static::$groupModel, static::$userGroupsPivot);
+		return $this->belongsToMany(static::$roleModel, static::$userRolesPivot);
 	}
 
 	/**
@@ -859,7 +859,7 @@ class User extends Model implements UserInterface {
 	 */
 	public static function setGroupModel($model)
 	{
-		static::$groupModel = $model;
+		static::$roleModel = $model;
 	}
 
 	/**
@@ -870,7 +870,7 @@ class User extends Model implements UserInterface {
 	 */
 	public static function setUserGroupsPivot($tableName)
 	{
-		static::$userGroupsPivot = $tableName;
+		static::$userRolesPivot = $tableName;
 	}
 
 	/**

@@ -5,7 +5,36 @@ use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
 class Blueprint extends BaseBlueprint
 {
-   protected function init()
+    /**
+     * Attributes that should be hashed.
+     *
+     * @var array
+     */
+    protected $hashableAttributes = array(
+        'password',
+        'persist_code',
+    );
+
+    /**
+     * Allowed permissions values.
+     *
+     * Possible options:
+     *   -1 => Deny (adds to array, but denies regardless of user's group).
+     *    0 => Remove.
+     *    1 => Add.
+     *
+     * @var array
+     */
+    protected $allowedPermissionsValues = array(-1, 0, 1);
+
+    /**
+     * The login attribute.
+     *
+     * @var string
+     */
+    protected static $loginAttribute = 'email';
+
+    protected function init()
     {
         $this->setStorageName('user');
         $this->primaryKey = array('id');
@@ -148,5 +177,15 @@ class Blueprint extends BaseBlueprint
         );
 
         return parent::init();
+    }
+
+    /**
+     * Returns the name for the user's login.
+     *
+     * @return string
+     */
+    public function getLoginName()
+    {
+        return static::$loginAttribute;
     }
 } 

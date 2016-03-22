@@ -62,7 +62,7 @@ class Group extends Model implements RoleInterface {
 	 *
 	 * @var string
 	 */
-	protected static $userGroupsPivot = 'users_groups';
+	protected static $userGroupsPivot = 'user__role';
 
 	/**
 	 * Returns the group's ID.

@@ -186,7 +186,7 @@ interface UserInterface {
 	 *
 	 * @return array
 	 */
-	public function getGroups();
+	public function getRoles();
 
 	/**
 	 * Adds the user to the given group
@@ -194,7 +194,7 @@ interface UserInterface {
 	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function addGroup(RoleInterface $group);
+	public function addRole(RoleInterface $role);
 
 	/**
 	 * Removes the user from the given group.
@@ -202,16 +202,16 @@ interface UserInterface {
 	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function removeGroup(RoleInterface $group);
+	public function removeRole(RoleInterface $role);
 
 	/**
 	 * Updates the user to the given group(s).
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Collection  $groups
+	 * @param  \Illuminate\Database\Eloquent\Collection  $roles
 	 * @param  bool  $remove
 	 * @return bool
 	 */
-	public function updateGroups($groups, $remove = false);
+	public function updateRoles($roles, $remove = false);
 
 	/**
 	 * See if the user is in the given group.
@@ -219,7 +219,7 @@ interface UserInterface {
 	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @return bool
 	 */
-	public function inGroup(RoleInterface $group);
+	public function hasRole(RoleInterface $role);
 
 	/**
 	 * Returns an array of merged permissions for each

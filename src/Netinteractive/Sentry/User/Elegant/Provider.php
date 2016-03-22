@@ -52,8 +52,21 @@ class Provider  implements ProviderInterface
     /**
      * @return mixed|MapperInterface
      */
-    public function getMapper(){
+    public function getMapper()
+    {
         return $this->mapper;
+    }
+
+    /**
+     * Create a new instance of the model.
+     *
+     * @return \Netinteractive\Elegant\Model\Record
+     */
+    public function createRecord()
+    {
+        $class = '\\'.ltrim($this->model, '\\');
+
+        return new $class;
     }
 
     /**
@@ -82,7 +95,14 @@ class Provider  implements ProviderInterface
      */
     public function findByLogin($login)
     {
-        // TODO: Implement findByLogin() method.
+        $record = $this->createRecord();
+
+        if ( ! $user = $this->getMapper()->where($record->getBlueprint()->getLoginName(), '=', $login)->first())
+        {
+            throw new UserNotFoundException("A user could not be found with a login value of [$login].");
+        }
+
+        return $user;
     }
 
     /**

@@ -45,7 +45,7 @@ class SentryServiceProvider extends ServiceProvider
 		$this->prepareResources();
 		$this->registerHasher();
 		$this->registerUserProvider();
-		$this->registerGroupProvider();
+		$this->registerRoleProvider();
 		$this->registerThrottleProvider();
 		$this->registerSession();
 		$this->registerCookie();
@@ -133,7 +133,7 @@ class SentryServiceProvider extends ServiceProvider
 			}
 
 			// Define the Group model to use for relationships.
-			if (method_exists($model, 'setGroupModel'))
+			/*if (method_exists($model, 'setGroupModel'))
 			{
 				$groupModel = array_get($config, 'groups.model');
 
@@ -152,7 +152,7 @@ class SentryServiceProvider extends ServiceProvider
 					array($model, 'setUserGroupsPivot'),
 					array($pivotTable)
 				);
-			}
+			}*/
 
 			return new UserProvider($app['sentry.hasher'], $model);
 		});
@@ -163,7 +163,7 @@ class SentryServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	protected function registerGroupProvider()
+	protected function registerRoleProvider()
 	{
 		$this->app['sentry.group'] = $this->app->share(function($app)
 		{

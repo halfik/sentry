@@ -20,8 +20,8 @@
 
 use Netinteractive\Sentry\Cookies\CookieInterface;
 use Netinteractive\Sentry\Cookies\NativeCookie;
-use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
-use Netinteractive\Sentry\Role\ProviderInterface as GroupProviderInterface;
+use Netinteractive\Sentry\Role\Eloquent\Provider as RoleProvider;
+use Netinteractive\Sentry\Role\ProviderInterface as RoleProviderInterface;
 use Netinteractive\Sentry\Hashing\NativeHasher;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
@@ -77,7 +77,7 @@ class Sentry {
 	 *
 	 * @var \Netinteractive\Sentry\Role\ProviderInterface
 	 */
-	protected $groupProvider;
+	protected $roleProvider;
 
 	/**
 	 * The throttle provider, used for retrieving
@@ -99,7 +99,7 @@ class Sentry {
 	 * Create a new Sentry object.
 	 *
 	 * @param  \Netinteractive\Sentry\User\ProviderInterface $userProvider
-	 * @param  \Netinteractive\Sentry\Role\ProviderInterface $groupProvider
+	 * @param  \Netinteractive\Sentry\Role\ProviderInterface $roleProvider
 	 * @param  \Netinteractive\Sentry\Throttling\ProviderInterface $throttleProvider
 	 * @param  \Netinteractive\Sentry\Sessions\SessionInterface $session
 	 * @param  \Netinteractive\Sentry\Cookies\CookieInterface $cookie
@@ -108,7 +108,7 @@ class Sentry {
 	 */
 	public function __construct(
 		UserProviderInterface $userProvider = null,
-		GroupProviderInterface $groupProvider = null,
+		RoleProviderInterface $roleProvider = null,
 		ThrottleProviderInterface $throttleProvider = null,
 		SessionInterface $session = null,
 		CookieInterface $cookie = null,
@@ -116,7 +116,7 @@ class Sentry {
 	)
 	{
 		$this->userProvider     = $userProvider ?: new UserProvider(new NativeHasher);
-		$this->groupProvider    = $groupProvider ?: new GroupProvider;
+		$this->roleProvider    = $roleProvider ?: new RoleProvider();
 		$this->throttleProvider = $throttleProvider ?: new ThrottleProvider($this->userProvider);
 
 		$this->session          = $session ?: new NativeSession;
@@ -432,24 +432,24 @@ class Sentry {
 	}
 
 	/**
-	 * Sets the group provider for Sentry.
+	 * Sets the role provider for Sentry.
 	 *
 	 * @param  \Netinteractive\Sentry\Role\ProviderInterface
 	 * @return void
 	 */
-	public function setGroupProvider(GroupProviderInterface $groupProvider)
+	public function setRoleProvider(RoleProviderInterface $roleProvider)
 	{
-		$this->groupProvider = $groupProvider;
+		$this->roleProvider = $roleProvider;
 	}
 
 	/**
-	 * Gets the group provider for Sentry.
+	 * Gets the role provider for Sentry.
 	 *
 	 * @return \Netinteractive\Sentry\Role\ProviderInterface
 	 */
-	public function getGroupProvider()
+	public function getRoleProvider()
 	{
-		return $this->groupProvider;
+		return $this->roleProvider;
 	}
 
 	/**
@@ -516,27 +516,27 @@ class Sentry {
 	}
 
 	/**
-	 * Find the group by ID.
+	 * Find the role by ID.
 	 *
 	 * @param  int  $id
-	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @return \Netinteractive\Sentry\Role\RoleInterface  $role
 	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
-	public function findGroupById($id)
+	public function findRoleById($id)
 	{
-		return $this->groupProvider->findById($id);
+		return $this->roleProvider->findById($id);
 	}
 
 	/**
-	 * Find the group by name.
+	 * Find the role by name.
 	 *
 	 * @param  string  $name
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
 	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
 	 */
-	public function findGroupByName($name)
+	public function findRoleByName($name)
 	{
-		return $this->groupProvider->findByName($name);
+		return $this->roleProvider->findByName($name);
 	}
 
 	/**
@@ -544,20 +544,20 @@ class Sentry {
 	 *
 	 * @return array  $groups
 	 */
-	public function findAllGroups()
+	public function findAllRoles()
 	{
-		return $this->groupProvider->findAll();
+		return $this->roleProvider->findAll();
 	}
 
 	/**
-	 * Creates a group.
+	 * Creates a role.
 	 *
 	 * @param  array  $attributes
 	 * @return \Netinteractive\Sentry\Role\RoleInterface
 	 */
-	public function createGroup(array $attributes)
+	public function createRole(array $attributes)
 	{
-		return $this->groupProvider->create($attributes);
+		return $this->roleProvider->create($attributes);
 	}
 
 
