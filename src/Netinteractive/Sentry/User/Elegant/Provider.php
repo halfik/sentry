@@ -35,7 +35,7 @@ class Provider  implements ProviderInterface
             $this->model = $model;
         }
 
-        $this->mapper = \App::make('ni.elegant.mapper.db', array(array($this->model)));
+        $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
         $this->hasher = $hasher;
     }
 
