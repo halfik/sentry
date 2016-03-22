@@ -10,13 +10,11 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function up()
     {
-
-
         if (Schema::hasTable('role')){
             DB::table('role')->insert(
                 array(
                     'code' => 'admin',
-                    'name' => 'Administrator',
+                    'name' => _('Administrator'),
                     'is_hidden' => false,
                     'weight' => 0
                 )
@@ -25,7 +23,7 @@ class MigrationCartalystDefaultRoles extends Migration {
             DB::table('role')->insert(
                 array(
                     'code' => 'user',
-                    'name' => 'Użytkownik',
+                    'name' => _('Użytkownik'),
                     'is_hidden' => true,
                     'weight' => 80
                 )
@@ -34,7 +32,7 @@ class MigrationCartalystDefaultRoles extends Migration {
             DB::table('role')->insert(
                 array(
                     'code' => 'guest',
-                    'name' => 'Gość',
+                    'name' => _('Gość'),
                     'is_hidden' => true,
                     'weight' => 100
                 )

@@ -29,7 +29,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_role', function($table)
+		Schema::create('user__role', function($table)
 		{
 			$table->integer('user__id')->unsigned();
 			$table->integer('role__id')->unsigned();
@@ -48,7 +48,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users_roles');
+		Schema::drop('user__role');
 	}
 
 }

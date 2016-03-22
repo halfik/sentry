@@ -30,7 +30,10 @@ use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
 use Netinteractive\Sentry\Users\Eloquent\Provider as UserProvider;
 use Illuminate\Support\ServiceProvider;
 
-class SentryServiceProvider extends ServiceProvider {
+class SentryServiceProvider extends ServiceProvider
+{
+
+
 
 	/**
 	 * Register the service provider.

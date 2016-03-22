@@ -70,7 +70,7 @@ return array(
 		|
 		*/
 
-		'key' => 'cartalyst_sentry',
+		'key' => 'netinteractive_sentry',
 
  	),
 
@@ -95,7 +95,7 @@ return array(
 		|
 		*/
 
-		'model' => 'Cartalyst\Sentry\Groups\Elegant\Group',
+		'model' => 'Netinteractive\Sentry\Groups\Elegant\Group',
 
 	),
 
@@ -120,7 +120,7 @@ return array(
 		|
 		*/
 
-		'model' => 'User',
+		'model' => 'Netinteractive\Sentry\User\Elegant\Record',
 
 		/*
 		|--------------------------------------------------------------------------
@@ -149,7 +149,7 @@ return array(
 	|
 	*/
 
-	'user_groups_pivot_table' => 'users_roles',
+	'user_groups_pivot_table' => 'user__role',
 
 	/*
 	|--------------------------------------------------------------------------

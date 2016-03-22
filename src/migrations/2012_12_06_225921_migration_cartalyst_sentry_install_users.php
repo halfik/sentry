@@ -50,7 +50,10 @@ class MigrationCartalystSentryInstallUsers extends Migration {
             // support the indexes, other engines aren't affected.
             $table->engine = 'InnoDB';
             $table->unique('email');
+            $table->index('login');
             $table->index('activation_code');
+            $table->index('first_name');
+            $table->index('last_name');
             $table->index('reset_password_code');
         });
     }
