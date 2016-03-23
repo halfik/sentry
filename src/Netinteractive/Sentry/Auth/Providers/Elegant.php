@@ -19,7 +19,7 @@ class ElegantProvider implements AuthProviderInferface
 
         // We'll default to the login name field, but fallback to a hard-coded
         // 'login' key in the array that was passed.
-        $loginName = $userProvider->getEmptyUser()->getLoginName();
+        $loginName = $userProvider->getEmptyUser()->getBlueprint()->getLoginName();
         $loginCredentialKey = (isset($credentials[$loginName])) ? $loginName : 'login';
 
         if (empty($credentials[$loginCredentialKey])) {
@@ -52,17 +52,18 @@ class ElegantProvider implements AuthProviderInferface
         }
         catch (UserNotFoundException $e) {
             if ($throttlingEnabled and isset($throttle)) {
-                $throttle->addLoginAttempt();
+                $throttleProvider->addLoginAttempt($throttle);
             }
 
             throw $e;
         }
 
         if ($throttlingEnabled and isset($throttle)) {
-            $throttle->clearLoginAttempts();
+            $throttleProvider->clearLoginAttempts($throttle);
         }
 
         $user->clearResetPassword();
+        $userProvider->getMapper()->save($user);
 
         return $user;
     }

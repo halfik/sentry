@@ -81,7 +81,7 @@ interface ProviderInterface {
      * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
      * @return void
      */
-    public function clearLoginAttemptsIfAllowed(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
+    public function clearLoginAttempts(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
 
     /**
      * Add a new login attempt.

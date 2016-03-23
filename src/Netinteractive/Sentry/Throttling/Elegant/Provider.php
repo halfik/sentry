@@ -172,7 +172,7 @@ class Provider  implements ProviderInterface
      *
      * @return void
      */
-    public function clearLoginAttemptsIfAllowed(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
+    public function clearLoginAttempts(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
     {
         $blueprint = $record->getBlueprint();
         $suspensionTime  = $blueprint->getSuspensionTime();
