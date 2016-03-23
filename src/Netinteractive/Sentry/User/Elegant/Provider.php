@@ -71,7 +71,7 @@ class Provider  implements ProviderInterface
     {
         if ( ! $user = $this->getMapper()->find($id))
         {
-            throw new UserNotFoundException( sprintf( _("A user could not be found with ID [%s]."), $id) );
+            throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika o ID [%s]."), $id) );
         }
 
         return $user;
@@ -86,10 +86,8 @@ class Provider  implements ProviderInterface
      */
     public function findByLogin($login)
     {
-        $record = $this->createRecord();
-
-        if ( !$user = $this->getMapper()->where($record->getBlueprint()->getLoginName(), '=', $login)->first()) {
-            throw new UserNotFoundException( sprintf( _("A user could not be found with a login value of [%s]."), $login ));
+        if ( !$user = $this->getMapper()->login($login)->first()) {
+            throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika o loginie [%s]."), $login ));
         }
 
         return $user;
@@ -108,7 +106,7 @@ class Provider  implements ProviderInterface
         $loginName = $record->getBlueprint()->getLoginName();
 
         if ( ! array_key_exists($loginName, $credentials)) {
-            throw new \InvalidArgumentException( sprintf( _("Login attribute [%s] was not provided."), $loginName));
+            throw new \InvalidArgumentException( sprintf( _("Nie dostarczono pola login [%s]."), $loginName));
         }
 
         $passwordName = $record->getBlueprint()->getPasswordName();
@@ -130,7 +128,7 @@ class Provider  implements ProviderInterface
         }
 
         if ( ! $user = $this->getMapper()->first()){
-            throw new UserNotFoundException( _("A user was not found with the given credentials."));
+            throw new UserNotFoundException( _("Nie znaleziono użytkownika."));
         }
 
         // Now check the hashed credentials match ours
@@ -171,18 +169,18 @@ class Provider  implements ProviderInterface
     public function findByActivationCode($code)
     {
         if ( !$code) {
-            throw new \InvalidArgumentException( _("No activation code passed.") );
+            throw new \InvalidArgumentException( _("Nie przekazano kodu aktywacyjnego.") );
         }
 
-        $result = $this->getMapper()->where('activation_code', '=', $code)->get();
+        $result = $this->getMapper()->activationCode($code)->get();
 
 
         if (($count = $result->count()) > 1) {
-            throw new \RuntimeException( sprintf( _("Found [%s] users with the same activation code."), $code) );
+            throw new \RuntimeException( sprintf( _("Znaleziono [%s] użytkowników z identycznym kodem aktywacyjnym."), $code) );
         }
 
         if ( ! $user = $result->first()) {
-            throw new UserNotFoundException( _("A user was not found with the given activation code.") );
+            throw new UserNotFoundException( _("Nie znaleziono użytkownika.") );
         }
 
         return $user;
@@ -198,14 +196,14 @@ class Provider  implements ProviderInterface
      */
     public function findByResetPasswordCode($code)
     {
-        $result = $this->getMapper()->where('reset_password_code', '=', $code)->get();
+        $result = $this->getMapper()->resetPasswordCode($code)->get();
 
         if (($count = $result->count()) > 1) {
-            throw new \RuntimeException( sprintf(_("Found [%s] users with the same reset password code."), $count) );
+            throw new \RuntimeException( sprintf(_("Znaleziono [%s] użytkowników z identycznym kodem resetującym hasło."), $count) );
         }
 
         if ( ! $user = $result->first()) {
-            throw new UserNotFoundException( _("A user was not found with the given reset password code.") );
+            throw new UserNotFoundException( _("Nie znaleziono użytkownika.") );
         }
 
         return $user;

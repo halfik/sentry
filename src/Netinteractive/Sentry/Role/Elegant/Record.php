@@ -1,8 +1,10 @@
 <?php
 namespace Netinteractive\Sentry\Role\Elegant;
 
+use \Netinteractive\Elegant\Model\Record AS BaseRecord;
+use \Netinteractive\Sentry\Role\RoleInterface as RoleInterface;
 
-class Record extends \Netinteractive\Elegant\Model\Record implements \Netinteractive\Sentry\Role\RoleInterface
+class Record extends BaseRecord implements RoleInterface
 {
     public function init()
     {
@@ -11,13 +13,13 @@ class Record extends \Netinteractive\Elegant\Model\Record implements \Netinterac
     }
 
     /**
-     * Returns the group's ID.
+     * Returns the role's ID.
      *
      * @return mixed
      */
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->id;
     }
 
     /**
@@ -27,7 +29,7 @@ class Record extends \Netinteractive\Elegant\Model\Record implements \Netinterac
      */
     public function getName()
     {
-        // TODO: Implement getName() method.
+        return $this->name;
     }
 
     /**
@@ -50,26 +52,6 @@ class Record extends \Netinteractive\Elegant\Model\Record implements \Netinterac
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Saves the group.
-     *
-     * @return bool
-     */
-    public function save()
-    {
-        // TODO: Implement save() method.
-    }
-
-    /**
-     * Delete the group.
-     *
-     * @return bool
-     */
-    public function delete()
-    {
-        // TODO: Implement delete() method.
     }
 
 

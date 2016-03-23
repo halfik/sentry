@@ -1,6 +1,4 @@
-<?php
-
-namespace Netinteractive\Sentry\Role\Elegant;
+<?php namespace Netinteractive\Sentry\Role\Elegant;
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
@@ -106,5 +104,13 @@ class Blueprint extends  BaseBlueprint
         );
 
         return parent::init();
+    }
+
+    /**
+     * Returns scope object
+     * @return null
+     */
+    public function getScopeObject(){
+        return new Scope($this->getStorageName());
     }
 }

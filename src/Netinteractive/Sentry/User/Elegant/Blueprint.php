@@ -72,7 +72,7 @@ class Blueprint extends BaseBlueprint
                 )
             ),
             'password'=>array(
-                'title' => _('Password'),
+                'title' => _('Hasło'),
                 'type'=> static::TYPE_PASSWORD,
                 'hashable' => true,
                 'rules' => array(
@@ -81,7 +81,7 @@ class Blueprint extends BaseBlueprint
             ),
 
             'first_name' => array(
-                'title' => _('First name'),
+                'title' => _('Imię'),
                 'type' => static::TYPE_STRING,
                 'sortable' => true,
                 'searchable' => Searchable::$contains,
@@ -92,7 +92,7 @@ class Blueprint extends BaseBlueprint
                 )
             ),
             'last_name' => array(
-                'title'=> _('Last name'),
+                'title'=> _('Nazwisko'),
                 'type'=>static::TYPE_STRING,
                 'sortable' => true,
                 'searchable' => Searchable::$contains,
@@ -103,7 +103,7 @@ class Blueprint extends BaseBlueprint
                 )
             ),
             'permissions' => array(
-                'title' => _('Permissions'),
+                'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
                 'filters' => array(
                     'save' => array(
@@ -115,7 +115,7 @@ class Blueprint extends BaseBlueprint
                 )
             ),
             'activated' => array(
-                'title' => _('Is active'),
+                'title' => _('Czy aktywny?'),
                 'type' => static::TYPE_BOOL,
                 'sortable' => true,
                 'rules' => array(
@@ -126,11 +126,11 @@ class Blueprint extends BaseBlueprint
                 )
             ),
             'activation_code' => array(
-                'title' => _('Activation code'),
+                'title' => _('Kod aktywacyjny'),
                 'type' => static::TYPE_STRING
             ),
             'activated_at' => array(
-                'title' => _('Activation date'),
+                'title' => _('Data aktywacji konta'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
                 'sortable' => true,
@@ -142,7 +142,7 @@ class Blueprint extends BaseBlueprint
                 ),
             ),
             'last_login' => array(
-                'title' => _('Last login date'),
+                'title' => _('Data ostatniego logowania'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
                 'sortable' => true,
@@ -159,11 +159,11 @@ class Blueprint extends BaseBlueprint
                 'type' => static::TYPE_STRING
             ),
             'reset_password_code' => array(
-                'title' => _('Password reset code'),
+                'title' => _('Kod resetu hasła'),
                 'type' => static::TYPE_STRING
             ),
             'created_at' => array(
-                'title'=> _('created_at'),
+                'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
                 'sortable' => true,
                 'rules' => array(
@@ -174,7 +174,7 @@ class Blueprint extends BaseBlueprint
                 ),
             ),
             'updated_at' => array(
-                'title'=> _('updated_at'),
+                'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
                 'sortable' => true,
                 'rules' => array(
@@ -187,6 +187,15 @@ class Blueprint extends BaseBlueprint
         );
 
         return parent::init();
+    }
+
+
+    /**
+     * Returns scope object
+     * @return null
+     */
+    public function getScopeObject(){
+        return new Scope($this->getStorageName());
     }
 
     /**

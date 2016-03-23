@@ -41,18 +41,4 @@ interface RoleInterface {
 	 */
 	public function getPermissions();
 
-	/**
-	 * Saves the group.
-	 *
-	 * @return bool
-	 */
-	public function save();
-
-	/**
-	 * Delete the group.
-	 *
-	 * @return bool
-	 */
-	public function delete();
-
 }

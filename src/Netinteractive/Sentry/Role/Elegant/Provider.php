@@ -61,7 +61,7 @@ class Provider implements ProviderInterface
 
 
     /**
-     * Find the group by ID.
+     * Find the role by ID.
      *
      * @param  int $id
      * @return \Netinteractive\Sentry\Role\RoleInterface  $role
@@ -69,15 +69,15 @@ class Provider implements ProviderInterface
      */
     public function findById($id)
     {
-        if (  $role = $this->getMapper()->find($id) ) {
-            throw new RoleNotFoundException( sprintf(_("A role could not be found with ID [%s]."), $id) );
+        if ( !$role = $this->getMapper()->find($id) ) {
+            throw new RoleNotFoundException( sprintf(_("Nie odnaleziono roli o ID [%s]."), $id) );
         }
 
         return $role;
     }
 
     /**
-     * Find the group by name.
+     * Find the role by name.
      *
      * @param  string $name
      * @return \Netinteractive\Sentry\Role\RoleInterface  $group
@@ -85,7 +85,11 @@ class Provider implements ProviderInterface
      */
     public function findByName($name)
     {
-        // TODO: Implement findByName() method.
+        if ( !$role = $this->getMapper()->name($name)->first()) {
+            throw new RoleNotFoundException( sprintf(_("Nie odnaleziono roli o nazwie [%s]."), $name));
+        }
+
+        return $role;
     }
 
     /**
