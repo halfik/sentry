@@ -93,13 +93,29 @@ class Provider implements ProviderInterface
     }
 
     /**
-     * Returns all groups.
+     * Find the role by code.
      *
-     * @return array  $groups
+     * @param  string  $code
+     * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+     * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
+     */
+    public function findByCode($code)
+    {
+        if ( !$role = $this->getMapper()->code($code)->first()) {
+            throw new RoleNotFoundException( sprintf(_("Nie odnaleziono roli o kodzie [%s]."), $code));
+        }
+
+        return $role;
+    }
+
+    /**
+     * Returns all roles.
+     *
+     * @return array  $roles
      */
     public function findAll()
     {
-        // TODO: Implement findAll() method.
+        return $this->getMapper()->get();
     }
 
     /**
@@ -110,7 +126,10 @@ class Provider implements ProviderInterface
      */
     public function create(array $attributes)
     {
-        // TODO: Implement create() method.
+        $role = $this->createRecord();
+        $role->fill($attributes);
+
+        return $role;
     }
 
 }

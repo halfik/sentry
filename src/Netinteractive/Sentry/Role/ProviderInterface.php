@@ -21,7 +21,7 @@
 interface ProviderInterface {
 
 	/**
-	 * Find the group by ID.
+	 * Find the role by ID.
 	 *
 	 * @param  int  $id
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
@@ -30,7 +30,7 @@ interface ProviderInterface {
 	public function findById($id);
 
 	/**
-	 * Find the group by name.
+	 * Find the role by name.
 	 *
 	 * @param  string  $name
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
@@ -38,15 +38,25 @@ interface ProviderInterface {
 	 */
 	public function findByName($name);
 
-	/**
-	 * Returns all groups.
+    /**
+     * Find the role by code.
+     *
+     * @param  string  $code
+     * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+     * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
+     */
+    public function findByCode($code);
+
+
+    /**
+	 * Returns all roles.
 	 *
 	 * @return array  $groups
 	 */
 	public function findAll();
 
 	/**
-	 * Creates a group.
+	 * Creates a role.
 	 *
 	 * @param  array  $attributes
 	 * @return \Netinteractive\Sentry\Role\RoleInterface
