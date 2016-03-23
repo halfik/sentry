@@ -72,4 +72,38 @@ interface ProviderInterface {
 	 */
 	public function isEnabled();
 
+    /**
+     * Inspects the last attempt vs the suspension time
+     * (the time in which attempts must space before the
+     * account is suspended). If we can clear our attempts
+     * now, we'll do so and save.
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return void
+     */
+    public function clearLoginAttemptsIfAllowed(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
+
+    /**
+     * Add a new login attempt.
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return void
+     */
+    public function addLoginAttempt(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
+
+    /**
+     * Suspend the user associated with the throttle
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return void
+     */
+    public function suspend(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
+
+
+    /**
+     * Unsuspend the user.
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return void
+     */
+    public function unsuspend(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
 }

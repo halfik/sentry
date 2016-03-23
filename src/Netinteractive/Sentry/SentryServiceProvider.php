@@ -58,7 +58,7 @@ class SentryServiceProvider extends ServiceProvider
 		$this->mergeConfigFrom($config, 'netinteractive.sentry');
 
 		$this->publishes([
-			$config     => config_path('netinteractive.sentry.php'),
+			//$config     => config_path('netinteractive.sentry.php'),
 			$migrations => $this->app->databasePath().'/migrations',
 		]);
 	}
@@ -167,7 +167,7 @@ class SentryServiceProvider extends ServiceProvider
 		$this->app['sentry.throttle'] = $this->app->share(function($app)
 		{
 			$config = $app['config']->get('netinteractive.sentry');
-            echo "<pre>"; print_R($config); exit;
+
 			$model = array_get($config, 'throttling.model');
 
 			$throttleProvider = new ThrottleProvider($app['sentry.user'], $model);

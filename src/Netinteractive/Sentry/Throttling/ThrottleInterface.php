@@ -34,33 +34,7 @@ interface ThrottleInterface {
 	 */
 	public function getLoginAttempts();
 
-	/**
-	 * Add a new login attempt.
-	 *
-	 * @return void
-	 */
-	public function addLoginAttempt();
 
-	/**
-	 * Clear all login attempts
-	 *
-	 * @return void
-	 */
-	public function clearLoginAttempts();
-
-	/**
-	 * Suspend the user associated with the throttle
-	 *
-	 * @return void
-	 */
-	public function suspend();
-
-	/**
-	 * Unsuspend the user.
-	 *
-	 * @return void
-	 */
-	public function unsuspend();
 
 	/**
 	 * Check if the user is suspended.
@@ -98,12 +72,5 @@ interface ThrottleInterface {
 	 * @throws \Netinteractive\Sentry\Throttling\UserSuspendedException
 	 */
 	public function check();
-
-	/**
-	 * Saves the throttle.
-	 *
-	 * @return bool
-	 */
-	public function save();
 
 }

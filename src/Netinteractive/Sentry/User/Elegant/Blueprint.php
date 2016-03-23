@@ -24,9 +24,12 @@ class Blueprint extends BaseBlueprint
         $this->incrementingPk = 'id';
 
         $config = \Config::get('netinteractive.sentry');
-        $this->getRelationManager()
-            ->belongsToMany('roles', $config['role']['model'],$config['user_role_pivot_table'], 'user__id', array('role__id') )
-        ;
+        $this->getRelationManager()->belongsToMany(
+            'roles',
+            $config['role']['model'],$config['user_role_pivot_table'],
+            'user__id',
+            'role__id'
+        );
 
         $this->fields = array(
             'id' => array(

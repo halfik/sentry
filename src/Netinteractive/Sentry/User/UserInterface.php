@@ -29,26 +29,6 @@ interface UserInterface {
 	 */
 	public function getId();
 
-	/**
-	 * Returns the name for the user's login.
-	 *
-	 * @return string
-	 */
-	public function getLoginName();
-
-	/**
-	 * Returns the user's login.
-	 *
-	 * @return string
-	 */
-	public function getLogin();
-
-	/**
-	 * Returns the name for the user's password.
-	 *
-	 * @return string
-	 */
-	public function getPasswordName();
 
 	/**
 	 * Returns the user's password (hashed).
@@ -79,29 +59,7 @@ interface UserInterface {
 	 */
 	public function isSuperUser();
 
-	/**
-	 * Validates the user and throws a number of
-	 * Exceptions if validation fails.
-	 *
-	 * @return bool
-	 * @throws \Netinteractive\Sentry\User\LoginRequiredException
-	 * @throws \Netinteractive\Sentry\User\UserExistsException
-	 */
-	public function validate();
 
-	/**
-	 * Save the user.
-	 *
-	 * @return bool
-	 */
-	public function save();
-
-	/**
-	 * Delete the user.
-	 *
-	 * @return bool
-	 */
-	public function delete();
 
 	/**
 	 * Gets a code for when the user is

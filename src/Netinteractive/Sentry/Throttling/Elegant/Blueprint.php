@@ -5,16 +5,34 @@ use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
 class Blueprint extends BaseBlueprint
 {
+
+    /**
+     * Attempt limit.
+     *
+     * @var int
+     */
+    protected static $attemptLimit;
+
+    /**
+     * Suspensions time in minutes.
+     *
+     * @var int
+     */
+    protected static $suspensionTime;
+
     /**
      * @return mixed
      */
     protected function init()
     {
-        $table = \Config::get('netinteractive.sentry.throttle_table');
+        $config = \Config::get('netinteractive.sentry');
+        $table = $config['throttle_table'];
 
         $this->setStorageName($table);
         $this->primaryKey = array('id');
         $this->incrementingPk = 'id';
+
+        $this->getRelationManager()->belongsTo('user',$config['users']['model'], 'user__id', 'id');
 
         $this->fields = array(
             'id' => array(
@@ -47,6 +65,9 @@ class Blueprint extends BaseBlueprint
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'required|integer',
+                ),
+                'filters' => array(
+                    'fill' => array('emptyToZero')
                 )
             ),
             'suspended' => array(
@@ -58,6 +79,7 @@ class Blueprint extends BaseBlueprint
                 ),
                 'filters' => array(
                     'display' => array('bool'),
+                    'fill' => array('emptyToFalse')
                 )
             ),
             'banned' => array(
@@ -69,6 +91,7 @@ class Blueprint extends BaseBlueprint
                 ),
                 'filters' => array(
                     'display' => array('bool'),
+                    'fill' => array('emptyToFalse')
                 )
             ),
             'last_attempt_at' => array(
@@ -112,11 +135,40 @@ class Blueprint extends BaseBlueprint
         return parent::init();
     }
 
+
+    /**
+     * returns login attemnt limit
+     * @return int
+     */
+    public static function getAttemptLimit()
+    {
+        if (!static::$attemptLimit){
+            static::$attemptLimit = \Config::get('netinteractive.sentry.throttling.attempt_limit');
+        }
+
+        return static::$attemptLimit;
+    }
+
+
+    /**
+     * Returns suspension time in minutes
+     * @return int
+     */
+    public static function getSuspensionTime()
+    {
+        if (!static::$suspensionTime){
+            static::$suspensionTime = \Config::get('netinteractive.sentry.throttling.suspension_time');
+        }
+
+        return static::$suspensionTime;
+    }
+
     /**
      * Returns scope object
      * @return null
      */
-    public function getScopeObject(){
+    public function getScopeObject()
+    {
         return new Scope($this->getStorageName());
     }
 }
