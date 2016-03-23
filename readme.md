@@ -47,6 +47,12 @@ Installation of Sentry is very easy. We've got a number of guides to get Sentry 
 
 Currently, we do not have an upgrade method from Sentry 1, however we may be able to publish one before the stable release of Sentry 2.0. When upgrading between betas or release-candidates, please see [our changelog](https://github.com/cartalyst/sentry/blob/master/changelog.md).
 
+
+## Changelog
+
+* 5.0.0 : init
+
+
 ### Support
 
 We offer support through [our help forums](http://help.cartalyst.com), on [IRC at #cartalyst](http://webchat.freenode.net/?channels=cartalyst) and through GitHub issues (bugs only).
