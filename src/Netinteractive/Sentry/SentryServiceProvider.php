@@ -17,14 +17,15 @@
  * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
+use Illuminate\Support\ServiceProvider;
 
 use Netinteractive\Sentry\Cookies\IlluminateCookie;
 use Netinteractive\Sentry\Sessions\IlluminateSession;
-use Illuminate\Support\ServiceProvider;
 
 use Netinteractive\Sentry\Role\Elegant\Provider as RoleProvider;
 use Netinteractive\Sentry\Throttling\Elegant\Provider as ThrottleProvider;
 use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
+use Netinteractive\Sentry\SocialProfile\Elegant\Provider as SocialProfileProvider;
 
 
 class SentryServiceProvider extends ServiceProvider
@@ -40,6 +41,7 @@ class SentryServiceProvider extends ServiceProvider
 		$this->registerUserProvider();
 		$this->registerRoleProvider();
 		$this->registerThrottleProvider();
+        $this->registerSocialProvider();
 		$this->registerSession();
 		$this->registerCookie();
 		$this->registerSentry();
@@ -210,6 +212,22 @@ class SentryServiceProvider extends ServiceProvider
 		});
 	}
 
+    /**
+     * Register social profile provider
+     *
+     * @return void
+     */
+    protected function registerSocialProvider()
+    {
+        $this->app['sentry.social'] = $this->app->share(function($app) {
+            $config = $app['config']->get('netinteractive.sentry');
+
+            $model = array_get($config, 'social_profile.model');
+
+            return new SocialProfileProvider($model);
+        });
+    }
+
 	/**
 	 * Register the session driver used by Sentry.
 	 *
@@ -266,6 +284,7 @@ class SentryServiceProvider extends ServiceProvider
 				$app['sentry.user'],
 				$app['sentry.role'],
 				$app['sentry.throttle'],
+                $app['sentry.social'],
 				$app['sentry.session'],
 				$app['sentry.cookie'],
 				$app['request']->getClientIp()

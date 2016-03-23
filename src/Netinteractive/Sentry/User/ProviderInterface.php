@@ -20,7 +20,8 @@
 
 use Netinteractive\Sentry\Role\RoleInterface;
 
-interface ProviderInterface {
+interface ProviderInterface
+{
 
 	/**
 	 * Finds a user by the given user ID.
@@ -55,8 +56,8 @@ interface ProviderInterface {
 	 * @param  string  $code
 	 * @return \Netinteractive\Sentry\User\UserInterface
 	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
-	 * @throws InvalidArgumentException
-	 * @throws RuntimeException
+	 * @throws \InvalidArgumentException
+	 * @throws \RuntimeException
 	 */
 	public function findByActivationCode($code);
 
@@ -65,7 +66,7 @@ interface ProviderInterface {
 	 *
 	 * @param  string  $code
 	 * @return \Netinteractive\Sentry\User\UserInterface
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 * @throws \Netinteractive\Sentry\User\UserNotFoundException
 	 */
 	public function findByResetPasswordCode($code);

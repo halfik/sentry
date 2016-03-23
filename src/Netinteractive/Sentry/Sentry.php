@@ -20,16 +20,18 @@
 
 use Netinteractive\Sentry\Cookies\CookieInterface;
 use Netinteractive\Sentry\Cookies\NativeCookie;
-use Netinteractive\Sentry\Role\Eloquent\Provider as RoleProvider;
+use Netinteractive\Sentry\Role\Elegant\Provider as RoleProvider;
 use Netinteractive\Sentry\Role\ProviderInterface as RoleProviderInterface;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
-use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
+use Netinteractive\Sentry\Throttling\Elegant\Provider as ThrottleProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface as ThrottleProviderInterface;
 use Netinteractive\Sentry\User\LoginRequiredException;
 use Netinteractive\Sentry\User\PasswordRequiredException;
 use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
 use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
+use Netinteractive\Sentry\SocialProfile\Elegant\Provider as SocialProfileProvider;
+use Netinteractive\Sentry\SocialProfile\ProviderInterface as SocialProviderInterface;
 use Netinteractive\Sentry\User\UserInterface;
 use Netinteractive\Sentry\User\UserNotFoundException;
 use Netinteractive\Sentry\User\UserNotActivatedException;
@@ -87,6 +89,11 @@ class Sentry {
 	 */
 	protected $throttleProvider;
 
+    /**
+     * @var \Netinteractive\Sentry\SocialProfile\ProviderInterface
+     */
+    protected $socialProfileProvider;
+
 	/**
 	 * The client's IP address associated with Sentry.
 	 *
@@ -109,6 +116,7 @@ class Sentry {
 		UserProviderInterface $userProvider = null,
 		RoleProviderInterface $roleProvider = null,
 		ThrottleProviderInterface $throttleProvider = null,
+        SocialProviderInterface $socialProfileProvider = null,
 		SessionInterface $session = null,
 		CookieInterface $cookie = null,
 		$ipAddress = null
@@ -117,11 +125,12 @@ class Sentry {
 		$this->userProvider     = $userProvider ?: new UserProvider();
 		$this->roleProvider    = $roleProvider ?: new RoleProvider();
 		$this->throttleProvider = $throttleProvider ?: new ThrottleProvider($this->userProvider);
+        $this->socialProfileProvider   = $socialProfileProvider ?: new SocialProfileProvider();
 
 		$this->session          = $session ?: new NativeSession;
 		$this->cookie           = $cookie ?: new NativeCookie;
 
-		if (isset($ipAddress)) {
+		if (isset($ipAddress)){
 			$this->ipAddress = $ipAddress;
 		}
 	}
@@ -490,6 +499,25 @@ class Sentry {
 	{
 		return $this->throttleProvider;
 	}
+
+    /**
+     * Sets the social profile provider
+     *
+     * @param SocialProviderInterface $socialProfileProvider
+     */
+    public function setSocialProfileProvider(SocialProviderInterface $socialProfileProvider)
+    {
+        $this->socialProfileProvider = $socialProfileProvider;
+    }
+
+    /**
+     * Returns social profile provider
+     * @return SocialProfileProvider|SocialProviderInterface
+     */
+    public function getSocialProfileProvider()
+    {
+        return $this->socialProfileProvider;
+    }
 
 	/**
 	 * Sets the IP address Sentry is bound to.

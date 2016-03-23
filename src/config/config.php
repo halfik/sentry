@@ -205,7 +205,33 @@ return array(
 		'suspension_time' => 15,
 
 	),
-    
+
+
+    /*
+	|--------------------------------------------------------------------------
+	| Social profile
+	|--------------------------------------------------------------------------
+	|
+	| Configuration specific to the role management component of Sentry.
+	|
+	*/
+
+    'social_profile' => array(
+
+        /*
+        |--------------------------------------------------------------------------
+        | Model
+        |--------------------------------------------------------------------------
+        |
+        | When using the "eloquent" driver, we need to know which
+        | Elegant models should be used throughout Sentry.
+        |
+        */
+
+        'model' => 'Netinteractive\Sentry\SocialProfile\Elegant\Record',
+
+    ),
+
 	/*
 	|--------------------------------------------------------------------------
 	| Multiple Login
