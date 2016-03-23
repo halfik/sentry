@@ -162,7 +162,7 @@ return array(
 		|
 		*/
 
-		'enabled' => false,
+		'enabled' => true,
 
 		/*
 		|--------------------------------------------------------------------------
@@ -174,7 +174,7 @@ return array(
 		|
 		*/
 
-		'model' => 'Netinteractive\Sentry\Throttling\Eloquent\Throttle',
+		'model' => 'Netinteractive\Sentry\Throttling\Elegant\Record',
 
 		/*
 		|--------------------------------------------------------------------------
@@ -205,31 +205,13 @@ return array(
 		'suspension_time' => 15,
 
 	),
-
-    'resources' => array(
-
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Model
-        |--------------------------------------------------------------------------
-        |
-        | When using the "eloquent" driver, we need to know which
-        | Elegant models should be used throughout Sentry.
-        |
-        */
-
-        'model' => 'Cartalyst\Sentry\Resources\Elegant\Resource',
-
-    ),
     
 	/*
 	|--------------------------------------------------------------------------
 	| Multiple Login
 	|--------------------------------------------------------------------------
 	|
-	| Parametr określa czy można się zalogować na to samo konto użytkownika kilkukrotnie jednocześnie
+	| Parametr określa czy można się zalogować na to samo konto użytkownika  jednocześnie z wielu urządzeń/przeglądarek
 	|
 	*/
     'multiple_login' => true,

@@ -19,18 +19,16 @@
  */
 
 use Netinteractive\Sentry\Cookies\IlluminateCookie;
-use Netinteractive\Sentry\Role\Elegant\Provider as RoleProvider;
-use Netinteractive\Sentry\Sentry;
 use Netinteractive\Sentry\Sessions\IlluminateSession;
-use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
-use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
 use Illuminate\Support\ServiceProvider;
+
+use Netinteractive\Sentry\Role\Elegant\Provider as RoleProvider;
+use Netinteractive\Sentry\Throttling\Elegant\Provider as ThrottleProvider;
+use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
+
 
 class SentryServiceProvider extends ServiceProvider
 {
-
-
-
 	/**
 	 * Register the service provider.
 	 *
@@ -169,17 +167,16 @@ class SentryServiceProvider extends ServiceProvider
 		$this->app['sentry.throttle'] = $this->app->share(function($app)
 		{
 			$config = $app['config']->get('netinteractive.sentry');
-
+            echo "<pre>"; print_R($config); exit;
 			$model = array_get($config, 'throttling.model');
 
 			$throttleProvider = new ThrottleProvider($app['sentry.user'], $model);
 
-			if (array_get($config, 'throttling.enabled') === false)
-			{
+			if (array_get($config, 'throttling.enabled') === false){
 				$throttleProvider->disable();
 			}
 
-			if (method_exists($model, 'setAttemptLimit'))
+			/*if (method_exists($model, 'setAttemptLimit'))
 			{
 				$attemptLimit = array_get($config, 'throttling.attempt_limit');
 
@@ -207,7 +204,7 @@ class SentryServiceProvider extends ServiceProvider
 					array($model, 'setUserModel'),
 					array($userModel)
 				);
-			}
+			}*/
 
 			return $throttleProvider;
 		});

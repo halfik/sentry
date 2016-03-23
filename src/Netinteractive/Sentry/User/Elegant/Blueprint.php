@@ -5,19 +5,6 @@ use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
 class Blueprint extends BaseBlueprint
 {
-
-    /**
-     * Allowed permissions values.
-     *
-     * Possible options:
-     *   -1 => Deny (adds to array, but denies regardless of user's group).
-     *    0 => Remove.
-     *    1 => Add.
-     *
-     * @var array
-     */
-    protected $allowedPermissionsValues = array(-1, 0, 1);
-
     /**
      * The login attribute.
      *
