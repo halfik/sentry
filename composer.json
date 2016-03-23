@@ -35,11 +35,6 @@
             "role": "Owner"
         },
         {
-          "name": "Emil Jaszczuk",
-          "email": "ejaszczuk1989k@gmail.com",
-          "role": "Developer"
-        },
-        {
             "name": "Michał Szapowałow",
             "email": "smikebox@gmail.com",
             "role": "Developer"
@@ -60,14 +55,6 @@
       "url": "ssh://git.nidev.pl/laravel/elegant"
     }
   ],
-	"require-dev": {
-		"mockery/mockery": "0.7.2",
-		"illuminate/cookie": ">=4.0.9,<4.2",
-		"illuminate/database": ">=4.0.9,<4.2",
-		"illuminate/http": ">=4.0.9,<4.2",
-		"illuminate/session": ">=4.0.9,<4.2",
-		"ircmaxell/password-compat": "1.0.*"
-	},
 	"suggest": {
 
 	},
