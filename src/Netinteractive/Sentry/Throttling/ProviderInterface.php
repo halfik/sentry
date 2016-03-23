@@ -106,4 +106,20 @@ interface ProviderInterface {
      * @return void
      */
     public function unsuspend(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
+
+    /**
+     * Ban the user.
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return bool
+     */
+    public function ban(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
+
+    /**
+     * Unban the user.
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return void
+     */
+    public function unban(\Netinteractive\Sentry\Throttling\ThrottleInterface $record);
 }

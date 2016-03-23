@@ -2,6 +2,8 @@
 
 
 use Netinteractive\Sentry\Throttling\ThrottleInterface;
+use Netinteractive\Sentry\Throttling\UserBannedException;
+use Netinteractive\Sentry\Throttling\UserSuspendedException;
 
 class Record extends \Netinteractive\Elegant\Model\Record implements ThrottleInterface
 {
@@ -21,7 +23,7 @@ class Record extends \Netinteractive\Elegant\Model\Record implements ThrottleInt
      */
     public function getUser()
     {
-        return $this->user()->get();
+        return $this->user()->first();
     }
 
     /**
@@ -50,25 +52,7 @@ class Record extends \Netinteractive\Elegant\Model\Record implements ThrottleInt
         return false;
     }
 
-    /**
-     * Ban the user.
-     *
-     * @return bool
-     */
-    public function ban()
-    {
-        // TODO: Implement ban() method.
-    }
 
-    /**
-     * Unban the user.
-     *
-     * @return void
-     */
-    public function unban()
-    {
-        // TODO: Implement unban() method.
-    }
 
     /**
      * Check if user is banned
@@ -77,7 +61,7 @@ class Record extends \Netinteractive\Elegant\Model\Record implements ThrottleInt
      */
     public function isBanned()
     {
-        // TODO: Implement isBanned() method.
+        return $this->banned;
     }
 
     /**
@@ -89,7 +73,21 @@ class Record extends \Netinteractive\Elegant\Model\Record implements ThrottleInt
      */
     public function check()
     {
-        // TODO: Implement check() method.
+        if ($this->isBanned()) {
+            throw new UserBannedException(sprintf(
+                'Użytkownik [%s] jest zbanowany.',
+                $this->getUser()->getLogin()
+            ));
+        }
+
+        if ($this->isSuspended()) {
+            throw new UserSuspendedException(sprintf(
+                'Użytkownik [%s] został zawieszony.',
+                $this->getUser()->getLogin()
+            ));
+        }
+
+        return true;
     }
 
 

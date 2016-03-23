@@ -70,6 +70,14 @@ interface UserInterface {
 	 */
 	public function getPersistCode();
 
+    /**
+     * Gets user login
+     *
+     * @return string
+     */
+    public function getLogin();
+
+
 	/**
 	 * Checks the given persist code.
 	 *

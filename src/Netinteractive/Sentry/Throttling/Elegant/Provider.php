@@ -224,7 +224,7 @@ class Provider  implements ProviderInterface
      */
     public function suspend(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
     {
-        if ( !$record->suspended) {
+        if (!$record->suspended) {
             $record->suspended    = true;
             $record->suspended_at =new Carbon();
             $this->getMapper()->save($record);
@@ -239,12 +239,42 @@ class Provider  implements ProviderInterface
      */
     public function unsuspend(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
     {
-        if ($record->suspended)
-        {
+        if ($record->suspended) {
             $record->attempts        = 0;
             $record->last_attempt_at = null;
             $record->suspended       = false;
             $record->suspended_at    = null;
+            $this->getMapper()->save($record);
+        }
+    }
+
+
+    /**
+     * Ban the user.
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return bool
+     */
+    public function ban(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
+    {
+        if (!$record->banned) {
+            $record->banned = true;
+            $record->banned_at = new Carbon();
+            $this->getMapper()->save($record);
+        }
+    }
+
+    /**
+     * Unban the user.
+     *
+     * @param \Netinteractive\Sentry\Throttling\ThrottleInterface $record
+     * @return void
+     */
+    public function unban(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
+    {
+        if ($record->banned) {
+            $record->banned = false;
+            $record->banned_at = null;
             $this->getMapper()->save($record);
         }
     }

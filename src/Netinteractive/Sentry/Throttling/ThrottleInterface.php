@@ -43,19 +43,6 @@ interface ThrottleInterface {
 	 */
 	public function isSuspended();
 
-	/**
-	 * Ban the user.
-	 *
-	 * @return bool
-	 */
-	public function ban();
-
-	/**
-	 * Unban the user.
-	 *
-	 * @return void
-	 */
-	public function unban();
 
 	/**
 	 * Check if user is banned

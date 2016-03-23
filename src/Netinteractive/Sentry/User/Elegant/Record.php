@@ -277,6 +277,19 @@ class Record extends \Netinteractive\Elegant\Model\Record implements UserInterfa
 
         return $this->persist_code;
     }
+
+    /**
+     * Gets user login
+     *
+     * @return string
+     */
+    public function getLogin()
+    {
+        $loginName = $this->getBlueprint()->getLoginName();
+        return $this->{$loginName};
+    }
+
+
     /**
      * Checks the given persist code.
      *

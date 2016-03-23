@@ -121,8 +121,7 @@ class Sentry {
 		$this->session          = $session ?: new NativeSession;
 		$this->cookie           = $cookie ?: new NativeCookie;
 
-		if (isset($ipAddress))
-		{
+		if (isset($ipAddress)) {
 			$this->ipAddress = $ipAddress;
 		}
 	}
@@ -139,8 +138,7 @@ class Sentry {
 	{
 		$user = $this->userProvider->create($credentials);
 
-		if ($activate)
-		{
+		if ($activate) {
 			$user->attemptActivation($user->getActivationCode());
 		}
 
