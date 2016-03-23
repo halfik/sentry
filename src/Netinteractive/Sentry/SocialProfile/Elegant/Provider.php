@@ -15,6 +15,11 @@ class Provider implements ProviderInterface
 	protected $model = 'Netinteractive\Sentry\SocialProfile\Elegant\Record';
 
     /**
+     * @var \Netinteractive\Elegant\Mapper\MapperInterface
+     */
+    protected $mapper;
+
+    /**
      * @param null $model
      */
     public function __construct($model = null)
@@ -22,23 +27,49 @@ class Provider implements ProviderInterface
         if (isset($model)) {
             $this->model = $model;
         }
+
+        $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
     }
 
-    public function createModel()
+
+    /**
+     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
+     * @return $this
+     */
+    public function setMapper(MapperInterface $mapper)
     {
-        $class = '\\'.ltrim($this->model, '\\');
-
-        return new $class;
+        $this->mapper = $mapper;
+        return $this;
     }
 
+    /**
+     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
+     */
+    public function getMapper()
+    {
+        return $this->mapper;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function createRecord()
+    {
+        return \App::make($this->model);
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
     public function create(array $data)
     {
-        $model = $this->createModel();
-        $model->fill($data);
+        $record = $this->createRecord();
+        $record->fill($data);
 
-        $model->save();
+        $this->getMapper()->save($record);
 
-        return $model;
+        return $record;
     }
 
     /**
@@ -48,14 +79,11 @@ class Provider implements ProviderInterface
      */
 	public function findById($id)
 	{
-		$model = $this->createModel();
+        $blueprint = $this->createRecord()->getBlueprint();
+        $social = $this->getMapper()->where($blueprint->getStorageName().'.id', '=', $id)->first();
 
-        $model->allowQueryAcl(false);
-        $social = $model->find($id);
-        $model->allowQueryAcl(true);
 
-		if ( ! $social )
-		{
+		if ( !$social ) {
 			throw new SocialProfileNotFoundException( sprintf( _('Nie odnaleziono profilu socialego o ID [%s].'), $id ) );
 		}
 
@@ -66,20 +94,13 @@ class Provider implements ProviderInterface
      * @param $profileId
      * @return mixed
      */
-    public function findByProfile($profileId, $type){
-        $model = $this->createModel();
+    public function findByProfile($profileId, $type)
+    {
+        $social = $this->getMapper()->profileId($profileId)->type($type)->first();
 
-
-
-        $model->allowQueryAcl(false);
-        $social = $model->where('profile_id','=',$profileId)->where('type','=',$type)->first();
-        $model->allowQueryAcl(true);
-
-        if ( ! $social )
-        {
+        if ( ! $social ) {
             throw new SocialProfileNotFoundException( sprintf( _('Nie odnaleziono profilu socialnego o ID [%s].'), $profileId ) );
         }
-
 
         return $social;
     }

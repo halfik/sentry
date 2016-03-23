@@ -11,7 +11,6 @@
  * the following URL: http://www.opensource.org/licenses/BSD-3-Clause
  *
  * @package    Sentry
- * @version    2.0.0
  * @author     Netinteractive LLC
  * @license    BSD License (3-clause)
  * @copyright  (c) 2011 - 2013, Netinteractive LLC
@@ -26,8 +25,6 @@ use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
 use Netinteractive\Sentry\Throttling\Elegant\Provider as ThrottleProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface as ThrottleProviderInterface;
-use Netinteractive\Sentry\User\LoginRequiredException;
-use Netinteractive\Sentry\User\PasswordRequiredException;
 use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
 use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
 use Netinteractive\Sentry\SocialProfile\Elegant\Provider as SocialProfileProvider;
@@ -36,7 +33,8 @@ use Netinteractive\Sentry\User\UserInterface;
 use Netinteractive\Sentry\User\UserNotFoundException;
 use Netinteractive\Sentry\User\UserNotActivatedException;
 
-class Sentry {
+class Sentry
+{
 
 	/**
 	 * The user that's been retrieved and is used
@@ -145,13 +143,13 @@ class Sentry {
 	 */
 	public function register(array $credentials, $activate = false)
 	{
-		$user = $this->userProvider->create($credentials);
+        $authManager =  \App::make('sentry.auth.manager');
+        $authProvider = $authManager->getCurrent();
+        $user = $authProvider->register($credentials, $activate);
 
-		if ($activate) {
-			$user->attemptActivation($user->getActivationCode());
-		}
+        \Event::fire('sentry.register', array($user, $credentials));
 
-		return $this->user = $user;
+        return $user;
 	}
 
 
@@ -170,65 +168,10 @@ class Sentry {
 	 */
 	public function authenticate(array $credentials, $remember = false)
 	{
-		// We'll default to the login name field, but fallback to a hard-coded
-		// 'login' key in the array that was passed.
-		$loginName = $this->userProvider->getEmptyUser()->getLoginName();
-		$loginCredentialKey = (isset($credentials[$loginName])) ? $loginName : 'login';
+        $authManager =  \App::make('sentry.auth.manager');
+        $authProvider = $authManager->getCurrent();
 
-		if (empty($credentials[$loginCredentialKey]))
-		{
-			throw new LoginRequiredException("The [$loginCredentialKey] attribute is required.");
-		}
-
-		if (empty($credentials['password']))
-		{
-			throw new PasswordRequiredException('The password attribute is required.');
-		}
-
-		// If the user did the fallback 'login' key for the login code which
-		// did not match the actual login name, we'll adjust the array so the
-		// actual login name is provided.
-		if ($loginCredentialKey !== $loginName)
-		{
-			$credentials[$loginName] = $credentials[$loginCredentialKey];
-			unset($credentials[$loginCredentialKey]);
-		}
-
-		// If throttling is enabled, we'll firstly check the throttle.
-		// This will tell us if the user is banned before we even attempt
-		// to authenticate them
-		if ($throttlingEnabled = $this->throttleProvider->isEnabled())
-		{
-			if ($throttle = $this->throttleProvider->findByUserLogin($credentials[$loginName], $this->ipAddress))
-			{
-				$throttle->check();
-			}
-		}
-
-		try
-		{
-			$user = $this->userProvider->findByCredentials($credentials);
-		}
-		catch (UserNotFoundException $e)
-		{
-			if ($throttlingEnabled and isset($throttle))
-			{
-				$throttle->addLoginAttempt();
-			}
-
-			throw $e;
-		}
-
-		if ($throttlingEnabled and isset($throttle))
-		{
-			$throttle->clearLoginAttempts();
-		}
-
-		$user->clearResetPassword();
-
-		$this->login($user, $remember);
-
-		return $this->user;
+        return $authProvider->authenticate($credentials);
 	}
 
 	/**
@@ -343,6 +286,7 @@ class Sentry {
 		// The user model can attach any handlers
 		// to the "recordLogin" event.
 		$user->recordLogin();
+        $this->getUserProvider()->getMapper()->save($user);
 	}
 
 	/**
@@ -564,6 +508,18 @@ class Sentry {
 		return $this->roleProvider->findByName($name);
 	}
 
+    /**
+     * Find the role by code.
+     *
+     * @param  string  $code
+     * @return \Netinteractive\Sentry\Role\RoleInterface  $group
+     * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
+     */
+    public function findRoleByCode($code)
+    {
+        return $this->roleProvider->findByCode($code);
+    }
+
 	/**
 	 * Returns all groups.
 	 *
@@ -658,15 +614,15 @@ class Sentry {
 	}
 
 	/**
-	 * Returns all users who belong to
+	 * Returns all users with role
 	 * a group.
 	 *
-	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $group
+	 * @param  \Netinteractive\Sentry\Role\RoleInterface  $role
 	 * @return array
 	 */
-	public function findAllUsersInGroup($group)
+	public function findAllUsersWithRole($role)
 	{
-		return $this->userProvider->findAllInGroup($group);
+		return $this->userProvider->findAllWithRole($role);
 	}
 
 	/**

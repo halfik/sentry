@@ -19,6 +19,7 @@
  */
 use Illuminate\Support\ServiceProvider;
 
+use Netinteractive\Sentry\Auth\AuthManager;
 use Netinteractive\Sentry\Cookies\IlluminateCookie;
 use Netinteractive\Sentry\Sessions\IlluminateSession;
 
@@ -30,6 +31,19 @@ use Netinteractive\Sentry\SocialProfile\Elegant\Provider as SocialProfileProvide
 
 class SentryServiceProvider extends ServiceProvider
 {
+
+    /**
+     * Boot the service provider.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->app['sentry.auth.manager']->set('elegant', $this->app['sentry.auth.providers.elegant']);
+        $this->app['sentry.auth.manager']->set('facebook', $this->app['sentry.auth.providers.facebook']);
+        $this->app['sentry.auth.manager']->set('linkedin', $this->app['sentry.auth.providers.linkedin']);
+    }
+
 	/**
 	 * Register the service provider.
 	 *
@@ -38,6 +52,7 @@ class SentryServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->prepareResources();
+        $this->registerAuth();
 		$this->registerUserProvider();
 		$this->registerRoleProvider();
 		$this->registerThrottleProvider();
@@ -59,12 +74,53 @@ class SentryServiceProvider extends ServiceProvider
 
 		$this->mergeConfigFrom($config, 'netinteractive.sentry');
 
-		$this->publishes([
-			//$config     => config_path('netinteractive.sentry.php'),
-			$migrations => $this->app->databasePath().'/migrations',
-		]);
+        $this->publishes([
+            __DIR__.'/../../config/config.php' => config_path('/packages/netinteractive/sentry/config.php'),
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../../migrations/' => $this->app->databasePath().'/migrations',
+        ], 'migrations');
 	}
 
+
+    /**
+     * Register Auth Manager
+     */
+    protected function registerAuth()
+    {
+
+        $this->app['sentry.auth.manager'] = $this->app->share(function($app)
+        {
+            return new AuthManager();
+        });
+
+        $this->app->singleton('AuthManager', function($app)
+        {
+            return $app['sentry.auth.manager'];
+        });
+
+
+        /**
+         * Dodajemy domyslnegogo auth providera do managera
+         *
+         * @return void
+         */
+        $this->app['sentry.auth.providers.elegant'] = $this->app->share(function($app)
+        {
+            return 'ElegantProvider';
+        });
+
+        $this->app['sentry.auth.providers.facebook'] = $this->app->share(function($app)
+        {
+            return 'FacebookProvider';
+        });
+
+        $this->app['sentry.auth.providers.linkedin'] = $this->app->share(function($app)
+        {
+            return 'LinkedInProvider';
+        });
+    }
 
 	/**
 	 * Register the user provider used by Sentry.

@@ -55,7 +55,7 @@ class Provider  implements ProviderInterface
     }
 
     /**
-     * @param MapperInterface $mapper
+     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
      * @return $this
      */
     public function setMapper(MapperInterface $mapper)
@@ -65,7 +65,7 @@ class Provider  implements ProviderInterface
     }
 
     /**
-     * @return mixed|MapperInterface
+     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
      */
     public function getMapper()
     {

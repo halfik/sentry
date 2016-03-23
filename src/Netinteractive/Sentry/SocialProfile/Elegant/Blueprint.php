@@ -78,4 +78,13 @@ class Blueprint extends BaseBlueprint
 
         return parent::init();
     }
+
+    /**
+     * Returns scope object
+     * @return null
+     */
+    public function getScopeObject()
+    {
+        return new Scope($this->getStorageName());
+    }
 }

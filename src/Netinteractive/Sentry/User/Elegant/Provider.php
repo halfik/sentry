@@ -33,7 +33,7 @@ class Provider  implements ProviderInterface
     }
 
     /**
-     * @param MapperInterface $mapper
+     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
      * @return $this
      */
     public function setMapper(MapperInterface $mapper)
@@ -43,7 +43,7 @@ class Provider  implements ProviderInterface
     }
 
     /**
-     * @return mixed|MapperInterface
+     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
      */
     public function getMapper()
     {
@@ -88,6 +88,23 @@ class Provider  implements ProviderInterface
     {
         if ( !$user = $this->getMapper()->login($login)->first()) {
             throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika o loginie [%s]."), $login ));
+        }
+
+        return $user;
+    }
+
+
+    /**
+     * Finds a user by the email value.
+     *
+     * @param  string  $email
+     * @return \Netinteractive\Sentry\User\UserInterface
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
+     */
+    public function findByEmail($email)
+    {
+        if ( !$user = $this->getMapper()->email($email)->first()) {
+            throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika z adresem email [%s]."), $email ));
         }
 
         return $user;
@@ -220,6 +237,37 @@ class Provider  implements ProviderInterface
     }
 
     /**
+     * Returns all users with access to
+     * a permission(s).
+     *
+     * @param  string|array  $permissions
+     * @return array
+     */
+    public function findAllWithAccess($permissions)
+    {
+        return array_filter($this->findAll(), function($user) use ($permissions)
+        {
+            return $user->hasAccess($permissions);
+        });
+    }
+
+    /**
+     * Returns all users with access to
+     * any given permission(s).
+     *
+     * @param  array  $permissions
+     * @return array
+     */
+    public function findAllWithAnyAccess(array $permissions)
+    {
+        return array_filter($this->findAll(), function($user) use ($permissions)
+        {
+            return $user->hasAnyAccess($permissions);
+        });
+    }
+
+
+    /**
      * Returns all users who belong to
      * a group.
      *
@@ -251,6 +299,8 @@ class Provider  implements ProviderInterface
     {
         $user = $this->createRecord();
         $user->fill($credentials);
+
+        $this->getMapper()->save($user);
 
         return $user;
     }

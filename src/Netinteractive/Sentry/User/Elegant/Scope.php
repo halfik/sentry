@@ -22,6 +22,21 @@ class Scope extends  BaseScope
 
     /**
      * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param string $email
+     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     */
+    public function scopeEmail(DbMapper $mapper, $email)
+    {
+        $query = $mapper->getQuery();
+        $blueprint = $query->getRecord()->getBlueprint();
+
+        $query->where($blueprint->getStorageName().'.email', '=', $email);
+
+        return $mapper;
+    }
+
+    /**
+     * @param \Netinteractive\Elegant\Mapper\DbMapper
      * @param string $code
      * @return \Netinteractive\Elegant\Mapper\DbMapper
      */

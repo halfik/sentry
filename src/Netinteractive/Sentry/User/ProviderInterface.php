@@ -41,6 +41,17 @@ interface ProviderInterface
 	 */
 	public function findByLogin($login);
 
+
+    /**
+     * Finds a user by the email value.
+     *
+     * @param  string  $email
+     * @return \Netinteractive\Sentry\User\UserInterface
+     * @throws \Netinteractive\Sentry\User\UserNotFoundException
+     */
+    public function findByEmail($email);
+
+
 	/**
 	 * Finds a user by the given credentials.
 	 *
