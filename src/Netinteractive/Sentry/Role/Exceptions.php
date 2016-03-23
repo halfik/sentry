@@ -18,6 +18,6 @@
  * @link       http://cartalyst.com
  */
 
-class GroupExistsException extends \UnexpectedValueException {}
-class GroupNotFoundException extends \UnexpectedValueException {}
+class RoleExistsException extends \UnexpectedValueException {}
+class RoleNotFoundException extends \UnexpectedValueException {}
 class NameRequiredException extends \UnexpectedValueException {}

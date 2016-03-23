@@ -36,6 +36,19 @@ return array(
 	'driver' => 'elegant',
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Tables
+    |--------------------------------------------------------------------------
+    |
+    */
+    'user_role_pivot_table' => 'user__role',
+    'user_table' => 'user',
+    'role_table' => 'role',
+    'throttle_table' => 'throttle',
+    'social_profile_table' => 'social_profile',
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Cookie
@@ -67,7 +80,7 @@ return array(
 	| Role
 	|--------------------------------------------------------------------------
 	|
-	| Configuration specific to the group management component of Sentry.
+	| Configuration specific to the role management component of Sentry.
 	|
 	*/
 
@@ -125,23 +138,6 @@ return array(
 
 	),
 
-	/*
-	|--------------------------------------------------------------------------
-	| User Role Pivot Table
-	|--------------------------------------------------------------------------
-	|
-	| When using the "eloquent" driver, you can specify the table name
-	| for the user groups pivot table.
-	|
-	| Default: users_groups
-	|
-	*/
-
-	'user_role_pivot_table' => 'user__role',
-    'user_table' => 'user',
-    'role_table' => 'role',
-    'throttle_table' => 'throttle',
-    'social_profile_table' => 'social_profile',
 
 	/*
 	|--------------------------------------------------------------------------

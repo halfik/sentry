@@ -519,7 +519,7 @@ class Sentry {
 	 *
 	 * @param  int  $id
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $role
-	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
+	 * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
 	 */
 	public function findRoleById($id)
 	{
@@ -531,7 +531,7 @@ class Sentry {
 	 *
 	 * @param  string  $name
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
-	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
+	 * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
 	 */
 	public function findRoleByName($name)
 	{

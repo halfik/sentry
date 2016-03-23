@@ -19,7 +19,7 @@
  */
 
 use Netinteractive\Sentry\Role\RoleInterface;
-use Netinteractive\Sentry\Role\GroupNotFoundException;
+use Netinteractive\Sentry\Role\RoleNotFoundException;
 use Netinteractive\Sentry\Role\ProviderInterface;
 
 class Provider implements ProviderInterface {
@@ -50,7 +50,7 @@ class Provider implements ProviderInterface {
 	 *
 	 * @param  int  $id
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
-	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
+	 * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
 	 */
 	public function findById($id)
 	{
@@ -58,7 +58,7 @@ class Provider implements ProviderInterface {
 
 		if ( ! $group = $model->newQuery()->find($id))
 		{
-			throw new GroupNotFoundException("A group could not be found with ID [$id].");
+			throw new RoleNotFoundException("A group could not be found with ID [$id].");
 		}
 
 		return $group;
@@ -69,7 +69,7 @@ class Provider implements ProviderInterface {
 	 *
 	 * @param  string  $name
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
-	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
+	 * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
 	 */
 	public function findByName($name)
 	{
@@ -77,7 +77,7 @@ class Provider implements ProviderInterface {
 
 		if ( ! $group = $model->newQuery()->where('name', '=', $name)->first())
 		{
-			throw new GroupNotFoundException("A group could not be found with the name [$name].");
+			throw new RoleNotFoundException("A group could not be found with the name [$name].");
 		}
 
 		return $group;

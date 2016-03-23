@@ -19,7 +19,7 @@
  */
 
 use Netinteractive\Sentry\Role\NameRequiredException;
-use Netinteractive\Sentry\Role\GroupExistsException;
+use Netinteractive\Sentry\Role\RoleExistsException;
 use Netinteractive\Sentry\Role\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
 
@@ -378,7 +378,7 @@ class Group extends Model implements RoleInterface {
 
 		if ($persistedGroup and $persistedGroup->getId() != $this->getId())
 		{
-			throw new GroupExistsException("A group already exists with name [$name], names must be unique for groups.");
+			throw new RoleExistsException("A role already exists with name [$name], names must be unique for roles.");
 		}
 
 		return true;

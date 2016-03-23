@@ -19,7 +19,7 @@
  */
 
 use Netinteractive\Sentry\Cookies\IlluminateCookie;
-use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
+use Netinteractive\Sentry\Role\Elegant\Provider as RoleProvider;
 use Netinteractive\Sentry\Sentry;
 use Netinteractive\Sentry\Sessions\IlluminateSession;
 use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
@@ -127,11 +127,11 @@ class SentryServiceProvider extends ServiceProvider
 	 */
 	protected function registerRoleProvider()
 	{
-		$this->app['sentry.group'] = $this->app->share(function($app)
+		$this->app['sentry.role'] = $this->app->share(function($app)
 		{
 			$config = $app['config']->get('netinteractive.sentry');
 
-			$model = array_get($config, 'groups.model');
+			$model = array_get($config, 'role.model');
 
 			// Define the User model to use for relationships.
 			/*if (method_exists($model, 'setUserModel'))
@@ -155,7 +155,7 @@ class SentryServiceProvider extends ServiceProvider
 				);
 			}*/
 
-			return new GroupProvider($model);
+			return new RoleProvider($model);
 		});
 	}
 
@@ -267,7 +267,7 @@ class SentryServiceProvider extends ServiceProvider
 		{
 			return new Sentry(
 				$app['sentry.user'],
-				$app['sentry.group'],
+				$app['sentry.role'],
 				$app['sentry.throttle'],
 				$app['sentry.session'],
 				$app['sentry.cookie'],

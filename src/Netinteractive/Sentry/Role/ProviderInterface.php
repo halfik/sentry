@@ -25,7 +25,7 @@ interface ProviderInterface {
 	 *
 	 * @param  int  $id
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
-	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
+	 * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
 	 */
 	public function findById($id);
 
@@ -34,7 +34,7 @@ interface ProviderInterface {
 	 *
 	 * @param  string  $name
 	 * @return \Netinteractive\Sentry\Role\RoleInterface  $group
-	 * @throws \Netinteractive\Sentry\Role\GroupNotFoundException
+	 * @throws \Netinteractive\Sentry\Role\RoleNotFoundException
 	 */
 	public function findByName($name);
 

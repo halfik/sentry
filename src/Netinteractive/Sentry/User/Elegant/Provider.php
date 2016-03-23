@@ -57,9 +57,7 @@ class Provider  implements ProviderInterface
      */
     public function createRecord()
     {
-        $class = '\\'.ltrim($this->model, '\\');
-
-        return new $class;
+        return \App::make($this->model);
     }
 
     /**
@@ -246,30 +244,6 @@ class Provider  implements ProviderInterface
     }
 
     /**
-     * Returns all users with access to
-     * a permission(s).
-     *
-     * @param  string|array $permissions
-     * @return array
-     */
-    public function findAllWithAccess($permissions)
-    {
-        // TODO: Implement findAllWithAccess() method.
-    }
-
-    /**
-     * Returns all users with access to
-     * any given permission(s).
-     *
-     * @param  array $permissions
-     * @return array
-     */
-    public function findAllWithAnyAccess(array $permissions)
-    {
-        // TODO: Implement findAllWithAnyAccess() method.
-    }
-
-    /**
      * Creates a user.
      *
      * @param  array $credentials
@@ -277,7 +251,10 @@ class Provider  implements ProviderInterface
      */
     public function create(array $credentials)
     {
-        // TODO: Implement create() method.
+        $user = $this->createRecord();
+        $user->fill($credentials);
+
+        return $user;
     }
 
     /**
@@ -287,7 +264,7 @@ class Provider  implements ProviderInterface
      */
     public function getEmptyUser()
     {
-        // TODO: Implement getEmptyUser() method.
+        return $this->createRecord();
     }
 
 
