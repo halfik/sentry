@@ -50,7 +50,13 @@ Currently, we do not have an upgrade method from Sentry 1, however we may be abl
 
 ## Changelog
 
-* 5.0.1 : usuniecie schema i zawartosci
+* 5.0.2 : 
+    * added: \Netinteractive\Sentry\Role\Elegant\Blueprint::getAllowedPermissionsValues() 
+    * added: \Netinteractive\Sentry\Role\Elegant:Provider::setPermissionsAttribute(array $permissions, $overwrite=false)
+    
+* 5.0.1 : 
+    * deleted: schema folder
+    
 * 5.0.0 : init
 
 

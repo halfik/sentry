@@ -45,6 +45,38 @@ class Record extends BaseRecord implements RoleInterface
         return $this->permissions;
     }
 
+
+    /**
+     * Mutator for taking permissions.
+     *
+     * @param  array  $permissions
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function setPermissionsAttribute(array $permissions, $overwrite=false)
+    {
+        // Merge permissions
+        if ($overwrite == false){
+            $permissions = array_merge($this->getPermissions(), $permissions);
+        }
+
+        // Loop through and adjust permissions as needed
+        foreach ($permissions as $permission => &$value) {
+            // Lets make sure their is a valid permission value
+            if ( ! in_array($value = (int) $value, $this->getBlueprint()->getAllowedPermissionsValues())) {
+                throw new \InvalidArgumentException( sprintf(_("Błędna wartość [%s] dla uprawnienia [%s]."), $value, $permission ) );
+            }
+
+            // If the value is 0, delete itif ($value === 0)
+            if ($value === 0) {
+                unset($permissions[$permission]);
+            }
+        }
+
+        $this->permissions = $permissions;
+        return $this;
+    }
+
     /**
      * Returns role code
      * @return string

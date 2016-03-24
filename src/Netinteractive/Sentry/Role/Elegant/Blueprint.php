@@ -8,6 +8,17 @@ class Blueprint extends  BaseBlueprint
     public static $superUserCode = 'admin';
 
     /**
+     * Allowed permissions values.
+     *
+     * Possible options:
+     *    0 => Remove.
+     *    1 => Add.
+     *
+     * @var array
+     */
+    public static $allowedPermissionsValues = array(0, 1);
+
+    /**
      * @return mixed
      */
     protected function init()
@@ -110,7 +121,17 @@ class Blueprint extends  BaseBlueprint
      * Returns scope object
      * @return null
      */
-    public function getScopeObject(){
+    public function getScopeObject()
+    {
         return new Scope($this->getStorageName());
+    }
+
+    /**
+     * Returns allowed values for permission
+     * @return array
+     */
+    public function getAllowedPermissionsValues()
+    {
+        return static::$allowedPermissionsValues;
     }
 }

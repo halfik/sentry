@@ -41,4 +41,12 @@ interface RoleInterface {
 	 */
 	public function getPermissions();
 
+    /**
+     * Mutator for taking permissions.
+     * @param array $permissions
+     * @param bool $overwrite
+     * @return $this
+     */
+    public function setPermissionsAttribute(array $permissions, $overwrite=false);
+
 }
