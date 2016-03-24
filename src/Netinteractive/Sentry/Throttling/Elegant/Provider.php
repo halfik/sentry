@@ -225,8 +225,8 @@ class Provider  implements ProviderInterface
     public function suspend(\Netinteractive\Sentry\Throttling\ThrottleInterface $record)
     {
         if (!$record->suspended) {
-            $record->suspended    = true;
-            $record->suspended_at =new Carbon();
+            $record->suspended = true;
+            $record->suspended_at = new Carbon();
             $this->getMapper()->save($record);
         }
     }

@@ -50,6 +50,7 @@ Currently, we do not have an upgrade method from Sentry 1, however we may be abl
 
 ## Changelog
 
+* 5.0.1 : usuniecie schema i zawartosci
 * 5.0.0 : init
 
 
