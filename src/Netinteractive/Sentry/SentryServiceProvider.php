@@ -32,6 +32,11 @@ use Netinteractive\Sentry\SocialProfile\Elegant\Provider as SocialProfileProvide
 class SentryServiceProvider extends ServiceProvider
 {
 
+    protected $commands = [
+        'Netinteractive\Sentry\Commands\MakeAdmin',
+    ];
+
+
     /**
      * Boot the service provider.
      *
@@ -60,6 +65,8 @@ class SentryServiceProvider extends ServiceProvider
 		$this->registerSession();
 		$this->registerCookie();
 		$this->registerSentry();
+
+        $this->commands($this->commands);
 	}
 
 	/**
@@ -135,42 +142,6 @@ class SentryServiceProvider extends ServiceProvider
 
 			$model = array_get($config, 'users.model');
 
-			// We will never be accessing a user in Sentry without accessing
-			// the user provider first. So, we can lazily set up our user
-			// model's login attribute here. If you are manually using the
-			// attribute outside of Sentry, you will need to ensure you are
-			// overriding at runtime.
-			/*if (method_exists($model, 'setLoginAttributeName'))
-			{
-				$loginAttribute = array_get($config, 'users.login_attribute');
-
-				forward_static_call_array(
-					array($model, 'setLoginAttributeName'),
-					array($loginAttribute)
-				);
-			}*/
-
-			// Define the Group model to use for relationships.
-			/*if (method_exists($model, 'setGroupModel'))
-			{
-				$groupModel = array_get($config, 'groups.model');
-
-				forward_static_call_array(
-					array($model, 'setGroupModel'),
-					array($groupModel)
-				);
-			}
-
-			// Define the user group pivot table name to use for relationships.
-			if (method_exists($model, 'setUserGroupsPivot'))
-			{
-				$pivotTable = array_get($config, 'user_groups_pivot_table');
-
-				forward_static_call_array(
-					array($model, 'setUserGroupsPivot'),
-					array($pivotTable)
-				);
-			}*/
 
 			return new UserProvider($model);
 		});
@@ -188,28 +159,6 @@ class SentryServiceProvider extends ServiceProvider
 			$config = $app['config']->get('netinteractive.sentry');
 
 			$model = array_get($config, 'role.model');
-
-			// Define the User model to use for relationships.
-			/*if (method_exists($model, 'setUserModel'))
-			{
-				$userModel = array_get($config, 'users.model');
-
-				forward_static_call_array(
-					array($model, 'setUserModel'),
-					array($userModel)
-				);
-			}
-
-			// Define the user group pivot table name to use for relationships.
-			if (method_exists($model, 'setUserGroupsPivot'))
-			{
-				$pivotTable = array_get($config, 'user_groups_pivot_table');
-
-				forward_static_call_array(
-					array($model, 'setUserGroupsPivot'),
-					array($pivotTable)
-				);
-			}*/
 
 			return new RoleProvider($model);
 		});
@@ -233,36 +182,6 @@ class SentryServiceProvider extends ServiceProvider
 			if (array_get($config, 'throttling.enabled') === false){
 				$throttleProvider->disable();
 			}
-
-			/*if (method_exists($model, 'setAttemptLimit'))
-			{
-				$attemptLimit = array_get($config, 'throttling.attempt_limit');
-
-				forward_static_call_array(
-					array($model, 'setAttemptLimit'),
-					array($attemptLimit)
-				);
-			}
-			if (method_exists($model, 'setSuspensionTime'))
-			{
-				$suspensionTime = array_get($config, 'throttling.suspension_time');
-
-				forward_static_call_array(
-					array($model, 'setSuspensionTime'),
-					array($suspensionTime)
-				);
-			}
-
-			// Define the User model to use for relationships.
-			if (method_exists($model, 'setUserModel'))
-			{
-				$userModel = array_get($config, 'users.model');
-
-				forward_static_call_array(
-					array($model, 'setUserModel'),
-					array($userModel)
-				);
-			}*/
 
 			return $throttleProvider;
 		});

@@ -48,6 +48,17 @@ return array(
     'throttle_table' => 'throttle',
     'social_profile_table' => 'social_profile',
 
+    /**
+     * Admin user
+     */
+    'admin' => array(
+        'email'=>'admin',
+        'login'=>'admin',
+        'password' => 'admin',
+        'first_name' => 'admin',
+        'activated' => 1
+    ),
+
 
 	/*
 	|--------------------------------------------------------------------------

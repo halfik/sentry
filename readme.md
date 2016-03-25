@@ -1,54 +1,25 @@
-# Sentry
-
-Cartalyst\Sentry
+Netinteractive\Sentry
 =====================
-# Sentry
 
-@author: halfik
+Package to work with User and related data.
 
-Sentry is a PHP 5.3+ fully-featured authentication & authorization system. It also provides additional features such as user groups and additional security features.
 
-Sentry is a framework agnostic set of interfaces with default implementations, though you can substitute any implementations you see fit.
-
-[![Build Status](https://travis-ci.org/cartalyst/sentry.png?branch=master)](https://travis-ci.org/cartalyst/sentry)
-
-![Bitdeli](https://d2weczhvl823v0.cloudfront.net/cartalyst/sentry/trend.png)
-
-### Features
-
-It also provides additional features such as user groups and additional security features:
-
-- Configurable authentication (can use any type of authentication required, such as username or email)
-- Authorization
-- Activation of user *(optional)*
-- Groups and group permissions
-- "Remember me"
-- User suspension
-- Login throttling *(optional)*
-- User banning
-- Password resetting
-- User data
-- Interface driven - switch out your own implementations at will
-
-### Installation
-
-Installation of Sentry is very easy. We've got a number of guides to get Sentry working with your favorite framework or on it's own:
-
-- [Install Sentry](https://cartalyst.com/manual/sentry#installation)
-
-### Getting Started
-
-- Use in [Laravel 4](https://cartalyst.com/manual/sentry#laravel-4)
-- Use in [FuelPHP 1](https://cartalyst.com/manual/sentry#fuelphp-1.x)
-- Use in [CodeIgniter 3](https://cartalyst.com/manual/sentry#codeigniter-3.0-dev)
-- Use [natively (through composer)](https://cartalyst.com/manual/sentry#native)
-
-### Upgrading
-
-Currently, we do not have an upgrade method from Sentry 1, however we may be able to publish one before the stable release of Sentry 2.0. When upgrading between betas or release-candidates, please see [our changelog](https://github.com/cartalyst/sentry/blob/master/changelog.md).
-
+## Services
+*  Netinteractive\Sentry\SentryServiceProvider - registers in App most important classes:
+     * sentry.auth.manager - class that allows to work with authentication drivers.
+     * sentry.user - user provider that allows to do basic stuff user related
+     * sentry.role - role provider
+     * sentry.throttle - throttle provider
+     * sentry.social - soccial profile provider
+     * sentry.session - session object used by sentry package
+     * sentry.cookie - cookie object used by sentry package
+     * sentry - main sentry class, that provides interface to work with user, roles, throttle etc.
+     
 
 ## Changelog
+
+* 5.0.3:
+    * added: Netinteractive\Sentry\Commands\MakeAdmin - it registers ni:makeAdmin command that created admin account based on config data
 
 * 5.0.2 : 
     * added: \Netinteractive\Sentry\Role\Elegant\Blueprint::getAllowedPermissionsValues() 
