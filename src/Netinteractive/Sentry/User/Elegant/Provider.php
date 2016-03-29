@@ -2,63 +2,45 @@
 
 use Netinteractive\Sentry\User\ProviderInterface;
 use Netinteractive\Elegant\Mapper\MapperInterface;
+use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
 use Netinteractive\Sentry\User\UserNotFoundException;
 use Netinteractive\Sentry\Role\RoleInterface;
 use Netinteractive\Sentry\User\WrongPasswordException;
 
-class Provider  implements ProviderInterface
+class Provider extends BusinessProvider implements ProviderInterface
 {
     /**
-     * @var \Netinteractive\Elegant\Mapper\MapperInterface
+     * @param null|string $record
      */
-    protected $mapper;
-
-
-    /**
-     * The Eloquent user model.
-     *
-     * @var string
-     */
-    protected $model = 'Netinteractive\Sentry\User\Elegant\Record';
-
-
-
-    public function __construct($model=null)
+    public function __construct($record=null)
     {
-        if (isset($model)) {
-            $this->model = $model;
+        if (!$record){
+            $record = 'Netinteractive\Sentry\User\Elegant\Record';
         }
-
-        $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
+        parent::__construct($record);
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
-     * @return $this
-     */
-    public function setMapper(MapperInterface $mapper)
-    {
-        $this->mapper = $mapper;
-        return $this;
-    }
-
-    /**
-     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
-     */
-    public function getMapper()
-    {
-        return $this->mapper;
-    }
-
-    /**
-     * Create a new instance of the model.
+     * Creates a user.
      *
-     * @return \Netinteractive\Elegant\Model\Record
+     * @param  array  $credentials
+     * @return \Netinteractive\Sentry\User\UserInterface
      */
-    public function createRecord()
+    public function create(array $credentials)
     {
-        return \App::make($this->model);
+        return parent::create($credentials);
     }
+
+    /**
+     * Returns an empty user object.
+     *
+     * @return \Netinteractive\Sentry\User\UserInterface
+     */
+    public function getEmptyUser()
+    {
+        return $this->createRecord();
+    }
+
 
     /**
      * Finds a user by the given user ID.
@@ -288,32 +270,4 @@ class Provider  implements ProviderInterface
             ->get()
         ;
     }
-
-    /**
-     * Creates a user.
-     *
-     * @param  array $credentials
-     * @return \Netinteractive\Sentry\User\UserInterface
-     */
-    public function create(array $credentials)
-    {
-        $user = $this->createRecord();
-        $user->fill($credentials);
-
-        $this->getMapper()->save($user);
-
-        return $user;
-    }
-
-    /**
-     * Returns an empty user object.
-     *
-     * @return \Netinteractive\Sentry\User\UserInterface
-     */
-    public function getEmptyUser()
-    {
-        return $this->createRecord();
-    }
-
-
 }

@@ -2,11 +2,12 @@
 
 
 use Carbon\Carbon;
+use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface;
 use Netinteractive\Sentry\User\UserInterface;
 use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
 
-class Provider  implements ProviderInterface
+class Provider extends BusinessProvider implements ProviderInterface
 {
 
     /**
@@ -24,62 +25,23 @@ class Provider  implements ProviderInterface
      */
     protected $enabled = true;
 
-    /**
-     * The  throttle model.
-     *
-     * @var string
-     */
-    protected $model = 'Netinteractive\Sentry\Throttling\Elegant\Record';
-
-    /**
-     * @var \Netinteractive\Elegant\Mapper\MapperInterface
-     */
-    protected $mapper;
 
     /**
      * Creates a new throttle provider.
      *
      * @param \Netinteractive\Sentry\User\ProviderInterface $userProvider
-     * @param  string $model
+     * @param  string $recordClass
      * @return void
      */
-    public function __construct(UserProviderInterface $userProvider, $model = null)
+    public function __construct(UserProviderInterface $userProvider, $recordClass = null)
     {
         $this->userProvider = $userProvider;
 
-        if (isset($model)) {
-            $this->model = $model;
+        if (!$recordClass){
+            $recordClass = 'Netinteractive\Sentry\Throttling\Elegant\Record';
         }
 
-        $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
-    }
-
-    /**
-     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
-     * @return $this
-     */
-    public function setMapper(MapperInterface $mapper)
-    {
-        $this->mapper = $mapper;
-        return $this;
-    }
-
-    /**
-     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
-     */
-    public function getMapper()
-    {
-        return $this->mapper;
-    }
-
-    /**
-     * Create a new instance of the model.
-     *
-     * @return \Netinteractive\Elegant\Model\Record
-     */
-    public function createRecord()
-    {
-        return \App::make($this->model);
+        parent::__construct($recordClass);
     }
 
     /**

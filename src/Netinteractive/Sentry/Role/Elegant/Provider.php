@@ -1,62 +1,33 @@
 <?php
 namespace Netinteractive\Sentry\Role\Elegant;
 
+use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
 use Netinteractive\Sentry\Role\RoleNotFoundException;
 use Netinteractive\Sentry\Role\ProviderInterface;
 
-class Provider implements ProviderInterface
+class Provider extends  BusinessProvider implements ProviderInterface
 {
-
     /**
-     * @var \Netinteractive\Elegant\Mapper\MapperInterface
+     * @param null|string $record
      */
-    protected $mapper;
-
-
-    /**
-     * The Eloquent user model.
-     *
-     * @var string
-     */
-    protected $model = 'Netinteractive\Sentry\Role\Elegant\Record';
-
-
-
-    public function __construct($model=null)
+    public function __construct($record=null)
     {
-        if (isset($model)) {
-            $this->model = $model;
+        if (!$record){
+            $record = 'Netinteractive\Sentry\Role\Elegant\Record';
         }
-
-        $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
+        parent::__construct($record);
     }
 
-    /**
-     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
-     * @return $this
-     */
-    public function setMapper(MapperInterface $mapper)
-    {
-        $this->mapper = $mapper;
-        return $this;
-    }
 
     /**
-     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
-     */
-    public function getMapper()
-    {
-        return $this->mapper;
-    }
-
-    /**
-     * Create a new instance of the model.
+     * Creates a role.
      *
-     * @return \Netinteractive\Elegant\Model\Record
+     * @param  array $attributes
+     * @return \Netinteractive\Sentry\Role\RoleInterface
      */
-    public function createRecord()
+    public function create(array $attributes)
     {
-        return \App::make($this->model);
+        return parent::create($attributes);
     }
 
 
@@ -116,22 +87,6 @@ class Provider implements ProviderInterface
     public function findAll()
     {
         return $this->getMapper()->get();
-    }
-
-    /**
-     * Creates a group.
-     *
-     * @param  array $attributes
-     * @return \Netinteractive\Sentry\Role\RoleInterface
-     */
-    public function create(array $attributes)
-    {
-        $role = $this->createRecord();
-        $role->fill($attributes);
-
-        $this->getMapper()->save($role);
-
-        return $role;
     }
 
 }

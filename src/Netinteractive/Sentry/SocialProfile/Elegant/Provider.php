@@ -1,75 +1,34 @@
 <?php namespace Netinteractive\Sentry\SocialProfile\Elegant;
 
 
+use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
 use Netinteractive\Sentry\SocialProfile\ProviderInterface;
 use Netinteractive\Sentry\SocialProfile\SocialProfileNotFoundException;
 
-class Provider implements ProviderInterface
+class Provider extends  BusinessProvider implements ProviderInterface
 {
 
-	/**
-	 * The Eloquent user model.
-	 *
-	 * @var string
-	 */
-	protected $model = 'Netinteractive\Sentry\SocialProfile\Elegant\Record';
-
     /**
-     * @var \Netinteractive\Elegant\Mapper\MapperInterface
+     * @param null|string $record
      */
-    protected $mapper;
-
-    /**
-     * @param null $model
-     */
-    public function __construct($model = null)
+    public function __construct($record=null)
     {
-        if (isset($model)) {
-            $this->model = $model;
+        if (!$record){
+            $record = 'Netinteractive\Sentry\SocialProfile\Elegant\Record';
         }
-
-        $this->mapper = \App::make('ni.elegant.mapper.db', array($this->model));
+        parent::__construct($record);
     }
 
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\MapperInterface $mapper
-     * @return $this
+     * Creates a social profile.
+     *
+     * @param  array  $credentials
+     * @return \Netinteractive\Sentry\User\UserInterface
      */
-    public function setMapper(MapperInterface $mapper)
+    public function create(array $credentials)
     {
-        $this->mapper = $mapper;
-        return $this;
-    }
-
-    /**
-     * @return mixed|\Netinteractive\Elegant\Mapper\MapperInterface
-     */
-    public function getMapper()
-    {
-        return $this->mapper;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function createRecord()
-    {
-        return \App::make($this->model);
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function create(array $data)
-    {
-        $record = $this->createRecord();
-        $record->fill($data);
-
-        $this->getMapper()->save($record);
-
-        return $record;
+        return parent::create($credentials);
     }
 
     /**
