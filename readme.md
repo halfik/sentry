@@ -18,6 +18,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.4:
+    * implemented \Netinteractive\Elegant\Model\Provider in all providers
+
 * 5.0.3:
     * added: Netinteractive\Sentry\Commands\MakeAdmin - it registers ni:makeAdmin command that created admin account based on config data
 
