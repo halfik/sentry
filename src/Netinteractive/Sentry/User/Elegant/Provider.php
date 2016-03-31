@@ -1,6 +1,5 @@
 <?php namespace Netinteractive\Sentry\User\Elegant;
 
-use Netinteractive\Sentry\SentryServiceProvider;
 use Netinteractive\Sentry\User\ProviderInterface;
 use Netinteractive\Elegant\Mapper\MapperInterface;
 use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
@@ -259,7 +258,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findAllWithRole( $code)
     {
-        $config = \Config::get(SentryServiceProvider::config());
+        $config =  \Config::get('netinteractive.sentry');
 
         $privotTable = $config['user_role_pivot_table'];
         $roleTable = $config['role_table'];

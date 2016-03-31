@@ -2,7 +2,6 @@
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
-use Netinteractive\Sentry\SentryServiceProvider;
 
 class Blueprint extends BaseBlueprint
 {
@@ -18,7 +17,7 @@ class Blueprint extends BaseBlueprint
      */
     protected function init()
     {
-        $config = \Config::get(SentryServiceProvider::config());
+        $config = \Config::get('netinteractive.sentry');
         $table = $config['user_table'];
 
         $this->setStorageName($table);

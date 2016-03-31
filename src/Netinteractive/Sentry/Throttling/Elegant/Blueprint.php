@@ -2,7 +2,6 @@
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
-use Netinteractive\Sentry\SentryServiceProvider;
 
 class Blueprint extends BaseBlueprint
 {
@@ -26,7 +25,7 @@ class Blueprint extends BaseBlueprint
      */
     protected function init()
     {
-        $config = \Config::get(SentryServiceProvider::config());
+        $config = \Config::get('netinteractive.sentry');
         $table = $config['throttle_table'];
 
         $this->setStorageName($table);
@@ -144,7 +143,7 @@ class Blueprint extends BaseBlueprint
     public static function getAttemptLimit()
     {
         if (!static::$attemptLimit){
-            static::$attemptLimit = \Config::get(SentryServiceProvider::config().'.throttling.attempt_limit');
+            static::$attemptLimit = \Config::get(\Config::get('netinteractive.sentry.throttling.attempt_limit'));
         }
 
         return static::$attemptLimit;
@@ -158,7 +157,7 @@ class Blueprint extends BaseBlueprint
     public static function getSuspensionTime()
     {
         if (!static::$suspensionTime){
-            static::$suspensionTime = \Config::get(SentryServiceProvider::config().'.throttling.suspension_time');
+            static::$suspensionTime = \Config::get(\Config::get('netinteractive.sentry.throttling.suspension_time'));
         }
 
         return static::$suspensionTime;

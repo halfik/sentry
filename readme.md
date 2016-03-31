@@ -18,6 +18,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.6
+    * fixed: Config usage bug and config merge bug.
+
 * 5.0.5
     * fixed: Config usage bug. Package were using config instead of published one.
     
