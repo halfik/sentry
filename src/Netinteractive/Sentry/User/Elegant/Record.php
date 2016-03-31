@@ -270,7 +270,7 @@ class Record extends \Netinteractive\Elegant\Model\Record implements UserInterfa
      */
     public function getPersistCode()
     {
-        $config =  \Config::get('netinteractive.sentry');
+        $config =  \Config::get('packages.netinteractive.sentry.config');
 
         if( !$this->persist_code || !$config['multiple_login'] ){
             $this->persist_code = $this->getRandomString();

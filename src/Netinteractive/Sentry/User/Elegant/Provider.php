@@ -258,7 +258,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findAllWithRole( $code)
     {
-        $config =  \Config::get('netinteractive.sentry');
+        $config =  \Config::get('packages.netinteractive.sentry.config');
 
         $privotTable = $config['user_role_pivot_table'];
         $roleTable = $config['role_table'];

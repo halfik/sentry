@@ -17,7 +17,7 @@ class Blueprint extends BaseBlueprint
      */
     protected function init()
     {
-        $config = \Config::get('netinteractive.sentry');
+        $config = \Config::get('packages.netinteractive.sentry.config');
         $table = $config['user_table'];
 
         $this->setStorageName($table);

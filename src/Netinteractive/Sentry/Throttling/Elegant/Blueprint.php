@@ -25,7 +25,7 @@ class Blueprint extends BaseBlueprint
      */
     protected function init()
     {
-        $config = \Config::get('netinteractive.sentry');
+        $config = \Config::get('packages.netinteractive.sentry.config');
         $table = $config['throttle_table'];
 
         $this->setStorageName($table);
@@ -143,7 +143,7 @@ class Blueprint extends BaseBlueprint
     public static function getAttemptLimit()
     {
         if (!static::$attemptLimit){
-            static::$attemptLimit = \Config::get(\Config::get('netinteractive.sentry.throttling.attempt_limit'));
+            static::$attemptLimit = \Config::get(\Config::get('packages.netinteractive.sentry.config.throttling.attempt_limit'));
         }
 
         return static::$attemptLimit;
@@ -157,7 +157,7 @@ class Blueprint extends BaseBlueprint
     public static function getSuspensionTime()
     {
         if (!static::$suspensionTime){
-            static::$suspensionTime = \Config::get(\Config::get('netinteractive.sentry.throttling.suspension_time'));
+            static::$suspensionTime = \Config::get(\Config::get('packages.netinteractive.sentry.config.throttling.suspension_time'));
         }
 
         return static::$suspensionTime;

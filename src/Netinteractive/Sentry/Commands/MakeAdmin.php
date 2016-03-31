@@ -55,7 +55,7 @@ class MakeAdmin extends Command
     {
         $roleProvider = \App::make('sentry')->getRoleProvider();
         $userProvider = \App::make('sentry')->getUserProvider();
-        $data = config('netinteractive.sentry.admin');
+        $data = config('packages.netinteractive.sentry.config.admin');
 
         if (!$data){
             return;

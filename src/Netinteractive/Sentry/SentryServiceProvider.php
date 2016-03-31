@@ -88,7 +88,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
         $config = realpath(__DIR__.'/../../config/config.php');;
 
-		$this->mergeConfigFrom($config, 'packages.netinteractive.sentry');
+		$this->mergeConfigFrom($config, 'packages.netinteractive.sentry.config');
 	}
 
 
@@ -139,7 +139,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.user'] = $this->app->share(function($app)
 		{
-			$config = $app['config']->get('netinteractive.sentry');
+			$config = $app['config']->get('packages.netinteractive.sentry.config');
 
 			$model = array_get($config, 'users.model');
 
@@ -157,8 +157,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.role'] = $this->app->share(function($app)
 		{
-            $config = $app['config']->get('netinteractive.sentry');
-
+            $config = $app['config']->get('packages.netinteractive.sentry.config');
 			$model = array_get($config, 'role.model');
 
 			return new RoleProvider($model);
@@ -174,7 +173,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.throttle'] = $this->app->share(function($app)
 		{
-            $config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get('packages.netinteractive.sentry.config');
 
 			$model = array_get($config, 'throttling.model');
 
@@ -196,7 +195,7 @@ class SentryServiceProvider extends ServiceProvider
     protected function registerSocialProvider()
     {
         $this->app['sentry.social'] = $this->app->share(function($app) {
-            $config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get('packages.netinteractive.sentry.config');
 
             $model = array_get($config, 'social_profile.model');
 
@@ -213,7 +212,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.session'] = $this->app->share(function($app)
 		{
-            $config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get('packages.netinteractive.sentry.config');
 			$key = $config['cookie']['key'];
 
 			return new IlluminateSession($app['session.store'], $key);
@@ -229,7 +228,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.cookie'] = $this->app->share(function($app)
 		{
-            $config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get('packages.netinteractive.sentry.config');
             $key = $config['cookie']['key'];
 
 			/**
