@@ -88,7 +88,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
         $config = realpath(__DIR__.'/../../config/config.php');;
 
-		$this->mergeConfigFrom($config, 'netinteractive.sentry');
+		$this->mergeConfigFrom($config, 'packages.netinteractive.sentry');
 	}
 
 
