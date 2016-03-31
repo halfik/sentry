@@ -18,6 +18,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.5
+    * fixed: Config usage bug. Package were using config instead of published one.
+    
 * 5.0.4:
     * implemented \Netinteractive\Elegant\Model\Provider in all providers
 

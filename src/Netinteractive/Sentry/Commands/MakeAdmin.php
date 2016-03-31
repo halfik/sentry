@@ -1,6 +1,7 @@
 <?php namespace Netinteractive\Sentry\Commands;
 
 use \Illuminate\Console\Command;
+use Netinteractive\Sentry\SentryServiceProvider;
 use Netinteractive\Sentry\User\UserNotFoundException;
 use \Symfony\Component\Console\Input\InputOption;
 use \Symfony\Component\Console\Input\InputArgument;
@@ -54,8 +55,11 @@ class MakeAdmin extends Command
     {
         $roleProvider = \App::make('sentry')->getRoleProvider();
         $userProvider = \App::make('sentry')->getUserProvider();
-        $data = config('netinteractive.sentry.admin');
+        $data = config(SentryServiceProvider::config().'.admin');
 
+        if (!$data){
+            return;
+        }
 
         #we create admin account only if it dosn't exists
         try{

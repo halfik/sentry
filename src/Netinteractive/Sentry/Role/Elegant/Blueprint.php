@@ -2,6 +2,7 @@
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
+use Netinteractive\Sentry\SentryServiceProvider;
 
 class Blueprint extends  BaseBlueprint
 {
@@ -23,13 +24,14 @@ class Blueprint extends  BaseBlueprint
      */
     protected function init()
     {
-        $table = \Config::get('netinteractive.sentry.role_table');
+        $config = \Config::get(SentryServiceProvider::config());
+        $table = $config['role_table'];
 
         $this->setStorageName($table);
         $this->primaryKey = array('id');
         $this->incrementingPk = 'id';
 
-        $config = \Config::get('netinteractive.sentry');
+
         $this->getRelationManager()
             ->belongsToMany('users', $config['users']['model'], $config['user_role_pivot_table'], 'role__id', array('user__id')  )
         ;

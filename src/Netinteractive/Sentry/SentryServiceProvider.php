@@ -36,6 +36,25 @@ class SentryServiceProvider extends ServiceProvider
         'Netinteractive\Sentry\Commands\MakeAdmin',
     ];
 
+    public static $CONFIG = 'packages.netinteractive.sentry.config';
+
+
+    /**
+     * Returns path to resources config. Use $dotNotnation true for \Config::get()
+     * and false for config_path()
+     * @param bool $dotNotation
+     * @return string
+     */
+    public static function config($dotNotation=true)
+    {
+        $response = self::$CONFIG;
+
+        if (!$dotNotation){
+            $response = '/'.str_replace('.', '/', $response).'.php';
+        }
+
+        return $response;
+    }
 
     /**
      * Boot the service provider.
@@ -82,7 +101,7 @@ class SentryServiceProvider extends ServiceProvider
 		$this->mergeConfigFrom($config, 'netinteractive.sentry');
 
         $this->publishes([
-            __DIR__.'/../../config/config.php' => config_path('/packages/netinteractive/sentry/config.php'),
+            __DIR__.'/../../config/config.php' => config_path(self::config(false)),
         ], 'config');
 
         $this->publishes([
@@ -138,7 +157,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.user'] = $this->app->share(function($app)
 		{
-			$config = $app['config']->get('netinteractive.sentry');
+			$config = $app['config']->get(self::config());
 
 			$model = array_get($config, 'users.model');
 
@@ -156,7 +175,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.role'] = $this->app->share(function($app)
 		{
-			$config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get(self::config());
 
 			$model = array_get($config, 'role.model');
 
@@ -173,7 +192,7 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.throttle'] = $this->app->share(function($app)
 		{
-			$config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get(self::config());
 
 			$model = array_get($config, 'throttling.model');
 
@@ -195,7 +214,7 @@ class SentryServiceProvider extends ServiceProvider
     protected function registerSocialProvider()
     {
         $this->app['sentry.social'] = $this->app->share(function($app) {
-            $config = $app['config']->get('netinteractive.sentry');
+            $config = $app['config']->get(self::config());
 
             $model = array_get($config, 'social_profile.model');
 
@@ -212,7 +231,8 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.session'] = $this->app->share(function($app)
 		{
-			$key = $app['config']->get('netinteractive.sentry.cookie.key');
+            $config = $app['config']->get(self::config());
+			$key = $config['cookie']['key'];
 
 			return new IlluminateSession($app['session.store'], $key);
 		});
@@ -227,7 +247,8 @@ class SentryServiceProvider extends ServiceProvider
 	{
 		$this->app['sentry.cookie'] = $this->app->share(function($app)
 		{
-			$key = $app['config']->get('netinteractive.sentry.cookie.key');
+            $config = $app['config']->get(self::config());
+            $key = $config['cookie']['key'];
 
 			/**
 			 * We'll default to using the 'request' strategy, but switch to
