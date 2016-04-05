@@ -143,7 +143,6 @@ class SentryServiceProvider extends ServiceProvider
 
 			$model = array_get($config, 'users.model');
 
-
 			return new UserProvider($model);
 		});
 	}
@@ -268,20 +267,5 @@ class SentryServiceProvider extends ServiceProvider
 		});
 
 		$this->app->alias('sentry', 'Netinteractive\Sentry\Sentry');
-	}
-
-	/**
-	 * Merge the given configuration with the existing configuration.
-	 *
-	 * @param  string  $path
-	 * @param  string  $key
-	 * @return void
-	 */
-	protected function mergeConfigFrom($path, $key)
-	{
-		$config = $this->app['config']->get($key, []);
-
-
-		$this->app['config']->set($key, array_merge_recursive(require $path, $config));
 	}
 }
