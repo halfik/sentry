@@ -52,11 +52,11 @@ class SentryServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../../config/config.php' => config_path('/packages/netinteractive/sentry/config.php'),
-        ], 'netinteractive.sentry');
+        ], 'config');
 
         $this->publishes([
             __DIR__.'/../../migrations/' => $this->app->databasePath().'/migrations',
-        ], 'migrations');
+        ], 'config');
     }
 
 	/**
@@ -270,4 +270,18 @@ class SentryServiceProvider extends ServiceProvider
 		$this->app->alias('sentry', 'Netinteractive\Sentry\Sentry');
 	}
 
+	/**
+	 * Merge the given configuration with the existing configuration.
+	 *
+	 * @param  string  $path
+	 * @param  string  $key
+	 * @return void
+	 */
+	protected function mergeConfigFrom($path, $key)
+	{
+		$config = $this->app['config']->get($key, []);
+
+
+		$this->app['config']->set($key, array_merge_recursive(require $path, $config));
+	}
 }
