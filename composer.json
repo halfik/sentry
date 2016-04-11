@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "5.0.11",
+    "version": "5.0.12",
 	"description": "PHP 5.4+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel"],
 	"license": "BSD-3-Clause",
@@ -55,9 +55,6 @@
       "url": "ssh://git.nidev.pl/laravel/elegant"
     }
   ],
-	"suggest": {
-
-	},
 	"autoload": {
       "classmap": [
         "src/Netinteractive/Sentry/Role/Exceptions.php",
@@ -69,9 +66,6 @@
         "Netinteractive\\Sentry": "src/"
       }
     },
-	"require": {
-		"php": ">=5.3.3"
-	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
 

@@ -18,6 +18,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.12
+    * fixed: composer.json double entries
+
 * 5.0.6 - 5.0.11
     * fixed: Config usage bug and config merge bug.
 
