@@ -18,6 +18,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.13
+    * fixed: Netinteractive\Sentry\Role\Elegant\Blueprint has timestamps=true
+
 * 5.0.12
     * fixed: composer.json double entries
 

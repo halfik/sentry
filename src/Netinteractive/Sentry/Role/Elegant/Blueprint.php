@@ -29,6 +29,7 @@ class Blueprint extends  BaseBlueprint
         $this->setStorageName($table);
         $this->primaryKey = array('id');
         $this->incrementingPk = 'id';
+        $this->timestamps = true;
 
 
         $this->getRelationManager()
