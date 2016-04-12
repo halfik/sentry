@@ -56,7 +56,7 @@ class SentryServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../../migrations/' => $this->app->databasePath().'/migrations',
-        ], 'config');
+        ], 'migrations');
     }
 
 	/**
