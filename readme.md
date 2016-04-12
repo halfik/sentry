@@ -18,7 +18,7 @@ Package to work with User and related data.
 
 ## Changelog
 
-* 5.0.14 - 5.0.15
+* 5.0.14 - 5.0.16
     * fixed: migration config data access wrong namespace bug
     * update: changed migration names
 

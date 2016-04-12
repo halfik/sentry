@@ -20,7 +20,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
+class MigrationNiSentryInstallUserRolePivot extends Migration {
 
 	/**
 	 * Run the migrations.

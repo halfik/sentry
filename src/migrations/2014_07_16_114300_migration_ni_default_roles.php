@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Migrations\Migration;
 
-class MigrationCartalystDefaultRoles extends Migration {
+class MigrationNiDefaultRoles extends Migration {
 
     /**
      * Run the migrations.
