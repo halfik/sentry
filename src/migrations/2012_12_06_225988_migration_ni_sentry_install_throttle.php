@@ -29,7 +29,7 @@ class MigrationCartalystSentryInstallThrottle extends Migration {
 	 */
 	public function up()
 	{
-        $tableName =  \Config::get('netinteractive.sentry.throttle_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.throttle_table');
 
 		Schema::create($tableName, function($table)
 		{
@@ -57,7 +57,7 @@ class MigrationCartalystSentryInstallThrottle extends Migration {
 	 */
 	public function down()
 	{
-        $tableName =  \Config::get('netinteractive.sentry.throttle_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.throttle_table');
 
 		Schema::drop($tableName);
 	}

@@ -10,7 +10,7 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function up()
     {
-        $tableName =  \Config::get('netinteractive.sentry.role_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.role_table');
 
         if (Schema::hasTable($tableName)){
             DB::table($tableName)->insert(
@@ -52,7 +52,7 @@ class MigrationCartalystDefaultRoles extends Migration {
      */
     public function down()
     {
-        $tableName =  \Config::get('netinteractive.sentry.role_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.role_table');
 
         if (Schema::hasTable($tableName)){
             DB::table($tableName)->where('name', 'admin')->delete();

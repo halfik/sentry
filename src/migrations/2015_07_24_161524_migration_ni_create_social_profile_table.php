@@ -12,7 +12,7 @@ class CreateSocialProfileTable extends Migration {
 	 */
 	public function up()
 	{
-        $tableName =  \Config::get('netinteractive.sentry.social_profile_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.social_profile_table');
 
         Schema::create($tableName, function($table)
         {
@@ -23,7 +23,7 @@ class CreateSocialProfileTable extends Migration {
             $table->timestamps();
             $table->unique( array('user__id', 'type') );
 
-            $userTableName = \Config::get('netinteractive.sentry.user_table');
+            $userTableName = \Config::get('packages.netinteractive.sentry.config.user_table');
 
             $table->foreign('user__id')->references('id')->on($userTableName)->onDelete('cascade');
         });
@@ -36,7 +36,7 @@ class CreateSocialProfileTable extends Migration {
 	 */
 	public function down()
 	{
-        $tableName =  \Config::get('netinteractive.sentry.social_profile_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.social_profile_table');
 
         if (Schema::hasTable($tableName)) {
             Schema::drop($tableName);

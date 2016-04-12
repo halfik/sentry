@@ -18,6 +18,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.14
+    * fixed: migration config data access wrong namespace bug
+
 * 5.0.13
     * fixed: Netinteractive\Sentry\Role\Elegant\Blueprint has timestamps=true
 

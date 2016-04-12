@@ -20,7 +20,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class MigrationCartalystSentryInstallGroups extends Migration {
+class MigrationCartalystSentryInstallUsers extends Migration {
 
     /**
      * Run the migrations.
@@ -29,24 +29,34 @@ class MigrationCartalystSentryInstallGroups extends Migration {
      */
     public function up()
     {
-        $tableName =  \Config::get('netinteractive.sentry.role_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.user_table');
 
         Schema::create($tableName, function($table)
         {
             $table->increments('id');
-            $table->string('name');
-            $table->string('code');
+            $table->string('login');
+            $table->string('email');
+            $table->string('password');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->text('permissions')->nullable();
-            $table->boolean('is_hidden')->default(false);
-            $table->smallInteger('weight', false, true)->default(0);
-
-            $table->timestamp('created_at')->default(DB::raw('now()'));
-            $table->timestamp('updated_at')->nullable();
+            $table->boolean('activated')->default(0);
+            $table->string('activation_code')->nullable();
+            $table->timestamp('activated_at')->nullable();
+            $table->timestamp('last_login')->nullable();
+            $table->string('persist_code')->nullable();
+            $table->string('reset_password_code')->nullable();
+            $table->timestamps();
 
             // We'll need to ensure that MySQL uses the InnoDB engine to
             // support the indexes, other engines aren't affected.
             $table->engine = 'InnoDB';
-            $table->unique('name');
+            $table->unique('email');
+            $table->index('login');
+            $table->index('activation_code');
+            $table->index('first_name');
+            $table->index('last_name');
+            $table->index('reset_password_code');
         });
     }
 
@@ -57,7 +67,7 @@ class MigrationCartalystSentryInstallGroups extends Migration {
      */
     public function down()
     {
-        $tableName =  \Config::get('netinteractive.sentry.role_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.user_table');
 
         Schema::drop($tableName);
     }

@@ -29,7 +29,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function up()
 	{
-        $tableName =  \Config::get('netinteractive.sentry.user_role_pivot_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.user_role_pivot_table');
 
 		Schema::create($tableName, function($table)
 		{
@@ -50,7 +50,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 	 */
 	public function down()
 	{
-        $tableName =  \Config::get('netinteractive.sentry.user_role_pivot_table');
+        $tableName =  \Config::get('packages.netinteractive.sentry.config.user_role_pivot_table');
 
 		Schema::drop($tableName);
 	}
