@@ -18,7 +18,7 @@ Package to work with User and related data.
 
 ## Changelog
 
-* 5.0.17
+* 5.0.17 - 5.0.18
     * fixed: role and user field definitions.
 
 * 5.0.14 - 5.0.16

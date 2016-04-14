@@ -83,6 +83,7 @@ class Blueprint extends  BaseBlueprint
                 'title' => _('Rola ukryta'),
                 'type' => static::TYPE_BOOL,
                 'sortable' => true,
+                'searchable' => Searchable::$equal,
                 'rules' => array(
                     'any' => 'boolean'
                 ),
@@ -93,11 +94,13 @@ class Blueprint extends  BaseBlueprint
             'weight' => array(
                 'title' => _('Waga'),
                 'sortable' => true,
+                'searchable' => Searchable::$equal,
                 'type'=> static::TYPE_INT,
             ),
             'created_at' => array(
                 'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
+                'searchable' => Searchable::$contains,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -109,6 +112,7 @@ class Blueprint extends  BaseBlueprint
             'updated_at' => array(
                 'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
+                'searchable' => Searchable::$contains,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
