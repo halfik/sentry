@@ -18,15 +18,18 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.17
+    * fixed: role and user field definitions.
+
 * 5.0.14 - 5.0.16
-    * fixed: migration config data access wrong namespace bug
-    * update: changed migration names
+    * fixed: migration config data access wrong namespace bug.
+    * update: changed migration names.
 
 * 5.0.13
     * fixed: Netinteractive\Sentry\Role\Elegant\Blueprint has timestamps=true
 
 * 5.0.12
-    * fixed: composer.json double entries
+    * fixed: composer.json double entries.
 
 * 5.0.6 - 5.0.11
     * fixed: Config usage bug and config merge bug.
@@ -35,17 +38,17 @@ Package to work with User and related data.
     * fixed: Config usage bug. Package were using config instead of published one.
     
 * 5.0.4:
-    * implemented \Netinteractive\Elegant\Model\Provider in all providers
+    * implemented \Netinteractive\Elegant\Model\Provider in all providers.
 
 * 5.0.3:
-    * added: Netinteractive\Sentry\Commands\MakeAdmin - it registers ni:makeAdmin command that created admin account based on config data
+    * added: Netinteractive\Sentry\Commands\MakeAdmin - it registers ni:makeAdmin command that created admin account based on config data.
 
 * 5.0.2 : 
-    * added: \Netinteractive\Sentry\Role\Elegant\Blueprint::getAllowedPermissionsValues() 
-    * added: \Netinteractive\Sentry\Role\Elegant:Provider::setPermissionsAttribute(array $permissions, $overwrite=false)
+    * added: \Netinteractive\Sentry\Role\Elegant\Blueprint::getAllowedPermissionsValues() .
+    * added: \Netinteractive\Sentry\Role\Elegant:Provider::setPermissionsAttribute(array $permissions, $overwrite=false).
     
 * 5.0.1 : 
-    * deleted: schema folder
+    * deleted: schema folder.
     
 * 5.0.0 : init
 

@@ -41,6 +41,7 @@ class Blueprint extends  BaseBlueprint
             'id' => array(
                 'title' => 'Id',
                 'type' => static::TYPE_INT,
+                'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'integer',
@@ -68,6 +69,7 @@ class Blueprint extends  BaseBlueprint
             'permissions' => array(
                 'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
+                'protected' => true,
                 'filters' => array(
                     'save' => array(
                         'jsonEncode'
@@ -90,10 +92,11 @@ class Blueprint extends  BaseBlueprint
             ),
             'weight' => array(
                 'title' => _('Waga'),
+                'sortable' => true,
                 'type'=> static::TYPE_INT,
             ),
             'created_at' => array(
-                'title'=> _('created_at'),
+                'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
                 'sortable' => true,
                 'rules' => array(
@@ -104,7 +107,7 @@ class Blueprint extends  BaseBlueprint
                 ),
             ),
             'updated_at' => array(
-                'title'=> _('updated_at'),
+                'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
                 'sortable' => true,
                 'rules' => array(

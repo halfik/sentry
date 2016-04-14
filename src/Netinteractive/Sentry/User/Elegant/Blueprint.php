@@ -36,6 +36,7 @@ class Blueprint extends BaseBlueprint
             'id' => array(
                 'title' => 'Id',
                 'type' => static::TYPE_INT,
+                'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'integer',
@@ -66,6 +67,7 @@ class Blueprint extends BaseBlueprint
                 'title' => _('Hasło'),
                 'type'=> static::TYPE_PASSWORD,
                 'hashable' => true,
+                'protected' => true,
                 'rules' => array(
                     'insert'=>'required'
                 )
@@ -96,6 +98,7 @@ class Blueprint extends BaseBlueprint
             'permissions' => array(
                 'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
+                'protected' => true,
                 'filters' => array(
                     'save' => array(
                         'jsonEncode'
@@ -108,6 +111,7 @@ class Blueprint extends BaseBlueprint
             'activated' => array(
                 'title' => _('Czy aktywny?'),
                 'type' => static::TYPE_BOOL,
+                'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'boolean'
@@ -118,10 +122,11 @@ class Blueprint extends BaseBlueprint
             ),
             'activation_code' => array(
                 'title' => _('Kod aktywacyjny'),
-                'type' => static::TYPE_STRING
+                'type' => static::TYPE_STRING,
+                'protected' => true,
             ),
             'activated_at' => array(
-                'title' => _('Data aktywacji konta'),
+                'title' => _('Data aktywacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
                 'sortable' => true,
@@ -147,10 +152,12 @@ class Blueprint extends BaseBlueprint
             'persist_code' => array(
                 'title' => _('Persist code'),
                 'hashable' => true,
+                'protected' => true,
                 'type' => static::TYPE_STRING
             ),
             'reset_password_code' => array(
                 'title' => _('Kod resetu hasła'),
+                'protected' => true,
                 'type' => static::TYPE_STRING
             ),
             'created_at' => array(
