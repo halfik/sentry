@@ -163,6 +163,7 @@ class Blueprint extends BaseBlueprint
             'created_at' => array(
                 'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
+                'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -174,6 +175,7 @@ class Blueprint extends BaseBlueprint
             'updated_at' => array(
                 'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
+                'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
