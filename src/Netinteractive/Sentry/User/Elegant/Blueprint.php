@@ -55,7 +55,7 @@ class Blueprint extends BaseBlueprint
             ),
             'email'=>array(
                 'title' =>_('E-mail'),
-                'type' => static::TYPE_STRING,
+                'type' => static::TYPE_EMAIL,
                 'sortable' => true,
                 'searchable' => Searchable::$contains,
                 'rules' => array(
