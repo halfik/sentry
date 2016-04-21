@@ -85,7 +85,7 @@ class Blueprint extends  BaseBlueprint
                 'sortable' => true,
                 'searchable' => Searchable::$equal,
                 'rules' => array(
-                    'any' => 'boolean'
+                    'any' => 'required|boolean'
                 ),
                 'filters' => array(
                     'display' => array('bool'),
@@ -95,6 +95,9 @@ class Blueprint extends  BaseBlueprint
                 'title' => _('Waga'),
                 'sortable' => true,
                 'searchable' => Searchable::$equal,
+                'rules' => array(
+                    'any' => 'required|int'
+                ),
                 'type'=> static::TYPE_INT,
             ),
             'created_at' => array(
