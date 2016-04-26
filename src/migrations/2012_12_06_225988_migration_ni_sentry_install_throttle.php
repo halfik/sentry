@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Database\Migrations\Migration;
 
+
 class MigrationNiSentryInstallThrottle extends Migration {
 
 	/**

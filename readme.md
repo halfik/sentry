@@ -14,10 +14,15 @@ Package to work with User and related data.
      * sentry.session - session object used by sentry package
      * sentry.cookie - cookie object used by sentry package
      * sentry - main sentry class, that provides interface to work with user, roles, throttle etc.
-     
+   
+## Commands:
+    * ni:makeAdmin - creates admin account based on config credentials
 
 ## Changelog
 
+* 5.0.23:
+    * fixed: artisan make command
+    
 * 5.0.22:
     * changed: models fields protection level definitions
 

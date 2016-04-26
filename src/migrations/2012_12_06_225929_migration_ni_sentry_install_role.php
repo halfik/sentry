@@ -12,23 +12,26 @@ class MigrationNiSentryInstallRole extends Migration {
     {
         $tableName =  \Config::get('packages.netinteractive.sentry.config.role_table');
 
-        Schema::create($tableName, function($table)
-        {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('code');
-            $table->text('permissions')->nullable();
-            $table->boolean('is_hidden')->default(false);
-            $table->smallInteger('weight', false, true)->default(0);
+        if (!Schema::hasTable($tableName)){
+            Schema::create($tableName, function($table)
+            {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('code');
+                $table->text('permissions')->nullable();
+                $table->boolean('is_hidden')->default(false);
+                $table->smallInteger('weight', false, true)->default(0);
 
-            $table->timestamp('created_at')->default(DB::raw('now()'));
-            $table->timestamp('updated_at')->nullable();
+                $table->timestamp('created_at')->default(DB::raw('now()'));
+                $table->timestamp('updated_at')->nullable();
 
-            // We'll need to ensure that MySQL uses the InnoDB engine to
-            // support the indexes, other engines aren't affected.
-            $table->engine = 'InnoDB';
-            $table->unique('name');
-        });
+                // We'll need to ensure that MySQL uses the InnoDB engine to
+                // support the indexes, other engines aren't affected.
+                $table->engine = 'InnoDB';
+                $table->unique('name');
+            });
+        }
+
     }
 
     /**

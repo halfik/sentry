@@ -31,16 +31,18 @@ class MigrationNiSentryInstallUserRolePivot extends Migration {
 	{
         $tableName =  \Config::get('packages.netinteractive.sentry.config.user_role_pivot_table');
 
-		Schema::create($tableName, function($table)
-		{
-			$table->integer('user__id')->unsigned();
-			$table->integer('role__id')->unsigned();
+		if (!Schema::hasTable($tableName)){
+			Schema::create($tableName, function($table)
+			{
+				$table->integer('user__id')->unsigned();
+				$table->integer('role__id')->unsigned();
 
-			// We'll need to ensure that MySQL uses the InnoDB engine to
-			// support the indexes, other engines aren't affected.
-			$table->engine = 'InnoDB';
-			$table->primary(array('user__id', 'role__id'));
-		});
+				// We'll need to ensure that MySQL uses the InnoDB engine to
+				// support the indexes, other engines aren't affected.
+				$table->engine = 'InnoDB';
+				$table->primary(array('user__id', 'role__id'));
+			});
+		}
 	}
 
 	/**
