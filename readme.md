@@ -18,6 +18,8 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.22:
+    * changed: models fields protection level definitions
 
 * 5.0.17 - 5.0.21
     * fixed: role and user field definitions.

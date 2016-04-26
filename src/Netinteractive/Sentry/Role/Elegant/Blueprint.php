@@ -69,7 +69,7 @@ class Blueprint extends  BaseBlueprint
             'permissions' => array(
                 'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
-                'protected' => true,
+                'protected' => static::PROTECTION_HIGH_MIN,
                 'filters' => array(
                     'save' => array(
                         'jsonEncode'
@@ -104,6 +104,7 @@ class Blueprint extends  BaseBlueprint
                 'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -116,6 +117,7 @@ class Blueprint extends  BaseBlueprint
                 'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',

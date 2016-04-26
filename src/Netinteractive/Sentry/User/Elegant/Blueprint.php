@@ -67,7 +67,7 @@ class Blueprint extends BaseBlueprint
                 'title' => _('Hasło'),
                 'type'=> static::TYPE_PASSWORD,
                 'hashable' => true,
-                'protected' => true,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'rules' => array(
                     'insert'=>'required'
                 )
@@ -98,7 +98,7 @@ class Blueprint extends BaseBlueprint
             'permissions' => array(
                 'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
-                'protected' => true,
+                'protected' => static::PROTECTION_HIGH_MIN,
                 'filters' => array(
                     'save' => array(
                         'jsonEncode'
@@ -123,12 +123,13 @@ class Blueprint extends BaseBlueprint
             'activation_code' => array(
                 'title' => _('Kod aktywacyjny'),
                 'type' => static::TYPE_STRING,
-                'protected' => true,
+                'protected' => static::PROTECTION_HIGH_MIN,
             ),
             'activated_at' => array(
                 'title' => _('Data aktywacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -140,6 +141,7 @@ class Blueprint extends BaseBlueprint
             'last_login' => array(
                 'title' => _('Data ostatniego logowania'),
                 'type' => static::TYPE_DATETIME,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
@@ -152,18 +154,19 @@ class Blueprint extends BaseBlueprint
             'persist_code' => array(
                 'title' => _('Persist code'),
                 'hashable' => true,
-                'protected' => true,
+                'protected' => static::PROTECTION_HIGH_MIN,
                 'type' => static::TYPE_STRING
             ),
             'reset_password_code' => array(
                 'title' => _('Kod resetu hasła'),
-                'protected' => true,
+                'protected' => static::PROTECTION_HIGH_MIN,
                 'type' => static::TYPE_STRING
             ),
             'created_at' => array(
                 'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -176,6 +179,7 @@ class Blueprint extends BaseBlueprint
                 'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
+                'protected' => static::PROTECTION_NORMAL_MIN,
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
