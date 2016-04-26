@@ -74,7 +74,12 @@ class MakeAdmin extends Command
                 return false;
             },100);
 
-            $user = $userProvider->create($data);
+            $user  = $userProvider->getEmptyUser();
+            $user->disableValidation();
+            $user->fill($data);
+
+            $mapper = $userProvider->getMapper();
+            $mapper->save($user);
 
             $user->addRole($adminRole);
 
