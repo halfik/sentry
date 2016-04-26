@@ -20,6 +20,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.24:
+    * removed from compose.json gettext package require
+
 * 5.0.23:
     * fixed: artisan make command
     
