@@ -69,7 +69,12 @@ class Blueprint extends  BaseBlueprint
             'permissions' => array(
                 'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
-                'protected' => static::PROTECTION_HIGH_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_VIEW,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'filters' => array(
                     'save' => array(
                         'jsonEncode'
@@ -104,7 +109,11 @@ class Blueprint extends  BaseBlueprint
                 'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -117,7 +126,11 @@ class Blueprint extends  BaseBlueprint
                 'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',

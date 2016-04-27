@@ -20,6 +20,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.25 - 5.0.26:
+    * updated: redefined protection levels for fields
+
 * 5.0.24:
     * removed from compose.json gettext package require
 

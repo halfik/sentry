@@ -67,7 +67,9 @@ class Blueprint extends BaseBlueprint
                 'title' => _('Hasło'),
                 'type'=> static::TYPE_PASSWORD,
                 'hashable' => true,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' => [
+                    static::PROTECT_VIEW,
+                ],
                 'rules' => array(
                     'insert'=>'required'
                 )
@@ -98,7 +100,12 @@ class Blueprint extends BaseBlueprint
             'permissions' => array(
                 'title' => _('Uprawnienia'),
                 'type'=> static::TYPE_STRING,
-                'protected' => static::PROTECTION_HIGH_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_VIEW,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'filters' => array(
                     'save' => array(
                         'jsonEncode'
@@ -123,13 +130,22 @@ class Blueprint extends BaseBlueprint
             'activation_code' => array(
                 'title' => _('Kod aktywacyjny'),
                 'type' => static::TYPE_STRING,
-                'protected' => static::PROTECTION_HIGH_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_VIEW,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
             ),
             'activated_at' => array(
                 'title' => _('Data aktywacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -141,7 +157,11 @@ class Blueprint extends BaseBlueprint
             'last_login' => array(
                 'title' => _('Data ostatniego logowania'),
                 'type' => static::TYPE_DATETIME,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'searchable' => Searchable::$equal,
                 'sortable' => true,
                 'rules' => array(
@@ -154,19 +174,33 @@ class Blueprint extends BaseBlueprint
             'persist_code' => array(
                 'title' => _('Persist code'),
                 'hashable' => true,
-                'protected' => static::PROTECTION_HIGH_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_VIEW,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'type' => static::TYPE_STRING
             ),
             'reset_password_code' => array(
                 'title' => _('Kod resetu hasła'),
-                'protected' => static::PROTECTION_HIGH_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_VIEW,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'type' => static::TYPE_STRING
             ),
             'created_at' => array(
                 'title'=> _('Data utworzenia'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
@@ -179,7 +213,11 @@ class Blueprint extends BaseBlueprint
                 'title'=> _('Data modyfikacji'),
                 'type' => static::TYPE_DATETIME,
                 'searchable' => Searchable::$equal,
-                'protected' => static::PROTECTION_NORMAL_MIN,
+                'protected' =>  [
+                    static::PROTECT_CREATE,
+                    static::PROTECT_UPDATE,
+                    static::PROTECT_DELETE
+                ],
                 'sortable' => true,
                 'rules' => array(
                     'any' => 'date',
