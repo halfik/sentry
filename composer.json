@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "5.0.26",
+    "version": "5.0.27",
 	"description": "PHP 5.4+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel", "user"],
 	"license": "BSD-3-Clause",

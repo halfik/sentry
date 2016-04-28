@@ -20,6 +20,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.27
+    * updated: RoleProvider::findAll() now orders result by role name
+
 * 5.0.25 - 5.0.26:
     * updated: redefined protection levels for fields
 

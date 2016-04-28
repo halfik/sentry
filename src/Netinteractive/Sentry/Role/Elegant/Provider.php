@@ -7,6 +7,7 @@ use Netinteractive\Sentry\Role\ProviderInterface;
 
 class Provider extends  BusinessProvider implements ProviderInterface
 {
+    private $table;
     /**
      * @param null|string $record
      */
@@ -16,6 +17,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
             $record = 'Netinteractive\Sentry\Role\Elegant\Record';
         }
         parent::__construct($record);
+        $this->table = $this->getMapper()->getRecord()->getBlueprint()->getStorageName();
     }
 
 
@@ -86,7 +88,11 @@ class Provider extends  BusinessProvider implements ProviderInterface
      */
     public function findAll()
     {
-        return $this->getMapper()->get();
+        return $this->getMapper()
+            ->getQuery()
+            ->orderBy($this->table.'.name')
+            ->get()
+            ;
     }
 
 }
