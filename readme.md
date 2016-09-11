@@ -20,6 +20,9 @@ Package to work with User and related data.
 
 ## Changelog
 
+* 5.0.28
+    * fixed: compose.json repositories list
+
 * 5.0.27
     * updated: RoleProvider::findAll() now orders result by role name
 
