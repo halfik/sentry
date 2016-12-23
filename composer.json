@@ -1,6 +1,6 @@
 {
 	"name": "netinteractive/sentry",
-    "version": "5.0.28",
+    "version": "6.0.0@dev",
 	"description": "PHP 5.4+ Fully-featured Authentication & Authorization System",
 	"keywords": ["auth", "security", "laravel", "user"],
 	"license": "BSD-3-Clause",
@@ -42,14 +42,21 @@
 	],
 	"require": {
 		"php": ">=5.3.3",
-	  	"netinteractive/elegant": ">=2.0"
+	  	"netinteractive/elegant": ">=3.0",
+		"illuminate/support": "5.0 - 5.2",
+		"illuminate/console": "5.0 - 5.2",
+		"illuminate/session": "5.0 - 5.2",
+		"nesbot/carbon": "~1.20",
     },
-  "repositories": [
-    {
-      "type":"git",
-      "url": "https://github.com/halfik/elegant"
-    }
-   ],
+	"github-protocols": [
+		"ssh", "https", "git"
+	],
+	"repositories": [
+	{
+	  "type":"git",
+	  "url": "https://github.com/halfik/elegant"
+	}
+	],
 	"autoload": {
       "classmap": [
         "src/Netinteractive/Sentry/Role/Exceptions.php",

@@ -1,4 +1,6 @@
-<?php namespace Netinteractive\Sentry\User\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\User\Elegant;
 
 use Netinteractive\Sentry\User\ProviderInterface;
 use Netinteractive\Elegant\Mapper\MapperInterface;
@@ -7,6 +9,10 @@ use Netinteractive\Sentry\User\UserNotFoundException;
 use Netinteractive\Sentry\Role\RoleInterface;
 use Netinteractive\Sentry\User\WrongPasswordException;
 
+/**
+ * Class Provider
+ * @package Netinteractive\Sentry\User\Elegant
+ */
 class Provider extends BusinessProvider implements ProviderInterface
 {
     /**
@@ -51,7 +57,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findById($id)
     {
-        if ( ! $user = $this->getMapper()->find($id))
+        if ( ! $user = $this->getRepository()->find($id))
         {
             throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika o ID [%s]."), $id) );
         }
@@ -68,7 +74,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findByLogin($login)
     {
-        if ( !$user = $this->getMapper()->login($login)->first()) {
+        if ( !$user = $this->getRepository()->login($login)->first()) {
             throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika o loginie [%s]."), $login ));
         }
 
@@ -85,7 +91,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findByEmail($email)
     {
-        if ( !$user = $this->getMapper()->email($email)->first()) {
+        if ( !$user = $this->getRepository()->email($email)->first()) {
             throw new UserNotFoundException( sprintf( _("Nie znaleziono użytkownika z adresem email [%s]."), $email ));
         }
 
@@ -122,11 +128,11 @@ class Provider extends BusinessProvider implements ProviderInterface
                 $hashedCredentials = array_merge($hashedCredentials, array($credential => $value));
             }
             else {
-                $this->getMapper()->where($credential, '=', $value);
+                $this->getRepository()->where($credential, '=', $value);
             }
         }
 
-        if ( ! $user = $this->getMapper()->first()){
+        if ( ! $user = $this->getRepository()->first()){
             throw new UserNotFoundException( _("Nie znaleziono użytkownika."));
         }
 
@@ -148,7 +154,7 @@ class Provider extends BusinessProvider implements ProviderInterface
                     // The algorithm used to create the hash is outdated and insecure.
                     // Rehash the password and save.
                     $user->{$credential} = $value;
-                    $this->getMapper()->save($user);
+                    $this->getRepository()->save($user);
                 }
             }
         }
@@ -171,7 +177,7 @@ class Provider extends BusinessProvider implements ProviderInterface
             throw new \InvalidArgumentException( _("Nie przekazano kodu aktywacyjnego.") );
         }
 
-        $result = $this->getMapper()->activationCode($code)->get();
+        $result = $this->getRepository()->activationCode($code)->get();
 
 
         if (($count = $result->count()) > 1) {
@@ -195,7 +201,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findByResetPasswordCode($code)
     {
-        $result = $this->getMapper()->resetPasswordCode($code)->get();
+        $result = $this->getRepository()->resetPasswordCode($code)->get();
 
         if (($count = $result->count()) > 1) {
             throw new \RuntimeException( sprintf(_("Znaleziono [%s] użytkowników z identycznym kodem resetującym hasło."), $count) );
@@ -215,7 +221,7 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findAll()
     {
-        return $this->getMapper()->get();
+        return $this->getRepository()->get();
     }
 
     /**
@@ -264,7 +270,7 @@ class Provider extends BusinessProvider implements ProviderInterface
         $roleTable = $config['role_table'];
         $userTable = $config['user_table'];
 
-        return $this->getMapper()
+        return $this->getRepository()
             ->selectRaw('"'.$userTable.'".*')
             ->join($privotTable, $privotTable.'.user__id', '=', $userTable.'.id')
             ->join($roleTable, $roleTable.'.id', '=', $privotTable.'.role__id')

@@ -1,10 +1,16 @@
-<?php namespace Netinteractive\Sentry\Auth\Providers;
+<?php
+
+namespace Netinteractive\Sentry\Auth\Providers;
 
 
 use Netinteractive\Sentry\User\LoginRequiredException;
 use Netinteractive\Sentry\User\PasswordRequiredException;
 use Netinteractive\Sentry\User\UserNotFoundException;
 
+/**
+ * Class ElegantProvider
+ * @package Netinteractive\Sentry\Auth\Providers
+ */
 class ElegantProvider implements AuthProviderInferface
 {
     /**
@@ -63,7 +69,7 @@ class ElegantProvider implements AuthProviderInferface
         }
 
         $user->clearResetPassword();
-        $userProvider->getMapper()->save($user);
+        $userProvider->getRepository()->save($user);
 
         return $user;
     }

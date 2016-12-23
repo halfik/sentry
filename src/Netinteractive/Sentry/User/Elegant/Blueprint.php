@@ -1,8 +1,14 @@
-<?php namespace Netinteractive\Sentry\User\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\User\Elegant;
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
+/**
+ * Class Blueprint
+ * @package Netinteractive\Sentry\User\Elegant
+ */
 class Blueprint extends BaseBlueprint
 {
     /**

@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\User;
+<?php
+
+namespace Netinteractive\Sentry\User;
+
 /**
  * Part of the Sentry package.
  *
@@ -18,8 +21,11 @@
  * @link       http://cartalyst.com
  */
 
-use Netinteractive\Sentry\Role\RoleInterface;
 
+/**
+ * Interface ProviderInterface
+ * @package Netinteractive\Sentry\User
+ */
 interface ProviderInterface
 {
 

@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\User;
+<?php 
+
+namespace Netinteractive\Sentry\User;
+
 /**
  * Part of the Sentry package.
  *
@@ -20,7 +23,12 @@
 
 use Netinteractive\Sentry\Role\RoleInterface;
 
-interface UserInterface {
+/**
+ * Interface UserInterface
+ * @package Netinteractive\Sentry\User
+ */
+interface UserInterface
+{
 
 	/**
 	 * Returns the user's ID.
@@ -173,7 +181,7 @@ interface UserInterface {
 	/**
 	 * Updates the user to the given group(s).
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Collection  $roles
+	 * @param  \Netinteractive\Elegant\Db\Eloquent\Collection  $roles
 	 * @param  bool  $remove
 	 * @return bool
 	 */

@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\SocialProfile;
+<?php
+
+namespace Netinteractive\Sentry\SocialProfile;
+
 /**
  * Part of the Sentry package.
  *

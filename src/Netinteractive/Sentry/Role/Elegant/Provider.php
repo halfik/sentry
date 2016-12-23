@@ -17,7 +17,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
             $record = 'Netinteractive\Sentry\Role\Elegant\Record';
         }
         parent::__construct($record);
-        $this->table = $this->getMapper()->getRecord()->getBlueprint()->getStorageName();
+        $this->table = $this->getRepository()->getRecord()->getBlueprint()->getStorageName();
     }
 
 
@@ -42,7 +42,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
      */
     public function findById($id)
     {
-        if ( !$role = $this->getMapper()->find($id) ) {
+        if ( !$role = $this->getRepository()->find($id) ) {
             throw new RoleNotFoundException( sprintf(_("Nie odnaleziono roli o ID [%s]."), $id) );
         }
 
@@ -58,7 +58,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
      */
     public function findByName($name)
     {
-        if ( !$role = $this->getMapper()->name($name)->first()) {
+        if ( !$role = $this->getRepository()->name($name)->first()) {
             throw new RoleNotFoundException( sprintf(_("Nie odnaleziono roli o nazwie [%s]."), $name));
         }
 
@@ -74,7 +74,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
      */
     public function findByCode($code)
     {
-        if ( !$role = $this->getMapper()->code($code)->first()) {
+        if ( !$role = $this->getRepository()->code($code)->first()) {
             throw new RoleNotFoundException( sprintf(_("Nie odnaleziono roli o kodzie [%s]."), $code));
         }
 
@@ -88,7 +88,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
      */
     public function findAll()
     {
-        return $this->getMapper()
+        return $this->getRepository()
             ->getQuery()
             ->orderBy($this->table.'.name')
             ->get()

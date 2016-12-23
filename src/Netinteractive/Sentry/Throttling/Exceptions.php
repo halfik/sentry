@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Throttling;
+<?php
+
+namespace Netinteractive\Sentry\Throttling;
+
 /**
  * Part of the Sentry package.
  *

@@ -1,6 +1,11 @@
-<?php namespace Netinteractive\Sentry\Auth\Providers;
+<?php
 
+namespace Netinteractive\Sentry\Auth\Providers;
 
+/**
+ * Interface AuthProviderInferface
+ * @package Netinteractive\Sentry\Auth\Providers
+ */
 Interface AuthProviderInferface
 {
 

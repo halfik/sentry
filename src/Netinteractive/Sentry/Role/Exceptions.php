@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Role;
+<?php
+
+namespace Netinteractive\Sentry\Role;
+
 /**
  * Part of the Sentry package.
  *

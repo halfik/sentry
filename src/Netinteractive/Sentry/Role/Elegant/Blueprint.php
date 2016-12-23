@@ -1,9 +1,15 @@
-<?php namespace Netinteractive\Sentry\Role\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\Role\Elegant;
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
-class Blueprint extends  BaseBlueprint
+/**
+ * Class Blueprint
+ * @package Netinteractive\Sentry\Role\Elegant
+ */
+class Blueprint extends BaseBlueprint
 {
     public static $superUserCode = 'admin';
 

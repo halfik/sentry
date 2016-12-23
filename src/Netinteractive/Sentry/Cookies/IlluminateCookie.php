@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Cookies;
+<?php
+
+namespace Netinteractive\Sentry\Cookies;
+
 /**
  * Part of the Sentry package.
  *
@@ -23,7 +26,8 @@ use Illuminate\Cookie\CookieJar;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 
-class IlluminateCookie implements CookieInterface {
+class IlluminateCookie implements CookieInterface
+{
 
 	/**
 	 * The key used in the Cookie.

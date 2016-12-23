@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Role;
+<?php
+
+namespace Netinteractive\Sentry\Role;
+
 /**
  * Part of the Sentry package.
  *
@@ -17,8 +20,8 @@
  * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
-
-interface ProviderInterface {
+interface ProviderInterface
+{
 
 	/**
 	 * Find the role by ID.

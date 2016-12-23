@@ -1,8 +1,14 @@
-<?php namespace Netinteractive\Sentry\Throttling\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\Throttling\Elegant;
 
 use Netinteractive\Elegant\Search\Searchable;
 use Netinteractive\Elegant\Model\Blueprint AS BaseBlueprint;
 
+/**
+ * Class Blueprint
+ * @package Netinteractive\Sentry\Throttling\Elegant
+ */
 class Blueprint extends BaseBlueprint
 {
 

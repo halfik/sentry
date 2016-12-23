@@ -1,7 +1,13 @@
-<?php namespace Netinteractive\Sentry\Auth;
+<?php
+
+namespace Netinteractive\Sentry\Auth;
 
 use Netinteractive\Sentry\Auth\Providers;
 
+/**
+ * Class AuthManager
+ * @package Netinteractive\Sentry\Auth
+ */
 class AuthManager
 {
     /**

@@ -1,5 +1,6 @@
-<?php namespace Netinteractive\Sentry\Throttling\Elegant;
+<?php
 
+namespace Netinteractive\Sentry\Throttling\Elegant;
 
 use Carbon\Carbon;
 use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
@@ -7,6 +8,10 @@ use Netinteractive\Sentry\Throttling\ProviderInterface;
 use Netinteractive\Sentry\User\UserInterface;
 use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
 
+/**
+ * Class Provider
+ * @package Netinteractive\Sentry\Throttling\Elegant
+ */
 class Provider extends BusinessProvider implements ProviderInterface
 {
 
@@ -53,20 +58,20 @@ class Provider extends BusinessProvider implements ProviderInterface
      */
     public function findByUser(UserInterface $user, $ipAddress = null)
     {
-        $this->getMapper()->userId($user->getId());
+        $this->getRepository()->userId($user->getId());
 
         if ($ipAddress) {
-            $this->getMapper()->ip($ipAddress);
+            $this->getRepository()->ip($ipAddress);
         }
 
-        if ( !$throttle = $this->getMapper()->first()) {
+        if ( !$throttle = $this->getRepository()->first()) {
             $throttle = $this->createRecord();
             $throttle->user__id = $user->getId();
             if ($ipAddress){
                 $throttle->ip_address = $ipAddress;
             }
 
-            $this->getMapper()->save($throttle);
+            $this->getRepository()->save($throttle);
         }
 
         return $throttle;
@@ -151,7 +156,7 @@ class Provider extends BusinessProvider implements ProviderInterface
 
         if  ($lastAttempt == null || $clearAttemptsAt <= $now) {
             $record->attempts = 0;
-            $this->getMapper()->save($record);
+            $this->getRepository()->save($record);
         }
 
         unset($lastAttempt);
@@ -174,7 +179,7 @@ class Provider extends BusinessProvider implements ProviderInterface
             $this->suspend($record);
         }
         else {
-            $this->getMapper()->save($record);
+            $this->getRepository()->save($record);
         }
     }
 
@@ -189,7 +194,7 @@ class Provider extends BusinessProvider implements ProviderInterface
         if (!$record->suspended) {
             $record->suspended = true;
             $record->suspended_at = new Carbon();
-            $this->getMapper()->save($record);
+            $this->getRepository()->save($record);
         }
     }
 
@@ -206,7 +211,7 @@ class Provider extends BusinessProvider implements ProviderInterface
             $record->last_attempt_at = null;
             $record->suspended       = false;
             $record->suspended_at    = null;
-            $this->getMapper()->save($record);
+            $this->getRepository()->save($record);
         }
     }
 
@@ -222,7 +227,7 @@ class Provider extends BusinessProvider implements ProviderInterface
         if (!$record->banned) {
             $record->banned = true;
             $record->banned_at = new Carbon();
-            $this->getMapper()->save($record);
+            $this->getRepository()->save($record);
         }
     }
 
@@ -237,7 +242,7 @@ class Provider extends BusinessProvider implements ProviderInterface
         if ($record->banned) {
             $record->banned = false;
             $record->banned_at = null;
-            $this->getMapper()->save($record);
+            $this->getRepository()->save($record);
         }
     }
 

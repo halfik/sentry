@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Facades\Laravel;
+<?php
+
+namespace Netinteractive\Sentry\Facades\Laravel;
+
 /**
  * Part of the Sentry package.
  *
@@ -20,7 +23,12 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Sentry extends Facade {
+/**
+ * Class Sentry
+ * @package Netinteractive\Sentry\Facades\Laravel
+ */
+class Sentry extends Facade
+{
 
 	/**
 	 * Get the registered name of the component.

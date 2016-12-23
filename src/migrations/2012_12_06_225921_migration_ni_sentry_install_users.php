@@ -1,8 +1,12 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Netinteractive\Elegant\Migrations\Migration;
 
-class MigrationNiSentryInstallUsers extends Migration {
+/**
+ * Class MigrationNiSentryInstallUsers
+ */
+class MigrationNiSentryInstallUsers extends Migration
+{
 
     /**
      * Run the migrations.

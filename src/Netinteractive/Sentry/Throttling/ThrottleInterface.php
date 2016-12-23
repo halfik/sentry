@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Throttling;
+<?php
+
+namespace Netinteractive\Sentry\Throttling;
+
 /**
  * Part of the Sentry package.
  *
@@ -18,7 +21,8 @@
  * @link       http://cartalyst.com
  */
 
-interface ThrottleInterface {
+interface ThrottleInterface
+{
 
 	/**
 	 * Returns the associated user with the throttler.

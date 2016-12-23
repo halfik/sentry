@@ -1,4 +1,6 @@
-<?php namespace Netinteractive\Sentry\Throttling;
+<?php
+
+namespace Netinteractive\Sentry\Throttling;
 
 use Netinteractive\Sentry\User\UserInterface;
 
@@ -21,7 +23,8 @@ use Netinteractive\Sentry\User\UserInterface;
  * @link       http://cartalyst.com
  */
 
-interface ProviderInterface {
+interface ProviderInterface
+{
 
 
 	/**

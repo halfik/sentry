@@ -1,14 +1,20 @@
-<?php namespace Netinteractive\Sentry\User\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\User\Elegant;
 
 use Netinteractive\Elegant\Mapper\DbMapper;
 use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 
+/**
+ * Class Scope
+ * @package Netinteractive\Sentry\User\Elegant
+ */
 class Scope extends  BaseScope
 {
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $login
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeLogin(DbMapper $mapper, $login)
     {
@@ -21,9 +27,9 @@ class Scope extends  BaseScope
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $email
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeEmail(DbMapper $mapper, $email)
     {
@@ -36,9 +42,9 @@ class Scope extends  BaseScope
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $code
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeActivationCode(DbMapper $mapper, $code)
     {
@@ -51,9 +57,9 @@ class Scope extends  BaseScope
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $code
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeResetPasswordCode(DbMapper $mapper, $code)
     {

@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Facades;
+<?php
+
+namespace Netinteractive\Sentry\Facades;
+
 /**
  * Part of the Sentry package.
  *
@@ -17,8 +20,8 @@
  * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
-
-abstract class Facade {
+abstract class Facade
+{
 
 	/**
 	 * Sentry instance.

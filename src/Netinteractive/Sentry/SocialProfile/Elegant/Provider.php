@@ -1,10 +1,15 @@
-<?php namespace Netinteractive\Sentry\SocialProfile\Elegant;
+<?php
 
+namespace Netinteractive\Sentry\SocialProfile\Elegant;
 
 use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
 use Netinteractive\Sentry\SocialProfile\ProviderInterface;
 use Netinteractive\Sentry\SocialProfile\SocialProfileNotFoundException;
 
+/**
+ * Class Provider
+ * @package Netinteractive\Sentry\SocialProfile\Elegant
+ */
 class Provider extends  BusinessProvider implements ProviderInterface
 {
 
@@ -39,7 +44,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
 	public function findById($id)
 	{
         $blueprint = $this->createRecord()->getBlueprint();
-        $social = $this->getMapper()->where($blueprint->getStorageName().'.id', '=', $id)->first();
+        $social = $this->getRepository()->where($blueprint->getStorageName().'.id', '=', $id)->first();
 
 
 		if ( !$social ) {
@@ -55,7 +60,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
      */
     public function findByProfile($profileId, $type)
     {
-        $social = $this->getMapper()->profileId($profileId)->type($type)->first();
+        $social = $this->getRepository()->profileId($profileId)->type($type)->first();
 
         if ( ! $social ) {
             throw new SocialProfileNotFoundException( sprintf( _('Nie odnaleziono profilu socialnego o ID [%s].'), $profileId ) );

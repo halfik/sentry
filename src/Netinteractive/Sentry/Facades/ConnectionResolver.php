@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Facades;
+<?php
+
+namespace Netinteractive\Sentry\Facades;
+
 /**
  * Part of the Sentry package.
  *
@@ -18,11 +21,16 @@
  * @link       http://cartalyst.com
  */
 
-use Illuminate\Database\ConnectionResolverInterface;
-use Illuminate\Database\Connection;
+use Netinteractive\Elegant\Db\ConnectionResolverInterface;
+use Netinteractive\Elegant\Db\Connection;
 use PDO;
 
-class ConnectionResolver implements ConnectionResolverInterface {
+/**
+ * Class ConnectionResolver
+ * @package Netinteractive\Sentry\Facades
+ */
+class ConnectionResolver implements ConnectionResolverInterface
+{
 
 	/**
 	 * The PDO instance.
@@ -55,7 +63,7 @@ class ConnectionResolver implements ConnectionResolverInterface {
 	/**
 	 * The database connection.
 	 *
-	 * @var \Illuminate\Database\Connection
+	 * @var \Netinteractive\Elegant\Db\Connection
 	 */
 	protected $connection;
 
@@ -78,7 +86,7 @@ class ConnectionResolver implements ConnectionResolverInterface {
 	 * Get a database connection instance.
 	 *
 	 * @param  string  $name
-	 * @return \Illuminate\Database\Connection
+	 * @return \Netinteractive\Elegant\Db\Connection
 	 */
 	public function connection($name = null)
 	{
@@ -109,7 +117,7 @@ class ConnectionResolver implements ConnectionResolverInterface {
 	/**
 	 * Returns the database connection.
 	 *
-	 * @return \Illuminate\Database\Connection
+	 * @return \Netinteractive\Elegant\Db\Connection
 	 * @throws \InvalidArgumentException
 	 */
 	public function getConnection()
@@ -122,19 +130,19 @@ class ConnectionResolver implements ConnectionResolverInterface {
 			switch ($this->driverName)
 			{
 				case 'mysql':
-					$connection = '\Illuminate\Database\MySqlConnection';
+					$connection = '\Netinteractive\Elegant\Db\MySqlConnection';
 					break;
 
 				case 'pgsql':
-					$connection = '\Illuminate\Database\PostgresConnection';
+					$connection = '\Netinteractive\Elegant\Db\PostgresConnection';
 					break;
 
 				case 'sqlsrv':
-					$connection = '\Illuminate\Database\SqlServerConnection';
+					$connection = '\Netinteractive\Elegant\Db\SqlServerConnection';
 					break;
 
 				case 'sqlite':
-					$connection = '\Illuminate\Database\SQLiteConnection';
+					$connection = '\Netinteractive\Elegant\Db\SQLiteConnection';
 					break;
 
 				default:

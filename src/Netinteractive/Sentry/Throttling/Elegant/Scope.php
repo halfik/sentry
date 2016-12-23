@@ -1,14 +1,20 @@
-<?php namespace Netinteractive\Sentry\Throttling\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\Throttling\Elegant;
 
 use Netinteractive\Elegant\Mapper\DbMapper;
 use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 
+/**
+ * Class Scope
+ * @package Netinteractive\Sentry\Throttling\Elegant
+ */
 class Scope extends BaseScope
 {
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param int $id
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeUserId(DbMapper $mapper, $id)
     {
@@ -21,9 +27,9 @@ class Scope extends BaseScope
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $ip
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeIp(DbMapper $mapper, $ip)
     {

@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Role;
+<?php
+
+namespace Netinteractive\Sentry\Role;
+
 /**
  * Part of the Sentry package.
  *
@@ -18,7 +21,8 @@
  * @link       http://cartalyst.com
  */
 
-interface RoleInterface {
+interface RoleInterface
+{
 
 	/**
 	 * Returns the group's ID.

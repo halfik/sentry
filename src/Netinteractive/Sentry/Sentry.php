@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry;
+<?php
+
+namespace Netinteractive\Sentry;
+
 /**
  * Part of the Sentry package.
  *
@@ -286,7 +289,7 @@ class Sentry
 		// The user model can attach any handlers
 		// to the "recordLogin" event.
 		$user->recordLogin();
-        $this->getUserProvider()->getMapper()->save($user);
+        $this->getUserProvider()->getRepository()->save($user);
 	}
 
 	/**

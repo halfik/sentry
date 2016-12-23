@@ -1,6 +1,11 @@
-<?php namespace Netinteractive\Sentry\SocialProfile\Elegant;
+<?php
 
+namespace Netinteractive\Sentry\SocialProfile\Elegant;
 
+/**
+ * Class Record
+ * @package Netinteractive\Sentry\SocialProfile\Elegant
+ */
 class Record extends \Netinteractive\Elegant\Model\Record
 {
     /**

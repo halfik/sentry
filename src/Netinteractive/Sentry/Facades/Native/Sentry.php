@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Facades\Native;
+<?php
+
+namespace Netinteractive\Sentry\Facades\Native;
+
 /**
  * Part of the Sentry package.
  *
@@ -20,21 +23,21 @@
 
 use Netinteractive\Sentry\Cookies\CookieInterface;
 use Netinteractive\Sentry\Cookies\NativeCookie;
-use Netinteractive\Sentry\Facades\ConnectionResolver;
 use Netinteractive\Sentry\Facades\Facade;
-use Netinteractive\Sentry\Role\Eloquent\Provider as GroupProvider;
 use Netinteractive\Sentry\Role\ProviderInterface as GroupProviderInterface;
 use Netinteractive\Sentry\Sessions\NativeSession;
 use Netinteractive\Sentry\Sessions\SessionInterface;
 use Netinteractive\Sentry\Sentry as BaseSentry;
-use Netinteractive\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface as ThrottleProviderInterface;
 use Netinteractive\Sentry\User\Elegant\Provider as UserProvider;
 use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use PDO;
 
-class Sentry extends Facade {
+/**
+ * Class Sentry
+ * @package Netinteractive\Sentry\Facades\Native
+ */
+class Sentry extends Facade
+{
 
 	/**
 	 * Creates a Sentry instance.
@@ -68,27 +71,6 @@ class Sentry extends Facade {
 		);
 	}
 
-	/**
-	 * Sets up the Eloquent Connection Resolver with the given PDO connection.
-	 *
-	 * @param  PDO    $pdo
-	 * @param  string $driverName
-	 * @param  string $tablePrefix
-	 * @return void
-	 */
-	public static function setupDatabaseResolver(PDO $pdo, $driverName = null, $tablePrefix = '')
-	{
-		// If Eloquent doesn't exist, then we must assume they are using their own providers.
-		if (class_exists('Illuminate\Database\Eloquent\Model'))
-		{
-			if (is_null($driverName))
-			{
-				$driverName = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
-			}
-
-			Eloquent::setConnectionResolver(new ConnectionResolver($pdo, $driverName, $tablePrefix));
-		}
-	}
 
 	/**
 	 * Looks through various server properties in an attempt

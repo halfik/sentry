@@ -1,4 +1,6 @@
-<?php namespace Netinteractive\Sentry\Auth\Providers;
+<?php
+
+namespace Netinteractive\Sentry\Auth\Providers;
 
 use Netinteractive\Sentry\SocialProfile\SocialProfileAlreadyExistsException;
 use Netinteractive\Sentry\SocialProfile\SocialProfileNotFoundException;
@@ -6,6 +8,10 @@ use Netinteractive\Sentry\SocialProfile\SocialProfileIdRequiredException;
 use Netinteractive\Sentry\User\LoginRequiredException;
 use Netinteractive\Sentry\User\UserNotFoundException;
 
+/**
+ * Class SocialProvider
+ * @package Netinteractive\Sentry\Auth\Providers
+ */
 abstract class SocialProvider implements AuthProviderInferface
 {
     /**
@@ -105,7 +111,7 @@ abstract class SocialProvider implements AuthProviderInferface
 
         if ($activate && $user->isActivated() == false) {
             $user->attemptActivation($user->getActivationCode());
-            $userProvider->getMapper()->save($user);
+            $userProvider->getRepository()->save($user);
         }
 
 

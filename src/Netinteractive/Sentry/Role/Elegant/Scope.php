@@ -1,15 +1,20 @@
-<?php namespace Netinteractive\Sentry\Role\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\Role\Elegant;
 
 use Netinteractive\Elegant\Mapper\DbMapper;
 use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 
-
+/**
+ * Class Scope
+ * @package Netinteractive\Sentry\Role\Elegant
+ */
 class Scope extends  BaseScope
 {
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $name
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeName(DbMapper $mapper, $name)
     {
@@ -22,9 +27,9 @@ class Scope extends  BaseScope
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $code
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeCode(DbMapper $mapper, $code)
     {

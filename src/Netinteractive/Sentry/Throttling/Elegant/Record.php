@@ -1,10 +1,15 @@
-<?php namespace Netinteractive\Sentry\Throttling\Elegant;
+<?php
 
+namespace Netinteractive\Sentry\Throttling\Elegant;
 
 use Netinteractive\Sentry\Throttling\ThrottleInterface;
 use Netinteractive\Sentry\Throttling\UserBannedException;
 use Netinteractive\Sentry\Throttling\UserSuspendedException;
 
+/**
+ * Class Record
+ * @package Netinteractive\Sentry\Throttling\Elegant
+ */
 class Record extends \Netinteractive\Elegant\Model\Record implements ThrottleInterface
 {
     /**

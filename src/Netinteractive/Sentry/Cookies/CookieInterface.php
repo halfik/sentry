@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Cookies;
+<?php
+
+namespace Netinteractive\Sentry\Cookies;
+
 /**
  * Part of the Sentry package.
  *
@@ -18,7 +21,8 @@
  * @link       http://cartalyst.com
  */
 
-interface CookieInterface {
+interface CookieInterface
+{
 
 	/**
 	 * Returns the cookie key.

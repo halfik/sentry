@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry\Sessions;
+<?php
+
+namespace Netinteractive\Sentry\Sessions;
+
 /**
  * Part of the Sentry package.
  *
@@ -20,7 +23,8 @@
 
 use Illuminate\Session\Store as SessionStore;
 
-class IlluminateSession implements SessionInterface {
+class IlluminateSession implements SessionInterface
+{
 
 	/**
 	 * The key used in the Session.

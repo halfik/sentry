@@ -1,4 +1,6 @@
-<?php namespace Netinteractive\Sentry\Commands;
+<?php
+
+namespace Netinteractive\Sentry\Commands;
 
 use \Illuminate\Console\Command;
 use Netinteractive\Sentry\SentryServiceProvider;
@@ -6,6 +8,10 @@ use Netinteractive\Sentry\User\UserNotFoundException;
 use \Symfony\Component\Console\Input\InputOption;
 use \Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class MakeAdmin
+ * @package Netinteractive\Sentry\Commands
+ */
 class MakeAdmin extends Command
 {
 
@@ -78,12 +84,12 @@ class MakeAdmin extends Command
             $user->disableValidation();
             $user->fill($data);
 
-            $mapper = $userProvider->getMapper();
+            $mapper = $userProvider->getRepository();
             $mapper->save($user);
 
             $user->addRole($adminRole);
 
-            $userProvider->getMapper()->save($user, true);
+            $userProvider->getRepository()->save($user, true);
         }
     }
 

@@ -1,4 +1,7 @@
-<?php namespace Netinteractive\Sentry;
+<?php
+
+namespace Netinteractive\Sentry;
+
 /**
  * Part of the Sentry package.
  *
@@ -17,6 +20,7 @@
  * @copyright  (c) 2011 - 2013, Netinteractive LLC
  * @link       http://cartalyst.com
  */
+
 use Illuminate\Support\ServiceProvider;
 
 use Netinteractive\Sentry\Auth\AuthManager;

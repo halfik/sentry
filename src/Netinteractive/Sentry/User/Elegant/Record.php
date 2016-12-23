@@ -1,4 +1,6 @@
-<?php namespace Netinteractive\Sentry\User\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\User\Elegant;
 
 
 use Carbon\Carbon;
@@ -6,6 +8,10 @@ use Netinteractive\Sentry\Role\RoleInterface;
 use Netinteractive\Sentry\User\UserInterface;
 use Netinteractive\Sentry\User\UserAlreadyActivatedException;
 
+/**
+ * Class Record
+ * @package Netinteractive\Sentry\User\Elegant
+ */
 class Record extends \Netinteractive\Elegant\Model\Record implements UserInterface
 {
     /**
@@ -477,7 +483,7 @@ class Record extends \Netinteractive\Elegant\Model\Record implements UserInterfa
     /**
      * Updates the user roles
      *
-     * @param  \Illuminate\Database\Eloquent\Collection $roles
+     * @param  \Netinteractive\Elegant\Db\Eloquent\Collection $roles
      * @param  bool $remove
      * @return bool
      */

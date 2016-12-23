@@ -1,14 +1,20 @@
-<?php namespace Netinteractive\Sentry\SocialProfile\Elegant;
+<?php
+
+namespace Netinteractive\Sentry\SocialProfile\Elegant;
 
 use Netinteractive\Elegant\Mapper\DbMapper;
 use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 
+/**
+ * Class Scope
+ * @package Netinteractive\Sentry\SocialProfile\Elegant
+ */
 class Scope extends BaseScope
 {
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $type
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeType(DbMapper $mapper, $type)
     {
@@ -21,9 +27,9 @@ class Scope extends BaseScope
     }
 
     /**
-     * @param \Netinteractive\Elegant\Mapper\DbMapper
+     * @param \Netinteractive\Elegant\Repository\Repository
      * @param string $profileId
-     * @return \Netinteractive\Elegant\Mapper\DbMapper
+     * @return \Netinteractive\Elegant\Repository\Repository
      */
     public function scopeProfileId(DbMapper $mapper, $profileId)
     {
