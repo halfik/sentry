@@ -3,8 +3,8 @@
 namespace Netinteractive\Sentry\User\Elegant;
 
 use Netinteractive\Sentry\User\ProviderInterface;
-use Netinteractive\Elegant\Mapper\MapperInterface;
-use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
+use Netinteractive\Elegant\Repository\RepositoryInterface;
+use Netinteractive\Elegant\Domain\ServiceProvider AS BusinessProvider;
 use Netinteractive\Sentry\User\UserNotFoundException;
 use Netinteractive\Sentry\Role\RoleInterface;
 use Netinteractive\Sentry\User\WrongPasswordException;

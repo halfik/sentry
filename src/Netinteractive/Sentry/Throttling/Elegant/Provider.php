@@ -3,7 +3,7 @@
 namespace Netinteractive\Sentry\Throttling\Elegant;
 
 use Carbon\Carbon;
-use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
+use Netinteractive\Elegant\Domain\ServiceProvider AS BusinessProvider;
 use Netinteractive\Sentry\Throttling\ProviderInterface;
 use Netinteractive\Sentry\User\UserInterface;
 use Netinteractive\Sentry\User\ProviderInterface as UserProviderInterface;

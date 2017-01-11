@@ -2,7 +2,7 @@
 
 namespace Netinteractive\Sentry\SocialProfile\Elegant;
 
-use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
+use Netinteractive\Elegant\Domain\ServiceProvider AS BusinessProvider;
 use Netinteractive\Sentry\SocialProfile\ProviderInterface;
 use Netinteractive\Sentry\SocialProfile\SocialProfileNotFoundException;
 

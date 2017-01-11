@@ -1,10 +1,15 @@
 <?php
+
 namespace Netinteractive\Sentry\Role\Elegant;
 
-use Netinteractive\Elegant\Model\Provider AS BusinessProvider;
+use Netinteractive\Elegant\Domain\ServiceProvider AS BusinessProvider;
 use Netinteractive\Sentry\Role\RoleNotFoundException;
 use Netinteractive\Sentry\Role\ProviderInterface;
 
+/**
+ * Class Provider
+ * @package Netinteractive\Sentry\Role\Elegant
+ */
 class Provider extends  BusinessProvider implements ProviderInterface
 {
     private $table;

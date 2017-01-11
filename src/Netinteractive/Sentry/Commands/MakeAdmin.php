@@ -84,8 +84,8 @@ class MakeAdmin extends Command
             $user->disableValidation();
             $user->fill($data);
 
-            $mapper = $userProvider->getRepository();
-            $mapper->save($user);
+            $repository = $userProvider->getRepository();
+            $repository->save($user);
 
             $user->addRole($adminRole);
 

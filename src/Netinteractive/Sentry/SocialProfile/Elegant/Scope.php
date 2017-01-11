@@ -2,7 +2,8 @@
 
 namespace Netinteractive\Sentry\SocialProfile\Elegant;
 
-use Netinteractive\Elegant\Mapper\DbMapper;
+use Netinteractive\Elegant\Repository\Repository;
+use Netinteractive\Elegant\Repository\RepositoryInterface;
 use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 
 /**
@@ -12,32 +13,32 @@ use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 class Scope extends BaseScope
 {
     /**
-     * @param \Netinteractive\Elegant\Repository\Repository
+     * @param \Netinteractive\Elegant\Repository\RepositoryInterface
      * @param string $type
-     * @return \Netinteractive\Elegant\Repository\Repository
+     * @return \Netinteractive\Elegant\Repository\RepositoryInterface
      */
-    public function scopeType(DbMapper $mapper, $type)
+    public function scopeType(RepositoryInterface $repository, $type)
     {
-        $query = $mapper->getQuery();
+        $query = $repository->getQuery();
         $blueprint = $query->getRecord()->getBlueprint();
 
         $query->where($blueprint->getStorageName().'.type','=',$type);
 
-        return $mapper;
+        return $repository;
     }
 
     /**
-     * @param \Netinteractive\Elegant\Repository\Repository
+     * @param \Netinteractive\Elegant\Repository\RepositoryInterface
      * @param string $profileId
-     * @return \Netinteractive\Elegant\Repository\Repository
+     * @return \Netinteractive\Elegant\Repository\RepositoryInterface
      */
-    public function scopeProfileId(DbMapper $mapper, $profileId)
+    public function scopeProfileId(RepositoryInterface $repository, $profileId)
     {
-        $query = $mapper->getQuery();
+        $query = $repository->getQuery();
         $blueprint = $query->getRecord()->getBlueprint();
 
         $query->where($blueprint->getStorageName().'.profile_id','=',$profileId);
 
-        return $mapper;
+        return $repository;
     }
 }

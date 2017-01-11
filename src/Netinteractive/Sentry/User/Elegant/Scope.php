@@ -2,43 +2,44 @@
 
 namespace Netinteractive\Sentry\User\Elegant;
 
-use Netinteractive\Elegant\Mapper\DbMapper;
+use Netinteractive\Elegant\Repository\Repository;
+use Netinteractive\Elegant\Repository\RepositoryInterface;
 use Netinteractive\Elegant\Model\Query\Scope AS BaseScope;
 
 /**
  * Class Scope
  * @package Netinteractive\Sentry\User\Elegant
  */
-class Scope extends  BaseScope
+class Scope extends BaseScope
 {
     /**
-     * @param \Netinteractive\Elegant\Repository\Repository
+     * @param \Netinteractive\Elegant\Repository\RepositoryInterface
      * @param string $login
-     * @return \Netinteractive\Elegant\Repository\Repository
+     * @return \Netinteractive\Elegant\Repository\RepositoryInterface
      */
-    public function scopeLogin(DbMapper $mapper, $login)
+    public function scopeLogin(RepositoryInterface $repository, $login)
     {
-        $query = $mapper->getQuery();
+        $query = $repository->getQuery();
         $blueprint = $query->getRecord()->getBlueprint();
 
         $query->where($blueprint->getStorageName().'.'.$blueprint->getLoginName(), '=', $login);
 
-        return $mapper;
+        return $repository;
     }
 
     /**
-     * @param \Netinteractive\Elegant\Repository\Repository
+     * @param \Netinteractive\Elegant\Repository\RepositoryInterface
      * @param string $email
-     * @return \Netinteractive\Elegant\Repository\Repository
+     * @return \Netinteractive\Elegant\Repository\RepositoryInterface
      */
-    public function scopeEmail(DbMapper $mapper, $email)
+    public function scopeEmail(RepositoryInterface $repository, $email)
     {
-        $query = $mapper->getQuery();
+        $query = $repository->getQuery();
         $blueprint = $query->getRecord()->getBlueprint();
 
         $query->where($blueprint->getStorageName().'.email', '=', $email);
 
-        return $mapper;
+        return $repository;
     }
 
     /**
@@ -46,14 +47,14 @@ class Scope extends  BaseScope
      * @param string $code
      * @return \Netinteractive\Elegant\Repository\Repository
      */
-    public function scopeActivationCode(DbMapper $mapper, $code)
+    public function scopeActivationCode(DbMapper $repository, $code)
     {
-        $query = $mapper->getQuery();
+        $query = $repository->getQuery();
         $blueprint = $query->getRecord()->getBlueprint();
 
         $query->where($blueprint->getStorageName().'.activation_code', '=', $code);
 
-        return $mapper;
+        return $repository;
     }
 
     /**
@@ -61,14 +62,14 @@ class Scope extends  BaseScope
      * @param string $code
      * @return \Netinteractive\Elegant\Repository\Repository
      */
-    public function scopeResetPasswordCode(DbMapper $mapper, $code)
+    public function scopeResetPasswordCode(DbMapper $repository, $code)
     {
-        $query = $mapper->getQuery();
+        $query = $repository->getQuery();
         $blueprint = $query->getRecord()->getBlueprint();
 
         $query->where($blueprint->getStorageName().'.reset_password_code', '=', $code);
 
-        return $mapper;
+        return $repository;
     }
 
 
