@@ -46,7 +46,7 @@
 		"illuminate/support": "5.0 - 5.2",
 		"illuminate/console": "5.0 - 5.2",
 		"illuminate/session": "5.0 - 5.2",
-		"nesbot/carbon": "~1.20",
+		"nesbot/carbon": "~1.20"
     },
 	"github-protocols": [
 		"ssh", "https", "git"
