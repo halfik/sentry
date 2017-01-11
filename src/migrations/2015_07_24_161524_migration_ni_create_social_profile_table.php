@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use Netinteractive\Elegant\Db\Schema\Blueprint;
+use Netinteractive\Elegant\Db\Migrations\Migration;
 
 class MigrationNiCreateSocialProfileTable extends Migration
 {

@@ -18,7 +18,7 @@
  * @link       http://cartalyst.com
  */
 
-use Illuminate\Database\Migrations\Migration;
+use Netinteractive\Elegant\Db\Migrations\Migration;
 
 class MigrationNiSentryInstallUserRolePivot extends Migration {
 

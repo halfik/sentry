@@ -1,5 +1,5 @@
 <?php
-use Illuminate\Database\Migrations\Migration;
+use Netinteractive\Elegant\Db\Migrations\Migration;
 
 
 class MigrationNiSentryInstallThrottle extends Migration {
