@@ -43,7 +43,7 @@ class Provider extends BusinessProvider implements ProviderInterface
         $this->userProvider = $userProvider;
 
         if (!$recordClass){
-            $recordClass = 'Netinteractive\Sentry\Throttling\Elegant\Record';
+            $recordClass =   \Config::get('packages.netinteractive.sentry.config.throttling.model');
         }
 
         parent::__construct($recordClass);

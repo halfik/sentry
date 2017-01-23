@@ -19,7 +19,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
     public function __construct($record=null)
     {
         if (!$record){
-            $record = 'Netinteractive\Sentry\Role\Elegant\Record';
+            $record =   \Config::get('packages.netinteractive.sentry.config.role.model');
         }
         parent::__construct($record);
         $this->table = $this->getRepository()->getRecord()->getBlueprint()->getStorageName();
