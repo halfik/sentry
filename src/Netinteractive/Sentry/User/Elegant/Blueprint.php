@@ -30,6 +30,7 @@ class Blueprint extends BaseBlueprint
         $this->primaryKey = array('id');
         $this->incrementingPk = 'id';
 
+        self::$loginAttribute = $config['users']['login_attribute'];
 
         $this->getRelationManager()->belongsToMany(
             'roles',

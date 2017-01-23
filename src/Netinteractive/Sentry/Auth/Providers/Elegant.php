@@ -16,7 +16,7 @@ class ElegantProvider implements AuthProviderInferface
     /**
      * metoda autoryzacyjna
      * @param array $credentianls
-     * @return User
+     * @return mixed
      */
     public function authenticate(array $credentials, $remember=false)
     {
@@ -74,7 +74,11 @@ class ElegantProvider implements AuthProviderInferface
         return $user;
     }
 
-
+    /**
+     * @param array $credentials
+     * @param bool $activate
+     * @return mixed
+     */
     public function register(array $credentials, $activate=false)
     {
 
