@@ -28,17 +28,6 @@ class Provider extends BusinessProvider implements ProviderInterface
     }
 
     /**
-     * Creates a user.
-     *
-     * @param  array  $credentials
-     * @return \Netinteractive\Sentry\User\UserInterface
-     */
-    public function create(array $credentials)
-    {
-        return parent::create($credentials);
-    }
-
-    /**
      * Returns an empty user object.
      *
      * @return \Netinteractive\Sentry\User\UserInterface

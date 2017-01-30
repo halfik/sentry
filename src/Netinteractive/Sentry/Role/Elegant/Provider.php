@@ -24,19 +24,7 @@ class Provider extends  BusinessProvider implements ProviderInterface
         parent::__construct($record);
         $this->table = $this->getRepository()->getRecord()->getBlueprint()->getStorageName();
     }
-
-
-    /**
-     * Creates a role.
-     *
-     * @param  array $attributes
-     * @return \Netinteractive\Sentry\Role\RoleInterface
-     */
-    public function create(array $attributes)
-    {
-        return parent::create($attributes);
-    }
-
+    
 
     /**
      * Find the role by ID.
